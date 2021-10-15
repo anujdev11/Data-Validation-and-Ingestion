@@ -8,7 +8,7 @@ public class InitializationController {
     
     @GetMapping(path = "/initialize")
     public String initializeApp(){
-        return "Application has been initialize. You may proceed.";
+        return "Application has been initialized. You may proceed.";
     }
 
 }
