@@ -13,13 +13,13 @@ before_script:
 build:
   stage: build
   tags:
-    - dalfcs_docker_autoscale
+    - dalfcs_docker_kvm
   script: "mvn clean install"
 
 test:
   stage: test
   tags:
-    - dalfcs_docker_autoscale
+    - dalfcs_docker_kvm
   script: "mvn clean test"
 
 after_script:
