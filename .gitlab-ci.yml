@@ -12,13 +12,13 @@ before_script:
 build:
   stage: build
   tags:
-    - $GITLAB_RUNNER
+    - dalfcs_gitlab_docker_ci
   script: "mvn clean install"
 
 test:
   stage: test
   tags:
-    - $GITLAB_RUNNER
+    - dalfcs_gitlab_docker_ci
   script: "mvn clean test"
 
 after_script:
@@ -27,7 +27,7 @@ after_script:
 deploy:
   stage: deploy
   tags:
-    - $GITLAB_RUNNER
+    - dalfcs_gitlab_docker_ci
   image: ruby:latest
   script:
     - apt-get update -qy
