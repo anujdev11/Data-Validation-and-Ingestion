@@ -1,0 +1,26 @@
+image:
+  maven:3-jdk-11
+
+stages:
+  - build
+  - test
+
+
+before_script:
+  - echo "DATA VALIDATION AND DATA INGESTION"
+  - echo "CI/CD Pipeline"
+
+build:
+  stage: build
+  tags:
+    - dalfcs_docker_kvm
+  script: "mvn clean install"
+
+test:
+  stage: test
+  tags:
+    - dalfcs_docker_kvm
+  script: "mvn clean test"
+
+after_script:
+  - echo "Build and Test Done Successfully"
