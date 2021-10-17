@@ -12,13 +12,13 @@ before_script:
 build:
   stage: build
   tags:
-    - ugrad
+    - $GITLAB_RUNNER
   script: "mvn clean install"
 
 test:
   stage: test
   tags:
-    - ugrad
+    - $GITLAB_RUNNER
   script: "mvn clean test"
 
 after_script:
@@ -27,7 +27,7 @@ after_script:
 deploy:
   stage: deploy
   tags:
-    - ugrad
+    - $GITLAB_RUNNER
   image: ruby:latest
   script:
     - apt-get update -qy
