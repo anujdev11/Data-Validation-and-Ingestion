@@ -26,6 +26,8 @@ after_script:
 
 deploy:
   stage: deploy
+  tags:
+    - dalfcs_docker_autoscale
   image: ruby:latest
   script:
     - apt-get update -qy
