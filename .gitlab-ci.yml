@@ -12,13 +12,13 @@ before_script:
 build:
   stage: build
   tags:
-    - dalfcs_docker_autoscale
+    - ugrad
   script: "mvn clean install"
 
 test:
   stage: test
   tags:
-    - dalfcs_docker_autoscale
+    - ugrad
   script: "mvn clean test"
 
 after_script:
@@ -27,7 +27,7 @@ after_script:
 deploy:
   stage: deploy
   tags:
-    - dalfcs_docker_autoscale
+    - ugrad
   image: ruby:latest
   script:
     - apt-get update -qy
