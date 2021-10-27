@@ -1,4 +1,4 @@
-package app.data_ingestion.Libraries;
+package app.data_ingestion.libraries;
 
 public class UtilLibrary {
     

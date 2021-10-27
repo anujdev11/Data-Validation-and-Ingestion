@@ -1,4 +1,4 @@
-package app.data_ingestion.Helpers;
+package app.data_ingestion.helpers;
 
 public class Helper {
     

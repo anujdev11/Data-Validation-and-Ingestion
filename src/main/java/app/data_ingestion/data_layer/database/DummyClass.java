@@ -1,4 +1,4 @@
-package app.data_ingestion.DataLayer.Database;
+package app.data_ingestion.data_layer.database;
 
 public class DummyClass {
     
