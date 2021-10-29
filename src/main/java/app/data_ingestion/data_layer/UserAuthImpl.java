@@ -11,27 +11,22 @@ public class UserAuthImpl implements UserAuth {
     UserRepository user_repo;
 
     @Override
-    public boolean register(String username, String password, String access_level) throws Exception {
-
-        return false;
+    public void register(User user) throws Exception {
+        User existing_user = user_repo.findById(user.getUsername())
+                            .orElseGet(() -> user_repo.save(user));
+        
+        if(existing_user != null){
+            throw new Exception("Username already exists.");
+        }
     }
 
     @Override
-    public boolean authenticate(String username, String password, String access_level) {
-        boolean is_authenticated = false;
-        try{
-            User user = user_repo.findById(username)
-            .orElseThrow(() -> new Exception());;
+    public boolean authenticate(String username, String password) throws Exception {
+        User user = user_repo.findById(username)
+                    .orElseThrow(() -> new Exception("Authentication failed. User not found."));
 
-            if(user.getPassword().equals(password)){
-                is_authenticated = true;
-            }
-        }
-        catch(Exception e){
-            System.out.println("Authentication failed. User not found.");
-        }
         
-        return is_authenticated;
+        return user.getPassword().equals(password);
     }
 
 

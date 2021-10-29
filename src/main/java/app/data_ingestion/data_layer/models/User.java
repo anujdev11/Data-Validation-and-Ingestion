@@ -22,10 +22,15 @@ public class User {
     @Column(name = "access_level")
     private String access_level;
 
-    public User(String username, String password, String access_level) {
+    @NotBlank
+    @Column(name = "organization")
+    private String organization;
+
+    public User(String username, String password, String access_level, String organization) {
         this.username = username;
         this.password = password;
         this.access_level = access_level;
+        this.organization = organization;
     }
 
     public String getUsername() {
@@ -38,6 +43,10 @@ public class User {
    
     public String getAccess_level() {
         return access_level;
+    }
+
+    public String getOrganization(){
+        return organization;
     }
     
 
