@@ -1,14 +1,15 @@
-package app.data_ingestion.data_layer.database;
+package app.data_ingestion.data_layer.databaseImpl;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
+import app.data_ingestion.data_layer.database.QueryExecutor;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-public class QueryExecutorImpl implements QueryExecutor{
+public class QueryExecutorImpl implements QueryExecutor {
 
     private JdbcTemplate jdbc_template;
 

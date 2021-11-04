@@ -1,10 +1,19 @@
 package app.data_ingestion.data_layer.repositories;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 import app.data_ingestion.data_layer.models.User;
+import org.springframework.stereotype.Repository;
 
-@Repository
-public interface UserRepository extends JpaRepository<User, String>{
+public interface UserRepository {
+
+//    public void register(User user) throws Exception;
+
+    /**
+     * @param username
+     * @param password
+     * @return
+     */
+    boolean userAuthentication(String username, String password);
+
+    boolean userRegistration(User user);
 
 }
