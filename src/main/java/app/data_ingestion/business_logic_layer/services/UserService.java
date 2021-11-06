@@ -4,6 +4,5 @@ import app.data_ingestion.data_layer.models.User;
 
 public interface UserService {
     boolean userAuthentication(String username, String password);
-
     boolean userRegistration(User user);
 }

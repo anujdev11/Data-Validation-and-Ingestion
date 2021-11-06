@@ -12,8 +12,7 @@ public interface UserDao {
      * @param password
      * @return
      */
-    public boolean userAuthentication(String username, String password) throws SQLException;
-    public boolean userRegistration(User user) throws SQLException;
+    
     public int add(User user) throws SQLException;
     public void delete(String username) throws SQLException;
     public User getUser(String username) throws SQLException;

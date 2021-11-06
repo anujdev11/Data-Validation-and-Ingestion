@@ -5,7 +5,9 @@ import app.data_ingestion.data_layer.dao.UserDao;
 import app.data_ingestion.data_layer.database.DatabaseConnection;
 import app.data_ingestion.data_layer.models.User;
 
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
+import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,10 +16,32 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
+import javax.sql.DataSource;
 
+@Repository
 public class UserDaoImpl extends JdbcDaoSupport implements UserDao {
 
-    static Connection connection = DatabaseConnection.getConnection();
+    static Connection connection;
+    final DataSource dataSource;
+    final JdbcTemplate jdbcTemplate;
+
+    public UserDaoImpl(JdbcTemplate jdbcTemplate, DataSource dataSource){
+        this.jdbcTemplate = jdbcTemplate;
+        this.dataSource = dataSource;
+        try {
+            connection = DatabaseConnection.getConnection(this.jdbcTemplate);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+    
+    @PostConstruct
+    private void initialize() {
+        setDataSource(dataSource);
+    }
+
 
     @Override
     public int add(User user) throws SQLException {
@@ -92,24 +116,4 @@ public class UserDaoImpl extends JdbcDaoSupport implements UserDao {
         return prepared_statment;
     }
 
-    @Override
-    public boolean userAuthentication(String username, String password) throws SQLException {
-        String sql = "SELECT COUNT(*) FROM user where username = ? and password = ?";
-        PreparedStatement prepared_statment = createPrepareStatement(sql, username, password);
-        ResultSet rs = prepared_statment.executeQuery();
-        return rs.next();
-    }
-
-    @Override
-    public boolean userRegistration(User user) throws SQLException {
-        String userInsertQuery = "INSERT INTO user (username,password,access_level,organization) VALUES (?, ?, ?, ?)";
-        PreparedStatement prepared_statment = createPrepareStatement(userInsertQuery, 
-                                                user.getUsername(),
-                                                user.getPassword(), 
-                                                user.getAccess_level(), 
-                                                user.getOrganization());
-        int success = prepared_statment.executeUpdate();
-        System.out.println("Success"+success);
-        return success>0;
-    }
 }
