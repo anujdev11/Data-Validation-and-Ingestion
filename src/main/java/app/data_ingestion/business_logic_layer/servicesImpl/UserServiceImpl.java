@@ -19,34 +19,42 @@ public class UserServiceImpl implements UserService {
     UserDao userDao;
     
     @Override
-    public boolean userAuthentication(String username, String password) {
+    public UserServiceStatus userAuthentication(String username, String password) {
 
         try {
-            return userExists(username);
+            List<User> users = userDao.getUsers();
+            Optional<User> authenticateUser = users.stream()
+                                                .filter(user -> user.getUsername().equalsIgnoreCase(username) &&
+                                                                user.getPassword().equalsIgnoreCase(password))
+                                                .findFirst();
+            return authenticateUser != null ? UserServiceStatus.SUCCESS : UserServiceStatus.INVALID_CREDENTIALS;
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return false;
+        return UserServiceStatus.FAILURE;
     }
 
     @Override
-    public boolean userRegistration(User user) {
+    public UserServiceStatus userRegistration(User user) {
         try {
             if(!userExists(user.getUsername())){
-                return userDao.add(user) > 0;
+                return userDao.add(user) > 0 ? UserServiceStatus.SUCCESS : UserServiceStatus.FAILURE;
+            }
+            else{
+                return UserServiceStatus.USER_ALREADY_EXISTS;
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return false;
+        return UserServiceStatus.FAILURE;
     }
 
     private boolean userExists(String username) throws SQLException {
         List<User> users = userDao.getUsers();
-        Optional<User> authenticatedUser = users.stream()
+        Optional<User> userExists = users.stream()
                                                 .filter(user -> user.getUsername().equalsIgnoreCase(username))
                                                 .findFirst();
-        return authenticatedUser != null;
+        return userExists != null;
     }
 
 
