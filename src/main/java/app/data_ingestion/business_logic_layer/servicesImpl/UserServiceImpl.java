@@ -23,11 +23,11 @@ public class UserServiceImpl implements UserService {
 
         try {
             List<User> users = userDao.getUsers();
-            Optional<User> authenticateUser = users.stream()
+            Optional<User> authenticatedUser = users.stream()
                                                 .filter(user -> user.getUsername().equalsIgnoreCase(username) &&
                                                                 user.getPassword().equalsIgnoreCase(password))
                                                 .findFirst();
-            return authenticateUser != null ? UserServiceStatus.SUCCESS : UserServiceStatus.INVALID_CREDENTIALS;
+            return authenticatedUser.isPresent() ? UserServiceStatus.SUCCESS : UserServiceStatus.INVALID_CREDENTIALS;
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -54,7 +54,7 @@ public class UserServiceImpl implements UserService {
         Optional<User> userExists = users.stream()
                                                 .filter(user -> user.getUsername().equalsIgnoreCase(username))
                                                 .findFirst();
-        return userExists != null;
+        return userExists.isPresent();
     }
 
 

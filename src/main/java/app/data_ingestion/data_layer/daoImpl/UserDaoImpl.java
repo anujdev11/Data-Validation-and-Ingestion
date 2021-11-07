@@ -49,9 +49,11 @@ public class UserDaoImpl extends JdbcDaoSupport implements UserDao {
               + "password, access_level, "
               + "organization) VALUES (?, ?, ?, ?)";
         PreparedStatement prepared_statment = createPrepareStatement(insert_query, 
-              user.getPassword(), 
-              user.getAccess_level(), 
-              user.getOrganization());
+                user.getUsername(),
+                user.getPassword(), 
+                user.getAccess_level(), 
+                user.getOrganization());
+        
         return prepared_statment.executeUpdate();
     }
 

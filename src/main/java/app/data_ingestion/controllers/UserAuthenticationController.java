@@ -4,11 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import app.data_ingestion.business_logic_layer.services.UserService;
 import app.data_ingestion.business_logic_layer.servicesImpl.UserServiceStatus;
 
+@RestController
 public class UserAuthenticationController {
 
     @Autowired
@@ -18,7 +21,8 @@ public class UserAuthenticationController {
     static final String SYSTEM_ERROR_MESSAGE = "System error";
 
     @PostMapping(path = "/users/authenticate")
-    public ResponseEntity<Object> userAuthentication(@RequestBody String username, @RequestBody String password){
+    @ResponseBody
+    public ResponseEntity<Object> userAuthentication(@RequestParam String username, @RequestParam String password){
         UserServiceStatus status = userService.userAuthentication(username, password);
         if(status == UserServiceStatus.SUCCESS){
             return ResponseEntity.status(HttpStatus.OK).body(SUCCESS_MESSAGE);  
