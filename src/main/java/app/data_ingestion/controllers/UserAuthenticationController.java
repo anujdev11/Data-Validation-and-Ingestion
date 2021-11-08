@@ -20,6 +20,11 @@ public class UserAuthenticationController {
     static final String INVALID_CREDENTIALS_MESSAGE = "Invalid username/password";
     static final String SYSTEM_ERROR_MESSAGE = "System error";
 
+    /**
+     * @param username
+     * @param password
+     * @return
+     */
     @PostMapping(path = "/users/authenticate")
     @ResponseBody
     public ResponseEntity<Object> userAuthentication(@RequestParam String username, @RequestParam String password){

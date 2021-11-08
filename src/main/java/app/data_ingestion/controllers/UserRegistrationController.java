@@ -26,6 +26,10 @@ public class UserRegistrationController {
         return "service is working";
     }
 
+    /**
+     * @param user
+     * @return
+     */
     @PostMapping(path = "/users/register")
     public ResponseEntity<Object> userRegistration(@RequestBody User user){
         UserServiceStatus status = userService.userRegistration(user);

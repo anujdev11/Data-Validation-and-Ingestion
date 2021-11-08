@@ -43,6 +43,11 @@ public class UserDaoImpl extends JdbcDaoSupport implements UserDao {
     }
 
 
+    /**
+     * @param user
+     * @return
+     * @throws SQLException
+     */
     @Override
     public int add(User user) throws SQLException {
         String insert_query = "insert into user (username, "
@@ -57,6 +62,10 @@ public class UserDaoImpl extends JdbcDaoSupport implements UserDao {
         return prepared_statment.executeUpdate();
     }
 
+    /**
+     * @param username
+     * @throws SQLException
+     */
     @Override
     public void delete(String username) throws SQLException {
         String delete_query = "delete from user where username = ?";
@@ -64,6 +73,11 @@ public class UserDaoImpl extends JdbcDaoSupport implements UserDao {
         prepared_statment.executeUpdate();
     }
 
+    /**
+     * @param username
+     * @return
+     * @throws SQLException
+     */
     @Override
     public User getUser(String username) throws SQLException {
         String select_query = "select * from user where username= ? limit 1";
@@ -79,6 +93,10 @@ public class UserDaoImpl extends JdbcDaoSupport implements UserDao {
         return user;
     }
 
+    /**
+     * @return
+     * @throws SQLException
+     */
     @Override
     public List<User> getUsers() throws SQLException {
         String select_query = "select * from user";
@@ -97,6 +115,10 @@ public class UserDaoImpl extends JdbcDaoSupport implements UserDao {
         return users;
     }
 
+    /**
+     * @param user
+     * @throws SQLException
+     */
     @Override
     public void update(User user) throws SQLException {
         String update_query = "update user set password= ?, access_level= ?, organization= ? where username = ?";
@@ -108,6 +130,12 @@ public class UserDaoImpl extends JdbcDaoSupport implements UserDao {
         
     }
 
+    /**
+     * @param sql
+     * @param params
+     * @return
+     * @throws SQLException
+     */
     private PreparedStatement createPrepareStatement(String sql, String... params) throws SQLException {
         PreparedStatement prepared_statment = connection.prepareStatement(sql);
         int counter = 1;

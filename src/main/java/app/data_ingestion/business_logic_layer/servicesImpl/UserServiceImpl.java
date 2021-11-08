@@ -17,7 +17,12 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     UserDao userDao;
-    
+
+    /**
+     * @param username
+     * @param password
+     * @return
+     */
     @Override
     public UserServiceStatus userAuthentication(String username, String password) {
 
@@ -34,6 +39,10 @@ public class UserServiceImpl implements UserService {
         return UserServiceStatus.FAILURE;
     }
 
+    /**
+     * @param user
+     * @return
+     */
     @Override
     public UserServiceStatus userRegistration(User user) {
         try {
@@ -49,6 +58,11 @@ public class UserServiceImpl implements UserService {
         return UserServiceStatus.FAILURE;
     }
 
+    /**
+     * @param username
+     * @return
+     * @throws SQLException
+     */
     private boolean userExists(String username) throws SQLException {
         List<User> users = userDao.getUsers();
         Optional<User> userExists = users.stream()

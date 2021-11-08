@@ -7,6 +7,12 @@ public class User {
     private String access_level;
     private String organization;
 
+    /**
+     * @param username
+     * @param password
+     * @param access_level
+     * @param organization
+     */
     public User(String username, String password, String access_level, String organization) {
         this.username = username;
         this.password = password;
