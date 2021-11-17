@@ -1,5 +1,8 @@
 package app.data_ingestion.controllers;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,7 +33,12 @@ public class UserAuthenticationController {
     public ResponseEntity<Object> userAuthentication(@RequestParam String username, @RequestParam String password){
         UserServiceStatus status = userService.userAuthentication(username, password);
         if(status == UserServiceStatus.SUCCESS){
-            return ResponseEntity.status(HttpStatus.OK).body(SUCCESS_MESSAGE);  
+            
+            Map<String,String> body = new HashMap<String, String>() {{
+                put("message", SUCCESS_MESSAGE);
+                put("access_level", userService.getUser().getAccess_level());
+            }};
+            return ResponseEntity.status(HttpStatus.OK).body(body);  
         }
         else if(status == UserServiceStatus.INVALID_CREDENTIALS){
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(INVALID_CREDENTIALS_MESSAGE);
