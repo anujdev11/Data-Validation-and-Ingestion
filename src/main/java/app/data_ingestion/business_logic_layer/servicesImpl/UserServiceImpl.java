@@ -17,6 +17,13 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     UserDao userDao;
+    User user;
+
+    
+
+    public User getUser() {
+        return user;
+    }
 
     /**
      * @param username
@@ -32,7 +39,12 @@ public class UserServiceImpl implements UserService {
                                                 .filter(user -> user.getUsername().equalsIgnoreCase(username) &&
                                                                 user.getPassword().equalsIgnoreCase(password))
                                                 .findFirst();
-            return authenticatedUser.isPresent() ? UserServiceStatus.SUCCESS : UserServiceStatus.INVALID_CREDENTIALS;
+            
+            if(authenticatedUser.isPresent()){
+                user = authenticatedUser.get();
+                return UserServiceStatus.SUCCESS;
+            }
+            return UserServiceStatus.INVALID_CREDENTIALS;
         } catch (SQLException e) {
             e.printStackTrace();
         }

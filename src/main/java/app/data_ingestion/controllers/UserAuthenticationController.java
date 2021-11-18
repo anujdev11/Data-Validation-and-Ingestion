@@ -1,5 +1,8 @@
 package app.data_ingestion.controllers;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import app.data_ingestion.business_logic_layer.services.UserService;
 import app.data_ingestion.business_logic_layer.servicesImpl.UserServiceStatus;
+import app.data_ingestion.helpers.Helper;
 
 @RestController
 public class UserAuthenticationController {
@@ -29,13 +33,20 @@ public class UserAuthenticationController {
     @ResponseBody
     public ResponseEntity<Object> userAuthentication(@RequestParam String username, @RequestParam String password){
         UserServiceStatus status = userService.userAuthentication(username, password);
+        Map<String,String> body_map = new HashMap<String, String>();
         if(status == UserServiceStatus.SUCCESS){
-            return ResponseEntity.status(HttpStatus.OK).body(SUCCESS_MESSAGE);  
+            
+            
+            body_map.put("message", SUCCESS_MESSAGE);
+            body_map.put("access_level", userService.getUser().getAccess_level());
+            return ResponseEntity.status(HttpStatus.OK).body(Helper.createResponseBody(body_map));  
         }
         else if(status == UserServiceStatus.INVALID_CREDENTIALS){
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(INVALID_CREDENTIALS_MESSAGE);
+            body_map.put("message", INVALID_CREDENTIALS_MESSAGE);
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Helper.createResponseBody(body_map)); 
         }
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(SYSTEM_ERROR_MESSAGE);
+        body_map.put("message", SYSTEM_ERROR_MESSAGE);
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Helper.createResponseBody(body_map)); 
     }
     
 }

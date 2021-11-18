@@ -1,26 +1,52 @@
 package app.data_ingestion.data_layer.databaseImpl;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.PostConstruct;
+import javax.sql.DataSource;
+
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.support.JdbcDaoSupport;
+import org.springframework.stereotype.Repository;
+
+import app.data_ingestion.data_layer.database.DatabaseConnection;
 import app.data_ingestion.data_layer.database.QueryExecutor;
 
-public class QueryExecutorImpl implements QueryExecutor {
+@Repository
+public class QueryExecutorImpl extends JdbcDaoSupport implements QueryExecutor {
 
+    static Connection connection;
+    final DataSource dataSource;
+    final JdbcTemplate jdbcTemplate;
 
-    public QueryExecutorImpl(){
+    public QueryExecutorImpl(JdbcTemplate jdbcTemplate, DataSource dataSource){
+        this.jdbcTemplate = jdbcTemplate;
+        this.dataSource = dataSource;
+        try {
+            connection = DatabaseConnection.getConnection(this.jdbcTemplate);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @PostConstruct
+    private void initialize() {
+        setDataSource(dataSource);
     }
 
     @Override
-    public void create_table(String query) {
+    public void createTable(String query) {
     }
 
     @Override
-    public void execute_query(String query) {
+    public void executeQuery(String query) {
         
     }
 
     @Override
-    public void insert_records(String query, List<Map<String, Object>> data_records, Map<String, String> map_column_to_datatype) {
+    public void insertRecords(String query, List<Map<String, Object>> data_records, Map<String, String> map_column_to_datatype) {
 
         /*jdbc_template.batchUpdate(query, new BatchPreparedStatementSetter() {
 
@@ -46,10 +72,9 @@ public class QueryExecutorImpl implements QueryExecutor {
     }
 
     @Override
-    public List<Map<String, Object>> fetch_records(String query) {
-        /*List<Map<String, Object>> data_records = jdbc_template.queryForList(query);
-        return data_records;*/
-        return null;
+    public List<Map<String, Object>> fetchRecords(String query) {
+        List<Map<String, Object>> data_records = jdbcTemplate.queryForList(query);
+        return data_records;
     }
     
 }
