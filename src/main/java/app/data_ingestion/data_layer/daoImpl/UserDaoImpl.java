@@ -53,7 +53,7 @@ public class UserDaoImpl extends JdbcDaoSupport implements UserDao {
         String insert_query = "insert into user (username, "
               + "password, access_level, "
               + "organization) VALUES (?, ?, ?, ?)";
-        PreparedStatement prepared_statment = createPrepareStatement(insert_query, 
+        PreparedStatement prepared_statment = DaoUtility.createPrepareStatement(connection, insert_query, 
                 user.getUsername(),
                 user.getPassword(), 
                 user.getAccess_level(), 
@@ -69,7 +69,7 @@ public class UserDaoImpl extends JdbcDaoSupport implements UserDao {
     @Override
     public void delete(String username) throws SQLException {
         String delete_query = "delete from user where username = ?";
-        PreparedStatement prepared_statment = createPrepareStatement(delete_query, username);
+        PreparedStatement prepared_statment = DaoUtility.createPrepareStatement(connection, delete_query, username);
         prepared_statment.executeUpdate();
     }
 
@@ -81,7 +81,7 @@ public class UserDaoImpl extends JdbcDaoSupport implements UserDao {
     @Override
     public User getUser(String username) throws SQLException {
         String select_query = "select * from user where username= ? limit 1";
-        PreparedStatement prepared_statment = createPrepareStatement(select_query, username);
+        PreparedStatement prepared_statment = DaoUtility.createPrepareStatement(connection, select_query, username);
         ResultSet rs = prepared_statment.executeQuery();
         User user = null;
         while (rs.next()) {
@@ -122,28 +122,12 @@ public class UserDaoImpl extends JdbcDaoSupport implements UserDao {
     @Override
     public void update(User user) throws SQLException {
         String update_query = "update user set password= ?, access_level= ?, organization= ? where username = ?";
-        PreparedStatement prepared_statment = createPrepareStatement(update_query, 
+        PreparedStatement prepared_statment = DaoUtility.createPrepareStatement(connection, update_query, 
                                                 user.getPassword(), 
                                                 user.getAccess_level(), 
                                                 user.getOrganization());
         prepared_statment.executeUpdate();
         
-    }
-
-    /**
-     * @param sql
-     * @param params
-     * @return
-     * @throws SQLException
-     */
-    private PreparedStatement createPrepareStatement(String sql, String... params) throws SQLException {
-        PreparedStatement prepared_statment = connection.prepareStatement(sql);
-        int counter = 1;
-        for(String param : params){
-            prepared_statment.setString(counter, param);
-            counter++;
-        }
-        return prepared_statment;
     }
 
 }

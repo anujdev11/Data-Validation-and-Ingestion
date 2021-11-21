@@ -9,4 +9,8 @@ public class Helper {
         body.put("data", data);
         return body;
     }
+
+    public static String addUnderscores(String name){
+        return name.replaceAll(name, "_");
+    }
 }
