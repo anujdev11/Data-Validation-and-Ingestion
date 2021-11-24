@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Arrays;
+import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
@@ -47,15 +48,14 @@ public class FileTypeDaoImpl extends JdbcDaoSupport implements FileTypeDao {
     
     @Override
     public int addFileDefinition(FileType fileTypeDef) throws SQLException {
-    	FileType fileType = new FileType();
-        String insert_query = "insert into file_definition (file_definition_id, "
-                + "file_definition_name"
-                + "file_definition_details) VALUES (?, ?, ?, ?)";
-          PreparedStatement prepared_statment = DaoUtility.createPrepareStatement(connection, insert_query,
-        		  fileType.getFileTypeId(),
-        		  fileType.getFileTypeName(),
-        		  fileType.getColumnDetails());
-              
+    	
+    	String listString = fileTypeDef.getColumnDetails().stream().map(Object::toString)
+                .collect(Collectors.joining(", "));
+        String insert_query = "insert into file_definition ("
+                + "file_definition_name,"
+                + "file_definition_details) VALUES (?, ?)";
+          PreparedStatement prepared_statment = DaoUtility.createPrepareStatement(connection, insert_query,fileTypeDef.getFileTypeName(),listString);
+  
           return prepared_statment.executeUpdate();
     }
 
@@ -76,12 +76,9 @@ public class FileTypeDaoImpl extends JdbcDaoSupport implements FileTypeDao {
             
             String columnDetails = rs.getString("file_definition_details");
 
-
             ObjectMapper objectMapper = new ObjectMapper();
             ColumnDetails[] colDetailsArray = objectMapper.readValue(columnDetails, ColumnDetails[].class);
             fileType.setColumnDetails(Arrays.asList(colDetailsArray) );
-
-
         }
         return fileType;
         

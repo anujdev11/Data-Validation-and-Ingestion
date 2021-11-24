@@ -10,8 +10,23 @@ public class FileType {
     String fileTypeName;
     List<ColumnDetails> columnDetails;
     
+    
+    public FileType(int fileTypeId, String fileTypeName, List<ColumnDetails> columnDetails) {
+		super();
+		this.fileTypeId = fileTypeId;
+		this.fileTypeName = fileTypeName;
+		this.columnDetails = columnDetails;
+	}
+    
+    
+	public FileType() {
+		super();
+	}
 
-    public int getFileTypeId() {
+
+
+
+	public int getFileTypeId() {
         return fileTypeId;
     }
 
@@ -56,6 +71,14 @@ public class FileType {
         }
         return col_to_rules;
     }
+
+
+
+	@Override
+	public String toString() {
+		return "FileType [fileTypeId=" + fileTypeId + ", fileTypeName=" + fileTypeName + ", columnDetails="
+				+ columnDetails + "]";
+	}
 
 
 

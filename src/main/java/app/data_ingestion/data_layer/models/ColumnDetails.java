@@ -31,5 +31,26 @@ public class ColumnDetails {
     public void setRules(List<ValidationRule> rules) {
         this.rules = rules;
     }
+
+	@Override
+	public String toString() {
+		return "ColumnDetails [column_name=" + column_name + ", data_type=" + data_type + ", rules=" + rules + "]";
+	}
+
+	public ColumnDetails(String column_name, String data_type, List<ValidationRule> rules) {
+		super();
+		System.out.println("------------"+rules);
+		this.column_name = column_name;
+		this.data_type = data_type;
+		this.rules = rules;
+	}
+
+	
+	
+	
+	
+	
+    
+    
     
 }
