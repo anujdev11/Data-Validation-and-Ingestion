@@ -51,10 +51,12 @@ public class FileTypeDaoImpl extends JdbcDaoSupport implements FileTypeDao {
     	
     	String listString = fileTypeDef.getColumnDetails().stream().map(Object::toString)
                 .collect(Collectors.joining(", "));
+    	String fileDefinitionColumnDetails="["+listString+"]";
+    	
         String insert_query = "insert into file_definition ("
                 + "file_definition_name,"
                 + "file_definition_details) VALUES (?, ?)";
-          PreparedStatement prepared_statment = DaoUtility.createPrepareStatement(connection, insert_query,fileTypeDef.getFileTypeName(),listString);
+          PreparedStatement prepared_statment = DaoUtility.createPrepareStatement(connection, insert_query,fileTypeDef.getFileTypeName(),fileDefinitionColumnDetails);
   
           return prepared_statment.executeUpdate();
     }

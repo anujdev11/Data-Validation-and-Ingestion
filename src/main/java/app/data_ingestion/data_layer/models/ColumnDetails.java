@@ -34,7 +34,7 @@ public class ColumnDetails {
 
 	@Override
 	public String toString() {
-		return "ColumnDetails [column_name=" + column_name + ", data_type=" + data_type + ", rules=" + rules + "]";
+		return "{column_name=" + column_name + ", data_type=" + data_type + ", rules=" + rules + "}";
 	}
 
 	public ColumnDetails(String column_name, String data_type, List<ValidationRule> rules) {

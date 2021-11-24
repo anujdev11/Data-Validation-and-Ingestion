@@ -30,7 +30,7 @@ public class ValidationRule {
 
 	@Override
 	public String toString() {
-		return "ValidationRule [operator=" + operator + ", rhsValue=" + rhsValue + "]";
+		return "{operator=" + operator + ", rhsValue=" + rhsValue + "}";
 	}
     
 }
