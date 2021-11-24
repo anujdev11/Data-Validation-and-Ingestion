@@ -39,7 +39,6 @@ public class ColumnDetails {
 
 	public ColumnDetails(String column_name, String data_type, List<ValidationRule> rules) {
 		super();
-		System.out.println("------------"+rules);
 		this.column_name = column_name;
 		this.data_type = data_type;
 		this.rules = rules;
