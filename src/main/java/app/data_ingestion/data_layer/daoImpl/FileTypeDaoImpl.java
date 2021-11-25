@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Arrays;
+import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
@@ -43,6 +44,21 @@ public class FileTypeDaoImpl extends JdbcDaoSupport implements FileTypeDao {
     @PostConstruct
     private void initialize() {
         setDataSource(dataSource);
+    }
+    
+    @Override
+    public int addFileDefinition(FileType fileTypeDef) throws SQLException {
+    	
+    	String listString = fileTypeDef.getColumnDetails().stream().map(Object::toString)
+                .collect(Collectors.joining(", "));
+    	String fileDefinitionColumnDetails="["+listString+"]";
+    	
+        String insert_query = "insert into file_definition ("
+                + "file_definition_name,"
+                + "file_definition_details) VALUES (?, ?)";
+          PreparedStatement prepared_statment = DaoUtility.createPrepareStatement(connection, insert_query,fileTypeDef.getFileTypeName(),fileDefinitionColumnDetails);
+  
+          return prepared_statment.executeUpdate();
     }
 
     @Override

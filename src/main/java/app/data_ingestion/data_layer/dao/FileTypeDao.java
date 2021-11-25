@@ -9,6 +9,9 @@ import app.data_ingestion.data_layer.models.FileType;
 
 public interface FileTypeDao {
     
+	public int addFileDefinition(FileType fileTypeDef) throws SQLException;
     public FileType getFileTypeById(int fileTypeId) throws SQLException, JsonMappingException, JsonProcessingException;
+	
+	
 
 }
