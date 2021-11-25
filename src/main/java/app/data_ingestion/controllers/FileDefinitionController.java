@@ -5,12 +5,10 @@ import app.data_ingestion.business_logic_layer.services.FileDefinitionService;
 import app.data_ingestion.business_logic_layer.servicesImpl.UserServiceStatus;
 import app.data_ingestion.data_layer.models.FileType;
 
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;

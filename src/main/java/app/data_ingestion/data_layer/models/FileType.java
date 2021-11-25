@@ -42,7 +42,7 @@ public class FileType {
 
 
     public void setFileTypeName(String fileTypeName) {
-        this.fileTypeName = fileTypeName;
+        this.fileTypeName = fileTypeName.toUpperCase();
     }
 
 

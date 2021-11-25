@@ -1,5 +1,7 @@
 package app.data_ingestion.data_layer.databaseImpl;
 import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
@@ -38,6 +40,8 @@ public class QueryExecutorImpl extends JdbcDaoSupport implements QueryExecutor {
 
     @Override
     public void createTable(String query) {
+        System.out.println("---createTable-- "+query);
+        jdbcTemplate.execute(query);
     }
 
     @Override
@@ -46,29 +50,63 @@ public class QueryExecutorImpl extends JdbcDaoSupport implements QueryExecutor {
     }
 
     @Override
-    public void insertRecords(String query, List<Map<String, Object>> data_records, Map<String, String> map_column_to_datatype) {
+    public void insertRecords(List<String> headers, String table_name, List<List<String>> rows, 
+                Map<String, String> map_column_to_datatype) throws SQLException {
+        
+        
+        System.out.println("---headers---- "+headers);
+        System.out.println("---table_name---- "+table_name);
+        System.out.println("---rows---- "+rows);
+        System.out.println("---map_column_to_datatype---- "+map_column_to_datatype);
 
-        /*jdbc_template.batchUpdate(query, new BatchPreparedStatementSetter() {
+        connection.setAutoCommit(false);
+        String cols_placeholder = "?,".repeat(headers.size());
+        cols_placeholder = cols_placeholder.substring(0, cols_placeholder.length()-1);
+        String query = String.format("insert into %s (%s) values (%s)", table_name, String.join(",", headers), cols_placeholder);
+        System.out.println("---query---- "+query);
+        PreparedStatement statement = connection.prepareStatement(query);
 
-            @Override
-            public void setValues(PreparedStatement ps, int i)
-                throws SQLException {
-
-                Map<String, Object> data_row = data_records.get(i);
-                int count = 1;
-                for (Map.Entry<String,Object> data_cell : data_row.entrySet()){
-                    //String column = data_cell.getKey();
-                    String col_value = (String) data_cell.getValue();
-                    //String data_type = map_column_to_datatype.get(column);
-                    ps.setString(count, col_value);
+        int row_counter = 0;
+        for(List<String> row : rows){
+            int cell_counter = 1;
+            for(String value : row){
+                System.out.println("---header name---- "+map_column_to_datatype.get(headers.get(cell_counter-1)));
+                switch (map_column_to_datatype.get(headers.get(cell_counter-1))) {
+                    case "STRING":
+                        statement.setString(cell_counter, value);
+                        break;
+                    case "INTEGER":
+                        statement.setInt(cell_counter, Integer.valueOf(value));
+                        break;
+                    case "FLOAT":
+                        statement.setFloat(cell_counter, Float.valueOf(value));
+                        break;
+                    case "DATE":
+                        statement.setDate(cell_counter, Date.valueOf(value));
+                        break;
+                    default:
+                        statement.setString(cell_counter, value);
+                        break;
                 }
+                ++cell_counter;
             }
-    
-            @Override
-            public int getBatchSize() {
-                return data_records.size();
+            ++row_counter;
+            System.out.println("----row_counter---- "+row_counter);
+
+            System.out.println("----rows.size()---- "+rows.size());
+            statement.addBatch();
+            if (row_counter % 500 == 0 || row_counter == rows.size()) {
+                System.out.println("executing batch");
+                System.out.println("---statement--- "+statement);
+                int[] count = statement.executeBatch();
+                System.out.println("---count--- "+count.length);
+                
             }
-        });*/
+
+        }
+        connection.commit();
+        connection.setAutoCommit(true);
+           
     }
 
     @Override

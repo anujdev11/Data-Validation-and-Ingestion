@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import app.data_ingestion.business_logic_layer.services.FileDefinitionService;
 import app.data_ingestion.data_layer.models.FileType;
-import app.data_ingestion.data_layer.models.User;
 import app.data_ingestion.data_layer.dao.FileTypeDao;
 
 @Service

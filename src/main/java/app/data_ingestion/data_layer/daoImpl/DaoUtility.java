@@ -17,21 +17,22 @@ public class DaoUtility {
         PreparedStatement prepared_statment = connection.prepareStatement(sql);
         int counter = 1;
         for(Object param : params){
+            System.out.println("----param.getClass().getName()---- "+param.getClass().getName());
             switch (param.getClass().getName()) {
-                case "String":
+                case "java.lang.String":
                     prepared_statment.setString(counter, (String) param);
                     break;
-                case "Integer":
+                case "java.lang.Integer":
                     prepared_statment.setInt(counter, (int) param);
                     break;
-                case "Float":
+                case "java.lang.Float":
                     prepared_statment.setFloat(counter, (float) param);
                     break;
-                case "Date":
+                case "java.lang.Date":
                     prepared_statment.setDate(counter, (Date) param);
                     break;
                 default:
-                    prepared_statment.setString(counter, (String) param);
+                    prepared_statment.setString(counter, String.valueOf(param));
                     break;
             }
             counter++;
