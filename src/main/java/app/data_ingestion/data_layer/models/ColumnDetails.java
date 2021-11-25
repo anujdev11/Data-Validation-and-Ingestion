@@ -8,12 +8,17 @@ public class ColumnDetails {
     String data_type;
     List<ValidationRule> rules;
 
+    @Override
+    public String toString() {
+        return "ColumnDetails [column_name=" + column_name + ", data_type=" + data_type + ", rules=" + rules + "]";
+    }
+
     public String getColumn_name() {
         return column_name;
     }
 
     public void setColumn_name(String column_name) {
-        this.column_name = column_name;
+        this.column_name = column_name.toUpperCase();
     }
 
     public String getData_type() {
@@ -21,7 +26,7 @@ public class ColumnDetails {
     }
 
     public void setData_type(String data_type) {
-        this.data_type = data_type;
+        this.data_type = data_type.toUpperCase();
     }
 
     public List<ValidationRule> getRules() {

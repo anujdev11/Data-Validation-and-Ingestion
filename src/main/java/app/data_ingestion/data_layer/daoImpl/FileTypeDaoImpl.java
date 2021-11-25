@@ -51,12 +51,14 @@ public class FileTypeDaoImpl extends JdbcDaoSupport implements FileTypeDao {
 
         String query = "select * from file_definition where file_definition_id = ? limit 1";
         PreparedStatement prepared_statment = DaoUtility.createPrepareStatement(connection, query, id);
+        System.out.println("----prepared_statment-----"+prepared_statment);
         ResultSet rs = prepared_statment.executeQuery();
         if(rs.next() == false){
             throw new SQLException("No file definition for id: "+id);
         }
-        while (rs.next()) {
+        else{
             fileType= new FileType();
+            System.out.println("----rs-----"+rs.getString("file_definition_name"));
             fileType.setFileTypeId(rs.getInt("file_definition_id"));
             fileType.setFileTypeName(rs.getString("file_definition_name"));
             
@@ -65,10 +67,12 @@ public class FileTypeDaoImpl extends JdbcDaoSupport implements FileTypeDao {
 
             ObjectMapper objectMapper = new ObjectMapper();
             ColumnDetails[] colDetailsArray = objectMapper.readValue(columnDetails, ColumnDetails[].class);
+            System.out.println("---colDetailsArray---- ");
+
+            System.out.println(colDetailsArray.length);
             fileType.setColumnDetails(Arrays.asList(colDetailsArray) );
-
-
         }
+        
         return fileType;
         
     }

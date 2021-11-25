@@ -40,6 +40,8 @@ public class QueryExecutorImpl extends JdbcDaoSupport implements QueryExecutor {
 
     @Override
     public void createTable(String query) {
+        System.out.println("---createTable-- "+query);
+        jdbcTemplate.execute(query);
     }
 
     @Override
@@ -50,42 +52,60 @@ public class QueryExecutorImpl extends JdbcDaoSupport implements QueryExecutor {
     @Override
     public void insertRecords(List<String> headers, String table_name, List<List<String>> rows, 
                 Map<String, String> map_column_to_datatype) throws SQLException {
+        
+        
+        System.out.println("---headers---- "+headers);
+        System.out.println("---table_name---- "+table_name);
+        System.out.println("---rows---- "+rows);
+        System.out.println("---map_column_to_datatype---- "+map_column_to_datatype);
 
-        String cols_placeholder = "?".repeat(headers.size());
+        connection.setAutoCommit(false);
+        String cols_placeholder = "?,".repeat(headers.size());
+        cols_placeholder = cols_placeholder.substring(0, cols_placeholder.length()-1);
         String query = String.format("insert into %s (%s) values (%s)", table_name, String.join(",", headers), cols_placeholder);
+        System.out.println("---query---- "+query);
         PreparedStatement statement = connection.prepareStatement(query);
 
         int row_counter = 0;
         for(List<String> row : rows){
-            int cell_counter = 0;
+            int cell_counter = 1;
             for(String value : row){
-                switch (headers.get(row_counter)) {
-                    case "String":
+                System.out.println("---header name---- "+map_column_to_datatype.get(headers.get(cell_counter-1)));
+                switch (map_column_to_datatype.get(headers.get(cell_counter-1))) {
+                    case "STRING":
                         statement.setString(cell_counter, value);
                         break;
-                    case "Integer":
+                    case "INTEGER":
                         statement.setInt(cell_counter, Integer.valueOf(value));
                         break;
-                    case "Float":
+                    case "FLOAT":
                         statement.setFloat(cell_counter, Float.valueOf(value));
                         break;
-                    case "Date":
+                    case "DATE":
                         statement.setDate(cell_counter, Date.valueOf(value));
                         break;
                     default:
                         statement.setString(cell_counter, value);
                         break;
                 }
-                cell_counter++;
+                ++cell_counter;
             }
-            row_counter++;
+            ++row_counter;
+            System.out.println("----row_counter---- "+row_counter);
 
+            System.out.println("----rows.size()---- "+rows.size());
             statement.addBatch();
             if (row_counter % 500 == 0 || row_counter == rows.size()) {
-                statement.executeBatch();
+                System.out.println("executing batch");
+                System.out.println("---statement--- "+statement);
+                int[] count = statement.executeBatch();
+                System.out.println("---count--- "+count.length);
+                
             }
 
         }
+        connection.commit();
+        connection.setAutoCommit(true);
            
     }
 

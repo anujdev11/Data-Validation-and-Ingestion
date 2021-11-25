@@ -11,6 +11,13 @@ public class FileType {
     List<ColumnDetails> columnDetails;
     
 
+    @Override
+    public String toString() {
+        return "FileType [columnDetails=" + columnDetails + ", fileTypeId=" + fileTypeId + ", fileTypeName="
+                + fileTypeName + "]";
+    }
+
+
     public int getFileTypeId() {
         return fileTypeId;
     }
@@ -27,7 +34,7 @@ public class FileType {
 
 
     public void setFileTypeName(String fileTypeName) {
-        this.fileTypeName = fileTypeName;
+        this.fileTypeName = fileTypeName.toUpperCase();
     }
 
 
