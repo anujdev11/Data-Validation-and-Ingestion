@@ -2,14 +2,11 @@ package app.data_ingestion.controllers;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import app.data_ingestion.business_logic_layer.services.IngestionService;
-
+@CrossOrigin(origins = "http://localhost:5555")
 @RestController
 public class IngestionController {
 
