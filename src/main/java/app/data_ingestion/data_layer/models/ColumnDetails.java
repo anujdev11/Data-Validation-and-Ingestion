@@ -4,37 +4,39 @@ import java.util.List;
 
 public class ColumnDetails {
 
-    String column_name;
-    String data_type;
+    String columnName;
+    String dataType;
     List<ValidationRule> rules;
 
     @Override
     public String toString() {
-        return "ColumnDetails [column_name=" + column_name + ", data_type=" + data_type + ", rules=" + rules + "]";
+        return "ColumnDetails [column_name=" + columnName + ", dataType=" + dataType + ", rules=" + rules + "]";
     }
 
-    public String getColumn_name() {
-        return column_name;
+    public String getColumnName() {
+        return columnName;
     }
 
-    public void setColumn_name(String column_name) {
-        this.column_name = column_name.toUpperCase();
+    public void setColumnName(String columnName) {
+        this.columnName = columnName;
     }
 
-    public String getData_type() {
-        return data_type;
+    public String getDataType() {
+        return dataType;
     }
 
-    public void setData_type(String data_type) {
-        this.data_type = data_type.toUpperCase();
+    public void setDataType(String dataType) {
+        this.dataType = dataType;
     }
 
     public List<ValidationRule> getRules() {
         return rules;
     }
-    
+
     public void setRules(List<ValidationRule> rules) {
         this.rules = rules;
     }
+
+    
     
 }

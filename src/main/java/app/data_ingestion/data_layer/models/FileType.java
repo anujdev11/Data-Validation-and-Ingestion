@@ -58,7 +58,7 @@ public class FileType {
     public Map<String,String> getColumn_to_datatype(){
         Map<String,String> col_datatype = new HashMap<>();
         for(ColumnDetails cd : columnDetails){
-            col_datatype.put(cd.getColumn_name(), cd.getData_type());
+            col_datatype.put(cd.getColumnName(), cd.getDataType());
         }
         return col_datatype;
     }
@@ -67,7 +67,7 @@ public class FileType {
         Map<String,List<ValidationRule>> col_to_rules = new HashMap<>();
         for(ColumnDetails cd : columnDetails){
             List<ValidationRule> rules = cd.getRules();
-            col_to_rules.put(cd.getColumn_name(),rules);
+            col_to_rules.put(cd.getColumnName(),rules);
         }
         return col_to_rules;
     }

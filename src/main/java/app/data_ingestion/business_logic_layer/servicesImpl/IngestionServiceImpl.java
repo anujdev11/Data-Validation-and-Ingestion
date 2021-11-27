@@ -12,9 +12,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import app.data_ingestion.business_logic_layer.services.IngestionService;
+import app.data_ingestion.config.ConfigReader;
 import app.data_ingestion.data_layer.dao.FileTypeDao;
 import app.data_ingestion.data_layer.database.QueryExecutor;
 import app.data_ingestion.data_layer.models.FileType;
+import app.data_ingestion.data_layer.models.ValidationRule;
 import app.data_ingestion.helpers.CustomExceptions;
 import app.data_ingestion.helpers.Helper;
 
@@ -29,6 +31,8 @@ public class IngestionServiceImpl implements IngestionService {
     
     List<String> headers;
     List<List<String>> rows; 
+    List<List<String>> invalidRows; 
+    List<List<String>> validRows; 
     FileType fileType;
     Map<String,String> map_column_to_datatype;
 
@@ -46,14 +50,59 @@ public class IngestionServiceImpl implements IngestionService {
             //validate table headers
             validateFileHeaders(headers);
 
+            //apply validation rules
+            filterFileRecords();
+
             createTable();
+
+            //
+            if(!invalidRows.isEmpty()){
+                String path = ConfigReader.getProperty("INVALID_ROWS_CSV_PATH");
+                CSVExport.createCSV(path, headers, invalidRows);
+            }
             
             //insert data
-            insertRecodsToDatabase();
+            if(!validRows.isEmpty()){
+                insertRecodsToDatabase();
+            }
 
         }
         else throw new CustomExceptions.EmptyFileException("Data Ingestion cannot be performed on an empty file. Please try again.");
 
+    }
+
+    private void filterFileRecords() {
+
+        validRows = new ArrayList<>();
+        invalidRows = new ArrayList<>();
+        ValidationRulesServiceImpl validator = new ValidationRulesServiceImpl();
+
+        Map<String,List<ValidationRule>> col_to_rules = fileType.getColumn_to_rules();
+        for(List<String> row: rows){
+            String violatedValidationRule = null;
+            int counter = 0;
+            for(String cellValue: row){
+                String header= headers.get(counter);
+                
+                if(col_to_rules.containsKey(header)){
+                    violatedValidationRule = validator.validate(col_to_rules.get(header), header, cellValue, map_column_to_datatype);
+                    
+                    System.out.println("-----violatedValidationRule-------------");
+                    System.out.println(violatedValidationRule);
+                    
+                    if(!violatedValidationRule.isBlank()){
+                        List<String> temp_list = new ArrayList<>(row);
+                        temp_list.add(violatedValidationRule);
+                        invalidRows.add(temp_list);
+                        break;
+                    }
+                } 
+                ++counter;
+            }
+            if(violatedValidationRule.isBlank()){
+                validRows.add(row);
+            }
+        }
     }
 
     @Override
@@ -79,7 +128,7 @@ public class IngestionServiceImpl implements IngestionService {
 
     @Override
     public void insertRecodsToDatabase() throws SQLException {
-        queryExecutor.insertRecords(headers, fileType.getFileTypeName(), rows, map_column_to_datatype);
+        queryExecutor.insertRecords(headers, fileType.getFileTypeName(), validRows, map_column_to_datatype);
     }
 
     @Override
