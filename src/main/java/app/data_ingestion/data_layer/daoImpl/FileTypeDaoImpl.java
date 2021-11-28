@@ -30,7 +30,7 @@ public class FileTypeDaoImpl extends JdbcDaoSupport implements FileTypeDao {
     final DataSource dataSource;
     final JdbcTemplate jdbcTemplate;
 
-    public FileTypeDaoImpl(JdbcTemplate jdbcTemplate, DataSource dataSource){
+    public FileTypeDaoImpl(JdbcTemplate jdbcTemplate, DataSource dataSource) {
         this.jdbcTemplate = jdbcTemplate;
         this.dataSource = dataSource;
         try {
@@ -40,25 +40,26 @@ public class FileTypeDaoImpl extends JdbcDaoSupport implements FileTypeDao {
         }
 
     }
-    
+
     @PostConstruct
     private void initialize() {
         setDataSource(dataSource);
     }
-    
+
     @Override
     public int addFileDefinition(FileType fileTypeDef) throws SQLException {
-    	
-    	String listString = fileTypeDef.getColumnDetails().stream().map(Object::toString)
+
+        String listString = fileTypeDef.getColumnDetails().stream().map(Object::toString)
                 .collect(Collectors.joining(", "));
-    	String fileDefinitionColumnDetails="["+listString+"]";
-    	
+        String fileDefinitionColumnDetails = "[" + listString + "]";
+
         String insert_query = "insert into file_definition ("
                 + "file_definition_name,"
                 + "file_definition_details) VALUES (?, ?)";
-          PreparedStatement prepared_statment = DaoUtility.createPrepareStatement(connection, insert_query,fileTypeDef.getFileTypeName(),fileDefinitionColumnDetails);
-  
-          return prepared_statment.executeUpdate();
+        PreparedStatement prepared_statment = DaoUtility.createPrepareStatement(connection, insert_query,
+                fileTypeDef.getFileTypeName(), fileDefinitionColumnDetails);
+
+        return prepared_statment.executeUpdate();
     }
 
     @Override
@@ -67,30 +68,28 @@ public class FileTypeDaoImpl extends JdbcDaoSupport implements FileTypeDao {
 
         String query = "select * from file_definition where file_definition_id = ? limit 1";
         PreparedStatement prepared_statment = DaoUtility.createPrepareStatement(connection, query, id);
-        System.out.println("----prepared_statment-----"+prepared_statment);
+        System.out.println("----prepared_statment-----" + prepared_statment);
         ResultSet rs = prepared_statment.executeQuery();
-        if(rs.next() == false){
-            throw new SQLException("No file definition for id: "+id);
-        }
-        else{
-            fileType= new FileType();
-            System.out.println("----rs-----"+rs.getString("file_definition_name"));
+        if (rs.next() == false) {
+            throw new SQLException("No file definition for id: " + id);
+        } else {
+            fileType = new FileType();
+            System.out.println("----rs-----" + rs.getString("file_definition_name"));
             fileType.setFileTypeId(rs.getInt("file_definition_id"));
             fileType.setFileTypeName(rs.getString("file_definition_name"));
-            
-            String columnDetails = rs.getString("file_definition_details");
 
+            String columnDetails = rs.getString("file_definition_details");
 
             ObjectMapper objectMapper = new ObjectMapper();
             ColumnDetails[] colDetailsArray = objectMapper.readValue(columnDetails, ColumnDetails[].class);
             System.out.println("---colDetailsArray---- ");
 
             System.out.println(colDetailsArray.length);
-            fileType.setColumnDetails(Arrays.asList(colDetailsArray) );
+            fileType.setColumnDetails(Arrays.asList(colDetailsArray));
         }
-        
+
         return fileType;
-        
+
     }
 
 }

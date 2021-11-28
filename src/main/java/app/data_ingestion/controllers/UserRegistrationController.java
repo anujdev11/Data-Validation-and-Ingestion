@@ -20,7 +20,7 @@ public class UserRegistrationController {
     static final String SYSTEM_ERROR_MESSAGE = "System error";
 
     @GetMapping(path = "/test")
-    public String test(){
+    public String test() {
         return "service is working";
     }
 
@@ -29,15 +29,14 @@ public class UserRegistrationController {
      * @return
      */
     @PostMapping(path = "/users/register")
-    public ResponseEntity<Object> userRegistration(@RequestBody User user){
+    public ResponseEntity<Object> userRegistration(@RequestBody User user) {
         UserServiceStatus status = userService.userRegistration(user);
-        if(status == UserServiceStatus.SUCCESS){
+        if (status == UserServiceStatus.SUCCESS) {
             return ResponseEntity.status(HttpStatus.CREATED).body(SUCCESS_MESSAGE);
+        } else if (status == UserServiceStatus.USER_ALREADY_EXISTS) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(USER_ALREADY_EXISTS_MESSAGE);
         }
-        else if(status == UserServiceStatus.USER_ALREADY_EXISTS){
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(USER_ALREADY_EXISTS_MESSAGE);  
-        }
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(SYSTEM_ERROR_MESSAGE);         
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(SYSTEM_ERROR_MESSAGE);
     }
 
 }

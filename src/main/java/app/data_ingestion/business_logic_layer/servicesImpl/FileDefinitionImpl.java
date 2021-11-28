@@ -11,19 +11,19 @@ import app.data_ingestion.data_layer.dao.FileTypeDao;
 
 @Service
 public class FileDefinitionImpl implements FileDefinitionService {
-	
-	@Autowired
-	FileTypeDao FileTypeDao;
 
-	 /**
+    @Autowired
+    FileTypeDao FileTypeDao;
+
+    /**
      * @param fileDef
      * @return
      */
     @Override
     public UserServiceStatus fileDefinition(FileType fileDef) {
         try {
-        	return FileTypeDao.addFileDefinition(fileDef) > 0 ? UserServiceStatus.SUCCESS : UserServiceStatus.FAILURE;
-           
+            return FileTypeDao.addFileDefinition(fileDef) > 0 ? UserServiceStatus.SUCCESS : UserServiceStatus.FAILURE;
+
         } catch (SQLException e) {
             e.printStackTrace();
         }

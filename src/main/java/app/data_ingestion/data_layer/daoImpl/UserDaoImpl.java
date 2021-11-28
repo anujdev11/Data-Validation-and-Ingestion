@@ -1,6 +1,5 @@
 package app.data_ingestion.data_layer.daoImpl;
 
-
 import app.data_ingestion.data_layer.dao.UserDao;
 import app.data_ingestion.data_layer.database.DatabaseConnection;
 import app.data_ingestion.data_layer.models.User;
@@ -26,7 +25,7 @@ public class UserDaoImpl extends JdbcDaoSupport implements UserDao {
     final DataSource dataSource;
     final JdbcTemplate jdbcTemplate;
 
-    public UserDaoImpl(JdbcTemplate jdbcTemplate, DataSource dataSource){
+    public UserDaoImpl(JdbcTemplate jdbcTemplate, DataSource dataSource) {
         this.jdbcTemplate = jdbcTemplate;
         this.dataSource = dataSource;
         try {
@@ -36,12 +35,11 @@ public class UserDaoImpl extends JdbcDaoSupport implements UserDao {
         }
 
     }
-    
+
     @PostConstruct
     private void initialize() {
         setDataSource(dataSource);
     }
-
 
     /**
      * @param user
@@ -51,14 +49,14 @@ public class UserDaoImpl extends JdbcDaoSupport implements UserDao {
     @Override
     public int add(User user) throws SQLException {
         String insert_query = "insert into user (username, "
-              + "password, access_level, "
-              + "organization) VALUES (?, ?, ?, ?)";
-        PreparedStatement prepared_statment = DaoUtility.createPrepareStatement(connection, insert_query, 
+                + "password, access_level, "
+                + "organization) VALUES (?, ?, ?, ?)";
+        PreparedStatement prepared_statment = DaoUtility.createPrepareStatement(connection, insert_query,
                 user.getUsername(),
-                user.getPassword(), 
-                user.getAccess_level(), 
+                user.getPassword(),
+                user.getAccess_level(),
                 user.getOrganization());
-        
+
         return prepared_statment.executeUpdate();
     }
 
@@ -85,10 +83,10 @@ public class UserDaoImpl extends JdbcDaoSupport implements UserDao {
         ResultSet rs = prepared_statment.executeQuery();
         User user = null;
         while (rs.next()) {
-            user= new User(rs.getString("username"),
-                        rs.getString("password"),
-                        rs.getString("access_level"),
-                        rs.getString("organization"));
+            user = new User(rs.getString("username"),
+                    rs.getString("password"),
+                    rs.getString("access_level"),
+                    rs.getString("organization"));
         }
         return user;
     }
@@ -103,14 +101,13 @@ public class UserDaoImpl extends JdbcDaoSupport implements UserDao {
         PreparedStatement prepared_statment = connection.prepareStatement(select_query);
         ResultSet rs = prepared_statment.executeQuery();
         List<User> users = new ArrayList<User>();
-  
+
         while (rs.next()) {
             users.add(
-                new User(rs.getString("username"),
-                        rs.getString("password"),
-                        rs.getString("access_level"),
-                        rs.getString("organization"))
-            );
+                    new User(rs.getString("username"),
+                            rs.getString("password"),
+                            rs.getString("access_level"),
+                            rs.getString("organization")));
         }
         return users;
     }
@@ -122,12 +119,12 @@ public class UserDaoImpl extends JdbcDaoSupport implements UserDao {
     @Override
     public void update(User user) throws SQLException {
         String update_query = "update user set password= ?, access_level= ?, organization= ? where username = ?";
-        PreparedStatement prepared_statment = DaoUtility.createPrepareStatement(connection, update_query, 
-                                                user.getPassword(), 
-                                                user.getAccess_level(), 
-                                                user.getOrganization());
+        PreparedStatement prepared_statment = DaoUtility.createPrepareStatement(connection, update_query,
+                user.getPassword(),
+                user.getAccess_level(),
+                user.getOrganization());
         prepared_statment.executeUpdate();
-        
+
     }
 
 }

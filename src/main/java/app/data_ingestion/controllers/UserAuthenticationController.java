@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import app.data_ingestion.business_logic_layer.services.UserService;
 import app.data_ingestion.business_logic_layer.servicesImpl.UserServiceStatus;
 import app.data_ingestion.helpers.Helper;
+
 @CrossOrigin(origins = "http://localhost:5555")
 @RestController
 
@@ -29,21 +30,20 @@ public class UserAuthenticationController {
      */
     @PostMapping(path = "/users/authenticate")
     @ResponseBody
-    public ResponseEntity<Object> userAuthentication(@RequestBody User users){
+    public ResponseEntity<Object> userAuthentication(@RequestBody User users) {
         UserServiceStatus status = userService.userAuthentication(users.getUsername(), users.getPassword());
-        Map<String,String> body_map = new HashMap<String, String>();
-        if(status == UserServiceStatus.SUCCESS){
-            body_map.put("status","200");
+        Map<String, String> body_map = new HashMap<String, String>();
+        if (status == UserServiceStatus.SUCCESS) {
+            body_map.put("status", "200");
             body_map.put("message", SUCCESS_MESSAGE);
             body_map.put("access_level", userService.getUser().getAccess_level());
-            return ResponseEntity.status(HttpStatus.OK).body(Helper.createResponseBody(body_map));  
-        }
-        else if(status == UserServiceStatus.INVALID_CREDENTIALS){
+            return ResponseEntity.status(HttpStatus.OK).body(Helper.createResponseBody(body_map));
+        } else if (status == UserServiceStatus.INVALID_CREDENTIALS) {
             body_map.put("message", INVALID_CREDENTIALS_MESSAGE);
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Helper.createResponseBody(body_map)); 
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Helper.createResponseBody(body_map));
         }
         body_map.put("message", SYSTEM_ERROR_MESSAGE);
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Helper.createResponseBody(body_map)); 
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Helper.createResponseBody(body_map));
     }
-    
+
 }

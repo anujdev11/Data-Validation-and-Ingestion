@@ -7,7 +7,6 @@ import app.data_ingestion.data_layer.models.User;
 
 public interface UserDao {
 
-
     /**
      * @param user
      * @return

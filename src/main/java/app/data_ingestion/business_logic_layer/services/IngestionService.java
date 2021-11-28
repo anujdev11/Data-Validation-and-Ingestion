@@ -7,7 +7,7 @@ import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 
 public interface IngestionService {
-    
+
     public void ingestData(int id, MultipartFile file, String delimiter) throws Exception;
 
     String retrieveFileContentsAsString(MultipartFile inputFile) throws IOException;

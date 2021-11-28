@@ -6,4 +6,3 @@ public enum UserServiceStatus {
     FAILURE,
     INVALID_CREDENTIALS
 }
-

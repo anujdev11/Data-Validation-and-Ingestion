@@ -13,11 +13,12 @@ public class DaoUtility {
      * @return
      * @throws SQLException
      */
-    public static PreparedStatement createPrepareStatement(Connection connection, String sql, Object... params) throws SQLException {
+    public static PreparedStatement createPrepareStatement(Connection connection, String sql, Object... params)
+            throws SQLException {
         PreparedStatement prepared_statment = connection.prepareStatement(sql);
         int counter = 1;
-        for(Object param : params){
-            System.out.println("----param.getClass().getName()---- "+param.getClass().getName());
+        for (Object param : params) {
+            System.out.println("----param.getClass().getName()---- " + param.getClass().getName());
             switch (param.getClass().getName()) {
                 case "java.lang.String":
                     prepared_statment.setString(counter, (String) param);
