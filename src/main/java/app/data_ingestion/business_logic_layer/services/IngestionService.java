@@ -19,4 +19,8 @@ public interface IngestionService {
     void createTable();
 
     void insertRecodsToDatabase() throws SQLException;
+
+    List<List<String>> getInvalidRows();
+
+    List<List<String>> getValidRows();
 }

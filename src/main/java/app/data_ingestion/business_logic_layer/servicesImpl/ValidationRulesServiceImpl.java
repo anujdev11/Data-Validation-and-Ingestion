@@ -1,5 +1,6 @@
 package app.data_ingestion.business_logic_layer.servicesImpl;
 
+import java.math.BigDecimal;
 import java.sql.Date;
 import java.util.List;
 import java.util.Map;
@@ -9,7 +10,7 @@ import app.data_ingestion.data_layer.models.ValidationRule;
 
 public class ValidationRulesServiceImpl implements ValidationRulesService{
 
-    public String validate(List<ValidationRule> rules, String header, String cellValue, Map<String, String> map_column_to_datatype) {
+    public String validate(List<ValidationRule> rules, String header, String cellValue, Map<String, String> mapColumnToDatatype) {
         System.out.println("-----rules-------------");
         System.out.println(rules);
         System.out.println("----header-----------");
@@ -17,14 +18,14 @@ public class ValidationRulesServiceImpl implements ValidationRulesService{
         System.out.println("------cellValue-----");
         System.out.println(cellValue);
         System.out.println("------map_column_to_datatype----");
-        System.out.println(map_column_to_datatype);
+        System.out.println(mapColumnToDatatype);
 
         String violatedValidationRule = "";
         for(ValidationRule rule : rules){
             String operator = rule.getOperator();
             String rhsValue = rule.getRhsValue();
 
-            switch(map_column_to_datatype.get(header)){
+            switch(mapColumnToDatatype.get(header)){
                 case "STRING":
                     violatedValidationRule= stringValidation(operator, rhsValue, header, cellValue);
                     break;
@@ -47,8 +48,16 @@ public class ValidationRulesServiceImpl implements ValidationRulesService{
 
     private String numberValidation(String operator, String rhsValue, String header, String cellValue) {
         String violatedValidationRule = "";
-        Float floatCellValue = Float.valueOf(cellValue);
-        Float floatRhsValue = Float.valueOf(rhsValue);
+        BigDecimal numCellValue= BigDecimal.ZERO; 
+        BigDecimal numRhsValue= BigDecimal.ZERO;
+        int comparedValue= 0;
+        if(!cellValue.isBlank()){
+            numCellValue = new BigDecimal(cellValue);
+        }
+        if(rhsValue!=null && !rhsValue.isBlank()){
+            numRhsValue = new BigDecimal(rhsValue);
+            comparedValue = numCellValue.compareTo(numRhsValue);
+        }
         switch (operator) {
             case "NOT NULL":
                 if(cellValue.isBlank()){
@@ -56,7 +65,8 @@ public class ValidationRulesServiceImpl implements ValidationRulesService{
                 }
                 break;
             case "EQUALS TO":
-                if(floatCellValue != floatRhsValue){
+                System.out.println("--numCellValue-- "+numCellValue+" --numRhsValue--- "+numRhsValue);
+                if(comparedValue != 0) {
                     violatedValidationRule = String.format("%s %s %s", header, operator, rhsValue);
                 }
                 break;
@@ -66,22 +76,22 @@ public class ValidationRulesServiceImpl implements ValidationRulesService{
                 }
                 break;
             case ">=":
-                if(!(floatCellValue >= floatRhsValue)) {
+                if(comparedValue < 0) {
                     violatedValidationRule = String.format("%s %s %s", header, operator, rhsValue);
                 }
                 break;
             case ">":
-                if(!(floatCellValue > floatRhsValue)) {
+                if(comparedValue <= 0) {
                     violatedValidationRule = String.format("%s %s %s", header, operator, rhsValue);
                 }
                 break;
             case "<":
-                if(!(floatCellValue < floatRhsValue)) {
+                if(comparedValue >= 0) {
                     violatedValidationRule = String.format("%s %s %s", header, operator, rhsValue);
                 }
                 break;
             case "<=":
-                if(!(floatCellValue <= floatRhsValue)) {
+                if(comparedValue > 0) {
                     violatedValidationRule = String.format("%s %s %s", header, operator, rhsValue);
                 }
                 break;
@@ -93,8 +103,15 @@ public class ValidationRulesServiceImpl implements ValidationRulesService{
 
     private String dateValidation(String operator, String rhsValue, String header, String cellValue) {
         String violatedValidationRule = "";
-        Date dateCellValue = Date.valueOf(cellValue);
-        Date dateRhsValue = Date.valueOf(rhsValue);
+        Date dateCellValue = null;//Date.valueOf(cellValue);
+        Date dateRhsValue = null;//Date.valueOf(rhsValue);
+        if(!cellValue.isBlank()){
+            dateCellValue = Date.valueOf(cellValue);
+        }
+        if(rhsValue!=null && !rhsValue.isBlank()){
+            dateRhsValue = Date.valueOf(rhsValue);
+        }
+
         switch (operator) {
             case "NOT NULL":
                 if(cellValue.isBlank()){
@@ -102,7 +119,7 @@ public class ValidationRulesServiceImpl implements ValidationRulesService{
                 }
                 break;
             case "EQUALS TO":
-                if(dateCellValue != dateRhsValue){
+                if(!dateCellValue.equals(dateRhsValue)){
                     violatedValidationRule = String.format("%s %s %s", header, operator, rhsValue);
                 }
                 break;

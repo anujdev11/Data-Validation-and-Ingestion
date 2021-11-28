@@ -38,13 +38,14 @@ public class IngestionServiceImpl implements IngestionService {
 
     public void ingestData(int id, MultipartFile file, String delimiter) throws Exception {
 
-        fileType = fileTypeDao.getFileTypeById(id);
-        System.out.println("---fileType-----"+fileType.toString());
-        map_column_to_datatype = fileType.getColumn_to_datatype();
-        System.out.println("---fileType-----"+fileType.toString());
         String contents = retrieveFileContentsAsString(file);
 
         if(contents != null && !contents.trim().isEmpty()){
+            System.out.println("---fileTypeDao-- "+fileTypeDao);
+            fileType = fileTypeDao.getFileTypeById(id);
+            fileType = fileTypeDao.getFileTypeById(id);
+            map_column_to_datatype = fileType.getColumn_to_datatype();
+
             populateHeadersAndRows(contents, delimiter);
 
             //validate table headers
@@ -161,5 +162,14 @@ public class IngestionServiceImpl implements IngestionService {
         String query = String.format("create table if not exists `%s` (%s)", fileType.getFileTypeName(), col_detail);
         queryExecutor.createTable(query);
     }
+
+    public List<List<String>> getInvalidRows() {
+        return invalidRows;
+    }
+
+    public List<List<String>> getValidRows() {
+        return validRows;
+    }
+    
     
 }

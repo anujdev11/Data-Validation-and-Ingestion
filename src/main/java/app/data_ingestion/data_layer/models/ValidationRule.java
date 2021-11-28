@@ -14,7 +14,7 @@ public class ValidationRule {
 
 
 	public void setOperator(String operator) {
-		this.operator = operator;
+		this.operator = operator.toUpperCase();
 	}
 
 
@@ -24,7 +24,7 @@ public class ValidationRule {
 
 
 	public void setRhsValue(String rhsValue) {
-		this.rhsValue = rhsValue;
+		this.rhsValue = rhsValue.toUpperCase();
 	}
 
 
