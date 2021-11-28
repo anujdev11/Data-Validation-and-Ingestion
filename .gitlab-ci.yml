@@ -29,11 +29,8 @@ test:
         - $CI_PROJECT_DIR/target/surefire-reports/TEST-*.xml
         - $CI_PROJECT_DIR/target/failsafe-reports/TEST-*.xml
 
-after_script:
-  - echo "Build and Test Done Successfully"
-
 deploy_develop:
-  stage: deploy
+  stage: deploy_develop
   tags:
     - dalfcs_gitlab_docker_ci
   image: ruby:latest
@@ -49,7 +46,7 @@ deploy_develop:
     - develop
 
 deploy_staging:
-  stage: deploy
+  stage: deploy_staging
   tags:
     - dalfcs_gitlab_docker_ci
   image: ruby:latest
@@ -65,7 +62,7 @@ deploy_staging:
     - staging
 
 deploy_production:
-  stage: deploy
+  stage: deploy_production
   tags:
     - dalfcs_gitlab_docker_ci
   image: ruby:latest
@@ -79,3 +76,6 @@ deploy_production:
     url: https://team-3-csci-5308.herokuapp.com/status
   only:
     - main
+
+after_script:
+  - echo "Build and Test Done Successfully"
