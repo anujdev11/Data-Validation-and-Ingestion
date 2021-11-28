@@ -1,10 +1,8 @@
 package app.data_ingestion.controllers;
 
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
-import java.util.Map;
 
 import app.data_ingestion.business_logic_layer.servicesImpl.IngestionServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import app.data_ingestion.business_logic_layer.services.IngestionService;
 import app.data_ingestion.config.ConfigReader;
+
 @CrossOrigin(origins = "http://localhost:5555")
 @RestController
 public class IngestionController {
@@ -28,16 +27,16 @@ public class IngestionController {
     @PostMapping(path = "/ingestion", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
     @ResponseBody
     public ResponseEntity<Object> ingestDataFromFile(@RequestParam("file_definition_id") String file_definition_id,
-                                    @RequestParam("input_file") MultipartFile multipartFile,
-                                    @RequestParam("delimiter") String delimiter) throws Exception {
-        
+            @RequestParam("input_file") MultipartFile multipartFile,
+            @RequestParam("delimiter") String delimiter) throws Exception {
+
         System.out.println(file_definition_id);
         System.out.println(delimiter);
         ingestionService.ingestData(Integer.valueOf(file_definition_id), multipartFile, delimiter);
         String fileName = ConfigReader.getProperty("INVALID_ROWS_CSV_PATH");
         InputStreamResource fileInputStream = null;
         File file = new File(fileName);
-        if(file.exists()){
+        if (file.exists()) {
             InputStream in = new FileInputStream(fileName);
             fileInputStream = new InputStreamResource(in);
 
@@ -46,21 +45,20 @@ public class IngestionController {
             headers.set(HttpHeaders.CONTENT_TYPE, "text/csv");
 
             return new ResponseEntity<>(
-                fileInputStream,
-                headers,
-                HttpStatus.OK
-            );
-            
+                    fileInputStream,
+                    headers,
+                    HttpStatus.OK);
+
         }
-        
+
         return new ResponseEntity<>(
-                HttpStatus.OK
-            );
+                HttpStatus.OK);
     }
+
     @GetMapping(path = "/getValidationRules")
-    public ResponseEntity<Object> getValidationRules(@RequestParam String ruleType){
+    public ResponseEntity<Object> getValidationRules(@RequestParam String ruleType) {
         String[] validationRule = IngestionServiceImpl.getValidationRule(ruleType);
-        return new ResponseEntity<>(validationRule,HttpStatus.OK);
+        return new ResponseEntity<>(validationRule, HttpStatus.OK);
     }
 
 }
