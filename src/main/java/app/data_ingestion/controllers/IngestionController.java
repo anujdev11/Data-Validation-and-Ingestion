@@ -4,17 +4,16 @@ package app.data_ingestion.controllers;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.util.Map;
 
+import app.data_ingestion.business_logic_layer.servicesImpl.IngestionServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import app.data_ingestion.business_logic_layer.services.IngestionService;
@@ -57,6 +56,11 @@ public class IngestionController {
         return new ResponseEntity<>(
                 HttpStatus.OK
             );
+    }
+    @GetMapping(path = "/getValidationRules")
+    public ResponseEntity<Object> getValidationRules(@RequestParam String ruleType){
+        String[] validationRule = IngestionServiceImpl.getValidationRule(ruleType);
+        return new ResponseEntity<>(validationRule,HttpStatus.OK);
     }
 
 }
