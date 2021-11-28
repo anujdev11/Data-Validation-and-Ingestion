@@ -20,6 +20,12 @@ test:
   tags:
     - dalfcs_gitlab_docker_ci
   script: "mvn clean test"
+  artifacts:
+    when: always
+    reports:
+      junit:
+        - $CI_PROJECT_DIR/target/surefire-reports/TEST-*.xml
+        - $CI_PROJECT_DIR/target/failsafe-reports/TEST-*.xml
 
 after_script:
   - echo "Build and Test Done Successfully"
