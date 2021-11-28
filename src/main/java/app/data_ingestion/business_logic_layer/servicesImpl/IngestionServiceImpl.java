@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import app.data_ingestion.helpers.ValidationRules;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -129,6 +130,11 @@ public class IngestionServiceImpl implements IngestionService {
     @Override
     public void insertRecodsToDatabase() throws SQLException {
         queryExecutor.insertRecords(headers, fileType.getFileTypeName(), validRows, map_column_to_datatype);
+    }
+
+
+    public static String[] getValidationRule(String ruleDataType) {
+        return ValidationRules.getValidationRule(ruleDataType);
     }
 
     @Override

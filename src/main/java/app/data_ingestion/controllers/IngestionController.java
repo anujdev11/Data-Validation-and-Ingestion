@@ -4,7 +4,9 @@ package app.data_ingestion.controllers;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.util.Map;
 
+import app.data_ingestion.business_logic_layer.servicesImpl.IngestionServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
@@ -54,6 +56,11 @@ public class IngestionController {
         return new ResponseEntity<>(
                 HttpStatus.OK
             );
+    }
+    @GetMapping(path = "/getValidationRules")
+    public ResponseEntity<Object> getValidationRules(@RequestParam String ruleType){
+        String[] validationRule = IngestionServiceImpl.getValidationRule(ruleType);
+        return new ResponseEntity<>(validationRule,HttpStatus.OK);
     }
 
 }
