@@ -18,7 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import app.data_ingestion.business_logic_layer.services.IngestionService;
 import app.data_ingestion.config.ConfigReader;
-
+@CrossOrigin(origins = "http://localhost:5555")
 @RestController
 public class IngestionController {
 
