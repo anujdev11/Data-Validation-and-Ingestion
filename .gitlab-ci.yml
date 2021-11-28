@@ -3,7 +3,9 @@ image: maven:3-jdk-11
 stages:
   - build
   - test
-  - deploy
+  - deploy_develop
+  - deploy_staging
+  - deploy_production
 
 before_script:
   - echo "DATA VALIDATION AND DATA INGESTION"
@@ -30,7 +32,7 @@ test:
 after_script:
   - echo "Build and Test Done Successfully"
 
-deploy:
+deploy_develop:
   stage: deploy
   tags:
     - dalfcs_gitlab_docker_ci
@@ -40,5 +42,40 @@ deploy:
     - apt-get install -y ruby-dev
     - gem install dpl
     - dpl --provider=heroku --app=$HEROKU_APP_DEVELOPEMENT  --api-key=$HEROKU_API_KEY
+  environment:
+    name: develop
+    url: https://team-3-csci-5308-developement.herokuapp.com/status
   only:
     - develop
+
+deploy_staging:
+  stage: deploy
+  tags:
+    - dalfcs_gitlab_docker_ci
+  image: ruby:latest
+  script:
+    - apt-get update -qy
+    - apt-get install -y ruby-dev
+    - gem install dpl
+    - dpl --provider=heroku --app=$HEROKU_APP_STAGING  --api-key=$HEROKU_API_KEY
+  environment:
+    name: staging
+    url: https://team-3-csci-5308-staging.herokuapp.com/status
+  only:
+    - staging
+
+deploy_production:
+  stage: deploy
+  tags:
+    - dalfcs_gitlab_docker_ci
+  image: ruby:latest
+  script:
+    - apt-get update -qy
+    - apt-get install -y ruby-dev
+    - gem install dpl
+    - dpl --provider=heroku --app=$HEROKU_APP_PRODUCTION  --api-key=$HEROKU_API_KEY
+  environment:
+    name: production
+    url: https://team-3-csci-5308.herokuapp.com/status
+  only:
+    - main
