@@ -48,7 +48,7 @@ deploy_develop:
 deploy_staging:
   stage: deploy_staging
   tags:
-    - ugrad
+    - dalfcs_gitlab_docker_ci
   image: ruby:latest
   script:
     - apt-get update -qy
@@ -64,7 +64,7 @@ deploy_staging:
 deploy_production:
   stage: deploy_production
   tags:
-    - ugrad
+    - dalfcs_gitlab_docker_ci
   image: ruby:latest
   script:
     - apt-get update -qy
