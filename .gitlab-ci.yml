@@ -14,13 +14,13 @@ before_script:
 build:
   stage: build
   tags:
-    - dalfcs_gitlab_docker_ci
+    - ugrad
   script: "mvn clean install"
 
 test:
   stage: test
   tags:
-    - dalfcs_gitlab_docker_ci
+    - ugrad
   script: "mvn clean test"
   artifacts:
     when: always
@@ -32,7 +32,7 @@ test:
 deploy_develop:
   stage: deploy_develop
   tags:
-    - dalfcs_gitlab_docker_ci
+    - ugrad
   image: ruby:latest
   script:
     - apt-get update -qy
