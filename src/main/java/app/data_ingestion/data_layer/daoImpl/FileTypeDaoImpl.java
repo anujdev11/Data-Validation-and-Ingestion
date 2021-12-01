@@ -93,4 +93,17 @@ public class FileTypeDaoImpl extends JdbcDaoSupport implements FileTypeDao {
         
     }
 
+    public boolean deleteFileDefinition(int file_definition_id) throws SQLException, JsonProcessingException {
+        FileType fileType = getFileTypeById(file_definition_id);
+        String fileTypeName = fileType.getFileTypeName();
+        String delete_query = "delete from file_definition where file_definition_id = ?";
+        String delete_table = String.format("drop table %s ", fileTypeName);
+        PreparedStatement prepared_statement = DaoUtility.createPrepareStatement(connection, delete_query, file_definition_id);
+        prepared_statement.executeUpdate();
+        PreparedStatement prepared_statement_table = DaoUtility.createPrepareStatement(connection, delete_table);
+        prepared_statement_table.executeUpdate();
+        return true;
+    }
+
+
 }

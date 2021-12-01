@@ -10,7 +10,7 @@ public class ColumnDetails {
 
     @Override
     public String toString() {
-        return "ColumnDetails [column_name=" + columnName + ", dataType=" + dataType + ", rules=" + rules + "]";
+        return "[column_name=" + columnName + ", dataType=" + dataType + ", rules=" + rules + "]";
     }
 
     public String getColumnName() {
