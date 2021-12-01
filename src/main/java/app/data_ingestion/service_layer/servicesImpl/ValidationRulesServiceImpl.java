@@ -11,7 +11,7 @@ import app.data_ingestion.data_layer.models.ValidationRule;
 public class ValidationRulesServiceImpl implements ValidationRulesService {
 
     /**
-     * @param rules 
+     * @param rules
      * @param header
      * @param cellValue
      * @param mapColumnToDatatype

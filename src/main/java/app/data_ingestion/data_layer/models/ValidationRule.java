@@ -28,7 +28,7 @@ public class ValidationRule {
 
     @Override
     public String toString() {
-        return "{operator=" + operator + ", rhsValue=" + rhsValue + "}";
+        return "{\"operator\":\"" + operator + "\", \"rhsValue\":\"" + rhsValue + "\"}";
     }
 
 }
