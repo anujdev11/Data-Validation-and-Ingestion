@@ -1,4 +1,4 @@
-package app.data_ingestion.business_logic_layer.servicesImpl;
+package app.data_ingestion.service_layer.servicesImpl;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -9,23 +9,23 @@ public class CSVExport {
 
     public static void createCSV(String path, List<String> headers, List<List<String>> invalidRows) throws IOException {
         String content = "";
-        
 
-        for(String header : headers){
+
+        for (String header : headers) {
             content += header + ",";
         }
-        content = content.substring(0, content.length()-1) +"\n";
+        content = content.substring(0, content.length() - 1) + "\n";
 
-        for(List<String> row : invalidRows){
-            for(String value : row){
+        for (List<String> row : invalidRows) {
+            for (String value : row) {
                 content += value + ",";
             }
             content = formatEnding(content);
         }
         content = content.trim();
         writeToFile(path, content);
-        
-        
+
+
     }
 
     private static void writeToFile(String path, String content) throws IOException {
@@ -43,9 +43,8 @@ public class CSVExport {
     }
 
     private static String formatEnding(String content) {
-        return content.substring(0, content.length()-1) +"\n";
+        return content.substring(0, content.length() - 1) + "\n";
     }
 
 
-    
 }

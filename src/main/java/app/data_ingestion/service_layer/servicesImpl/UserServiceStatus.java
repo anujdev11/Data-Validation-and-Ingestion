@@ -1,4 +1,4 @@
-package app.data_ingestion.business_logic_layer.servicesImpl;
+package app.data_ingestion.service_layer.servicesImpl;
 
 public enum UserServiceStatus {
     SUCCESS,

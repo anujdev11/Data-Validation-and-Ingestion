@@ -26,7 +26,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.multipart.MultipartFile;
 
-import app.data_ingestion.business_logic_layer.services.IngestionService;
+import app.data_ingestion.service_layer.services.IngestionService;
 import app.data_ingestion.data_layer.dao.FileTypeDao;
 import app.data_ingestion.data_layer.database.QueryExecutor;
 import app.data_ingestion.data_layer.models.ColumnDetails;
@@ -50,112 +50,107 @@ public class IngestionServiceTest {
 
     FileType fileType;
 
-    
-    void initializeFileTypeDaoBeans(){
 
-        try{
-            fileType= new FileType();
+    void initializeFileTypeDaoBeans() {
+
+        try {
+            fileType = new FileType();
             fileType.setFileTypeId(1);
             fileType.setFileTypeName("Sales");
             String columnDetails = "[{\"columnName\":\"NAME\",\"dataType\":\"STRING\",\"rules\":[]},{\"columnName\":\"SALES\",\"dataType\":\"INTEGER\",\"rules\":[]}]";
             ObjectMapper objectMapper = new ObjectMapper();
             ColumnDetails[] colDetailsArray;
-            
+
             colDetailsArray = objectMapper.readValue(columnDetails, ColumnDetails[].class);
-            
-            fileType.setColumnDetails(Arrays.asList(colDetailsArray) );
-            
+
+            fileType.setColumnDetails(Arrays.asList(colDetailsArray));
+
             when(fileTypeDao.getFileTypeById(1)).thenReturn(fileType);
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    
-    MockMultipartFile initializeMultipartFileSales(){
 
-        try{
-            String fileContent = "name,sales"+System.lineSeparator()+"Prachi,90"+System.lineSeparator()+"Shan,100";
+    MockMultipartFile initializeMultipartFileSales() {
+
+        try {
+            String fileContent = "name,sales" + System.lineSeparator() + "Prachi,90" + System.lineSeparator() + "Shan,100";
             MockMultipartFile multipartFile = new MockMultipartFile(
-                        "file", 
-                        "sales.csv", 
-                        MediaType.APPLICATION_OCTET_STREAM_VALUE, 
-                        fileContent.getBytes()
-                    );
+                    "file",
+                    "sales.csv",
+                    MediaType.APPLICATION_OCTET_STREAM_VALUE,
+                    fileContent.getBytes()
+            );
             return multipartFile;
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
     }
 
-    MockMultipartFile initializeMultipartFileEmployee(){
+    MockMultipartFile initializeMultipartFileEmployee() {
 
-        try{
-            String fileContent = "id,name"+System.lineSeparator()+"1,Prachi Kabtiyal"+System.lineSeparator()+"2,Shan Malhotra";
+        try {
+            String fileContent = "id,name" + System.lineSeparator() + "1,Prachi Kabtiyal" + System.lineSeparator() + "2,Shan Malhotra";
             MockMultipartFile multipartFile = new MockMultipartFile(
-                        "file", 
-                        "employees.csv", 
-                        MediaType.APPLICATION_OCTET_STREAM_VALUE, 
-                        fileContent.getBytes()
-                    );
+                    "file",
+                    "employees.csv",
+                    MediaType.APPLICATION_OCTET_STREAM_VALUE,
+                    fileContent.getBytes()
+            );
             return multipartFile;
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
     }
 
-    MockMultipartFile initializeMultipartFileEmpty(){
+    MockMultipartFile initializeMultipartFileEmpty() {
 
-        try{
+        try {
             String fileContent = "";
             MockMultipartFile multipartFile = new MockMultipartFile(
-                        "file", 
-                        "empty.csv", 
-                        MediaType.APPLICATION_OCTET_STREAM_VALUE, 
-                        fileContent.getBytes()
-                    );
+                    "file",
+                    "empty.csv",
+                    MediaType.APPLICATION_OCTET_STREAM_VALUE,
+                    fileContent.getBytes()
+            );
             return multipartFile;
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
     }
 
-    
-    void initializeQueryExecutorBean(){
 
-        try{
+    void initializeQueryExecutorBean() {
+
+        try {
             String query = "create table if not exists `SALES` (`NAME` nvarchar(1000),`SALES` INTEGER)";
             doNothing().when(jdbcTemplate).execute(query);
 
             List<String> headers = new ArrayList<>(Arrays.asList("NAME", "SALES"));
             String tableName = "SALES";
             List<List<String>> rows = new ArrayList<>();
-            rows.add(new ArrayList<>(Arrays.asList("Prachi","90")));
-            rows.add(new ArrayList<>(Arrays.asList("Shan","100")));
+            rows.add(new ArrayList<>(Arrays.asList("Prachi", "90")));
+            rows.add(new ArrayList<>(Arrays.asList("Shan", "100")));
 
-            Map<String,String> map_column_to_datatype = new HashMap<>();
+            Map<String, String> map_column_to_datatype = new HashMap<>();
             map_column_to_datatype.put("NAME", "STRING");
             map_column_to_datatype.put("SALES", "INTEGER");
             doNothing().when(queryExecutor).insertRecords(headers, tableName, rows, map_column_to_datatype);
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     @Test
-    void retrieveFileContentsAsStringTest(){
+    void retrieveFileContentsAsStringTest() {
         try {
             MultipartFile multipartFile = initializeMultipartFileSales();
-            String fileContent = "name,sales"+System.lineSeparator()+"Prachi,90"+System.lineSeparator()+"Shan,100";
-            String actualContent= ingestService.retrieveFileContentsAsString(multipartFile);
+            String fileContent = "name,sales" + System.lineSeparator() + "Prachi,90" + System.lineSeparator() + "Shan,100";
+            String actualContent = ingestService.retrieveFileContentsAsString(multipartFile);
             assertEquals(fileContent, actualContent);
         } catch (IOException e) {
             e.printStackTrace();
@@ -163,12 +158,12 @@ public class IngestionServiceTest {
     }
 
     @Test
-    void retrieveFileContentsAsStringWithNoInputFile(){
+    void retrieveFileContentsAsStringWithNoInputFile() {
         assertThrows(NullPointerException.class, () -> ingestService.retrieveFileContentsAsString(null));
     }
 
     @Test
-    void retrieveFileContentsAsStringWithDifferentFiles(){
+    void retrieveFileContentsAsStringWithDifferentFiles() {
         MultipartFile sales = initializeMultipartFileSales();
         MultipartFile employees = initializeMultipartFileEmployee();
         try {
@@ -182,19 +177,19 @@ public class IngestionServiceTest {
     }
 
     @Test
-    void ingestDataWithoutValidations() throws Exception{
+    void ingestDataWithoutValidations() throws Exception {
         initializeFileTypeDaoBeans();
         MultipartFile multipartFile = initializeMultipartFileSales();
         initializeQueryExecutorBean();
         ingestService.ingestData(1, multipartFile, ",");
         assertAll(
-            () -> assertEquals(2, ingestService.getValidRows().size()),
-            () -> assertEquals(0, ingestService.getInvalidRows().size())
+                () -> assertEquals(2, ingestService.getValidRows().size()),
+                () -> assertEquals(0, ingestService.getInvalidRows().size())
         );
     }
 
     @Test
-    void ingestDataWithIncorrectDelimiter() throws Exception{
+    void ingestDataWithIncorrectDelimiter() throws Exception {
 
         initializeFileTypeDaoBeans();
         MultipartFile multipartFile = initializeMultipartFileSales();
@@ -202,10 +197,9 @@ public class IngestionServiceTest {
         //ingestService.ingestData(1, multipartFile, "-");
         assertThrows(Exception.class, () -> ingestService.ingestData(1, multipartFile, "-"));
 
-        try{
+        try {
             ingestService.ingestData(1, multipartFile, "-");
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             String expectedMessage = "Invalid headers. Correct headers are: SALES, NAME";
             String actualMessage = e.getMessage();
             assertEquals(expectedMessage, actualMessage);
@@ -213,22 +207,21 @@ public class IngestionServiceTest {
     }
 
     @Test
-    void ingestDataWithEmptyFile(){
+    void ingestDataWithEmptyFile() {
         MultipartFile empty = initializeMultipartFileEmpty();
         assertThrows(Exception.class, () -> ingestService.ingestData(1, empty, ","));
     }
 
     @Test
-    void ingestDataWithEmptyFileExceptionMessage() throws Exception{
+    void ingestDataWithEmptyFileExceptionMessage() throws Exception {
         MultipartFile empty = initializeMultipartFileEmpty();
-        try{
+        try {
             ingestService.ingestData(1, empty, ",");
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             String expectedMessage = "Data Ingestion cannot be performed on an empty file. Please try again.";
             String actualMessage = e.getMessage();
             assertEquals(expectedMessage, actualMessage);
         }
     }
-    
+
 }
