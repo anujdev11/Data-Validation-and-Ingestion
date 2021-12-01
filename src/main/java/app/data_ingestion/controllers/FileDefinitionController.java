@@ -25,6 +25,10 @@ public class FileDefinitionController {
     static final String SYSTEM_ERROR_MESSAGE = "System error";
 
 
+    /**
+     * @param fileType
+     * @return
+     */
     @PostMapping(path = "/fileDefinition")
     public ResponseEntity<Object> addFileDefinition(@RequestBody FileType fileType) {
         UserServiceStatus status = fileDefService.fileDefinition(fileType);
@@ -34,6 +38,12 @@ public class FileDefinitionController {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(SYSTEM_ERROR_MESSAGE);
     }
 
+    /**
+     * @param file_definition_id
+     * @return
+     * @throws SQLException
+     * @throws JsonProcessingException
+     */
     @PostMapping(path = "/fileDefinition/delete")
     public ResponseEntity<Object> deleteFileDefinition(@RequestParam("file_definition_id") int file_definition_id) throws SQLException, JsonProcessingException {
         boolean status = fileDefService.deleteFileDefinition(file_definition_id);

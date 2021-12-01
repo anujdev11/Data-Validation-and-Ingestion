@@ -65,7 +65,7 @@ public class IngestionServiceImpl implements IngestionService {
 
             // insert data
             if (!validRows.isEmpty()) {
-                insertRecodsToDatabase();
+                insertRecordsToDatabase();
             }
 
         } else
@@ -131,7 +131,7 @@ public class IngestionServiceImpl implements IngestionService {
     }
 
     @Override
-    public void insertRecodsToDatabase() throws SQLException {
+    public void insertRecordsToDatabase() throws SQLException {
         queryExecutor.insertRecords(headers, fileType.getFileTypeName(), validRows, map_column_to_datatype);
     }
 

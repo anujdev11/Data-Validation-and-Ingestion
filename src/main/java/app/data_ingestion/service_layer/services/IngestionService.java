@@ -8,17 +8,36 @@ import org.springframework.web.multipart.MultipartFile;
 
 public interface IngestionService {
 
+    /**
+     * @param id
+     * @param file
+     * @param delimiter
+     * @throws Exception
+     */
     public void ingestData(int id, MultipartFile file, String delimiter) throws Exception;
 
+    /**
+     * @param inputFile
+     * @return
+     * @throws IOException
+     */
     String retrieveFileContentsAsString(MultipartFile inputFile) throws IOException;
 
+    /**
+     * @param file_content
+     * @param delimiter
+     */
     void populateHeadersAndRows(String file_content, String delimiter);
 
+    /**
+     * @param headers
+     * @throws Exception
+     */
     void validateFileHeaders(List<String> headers) throws Exception;
 
     void createTable();
 
-    void insertRecodsToDatabase() throws SQLException;
+    void insertRecordsToDatabase() throws SQLException;
 
     List<List<String>> getInvalidRows();
 

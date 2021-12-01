@@ -13,6 +13,10 @@ public class DataRetrievalServiceImpl implements DataRetrievalService {
     @Autowired
     QueryExecutor queryExecutor;
 
+    /**
+     * @param table_name
+     * @return
+     */
     @Override
     public Object fetchData(String table_name) {
         String query = String.format("select * from %s", table_name);

@@ -46,6 +46,11 @@ public class FileTypeDaoImpl extends JdbcDaoSupport implements FileTypeDao {
         setDataSource(dataSource);
     }
 
+    /**
+     * @param fileTypeDef
+     * @return
+     * @throws SQLException
+     */
     @Override
     public int addFileDefinition(FileType fileTypeDef) throws SQLException {
 
@@ -61,6 +66,13 @@ public class FileTypeDaoImpl extends JdbcDaoSupport implements FileTypeDao {
         return prepared_statment.executeUpdate();
     }
 
+    /**
+     * @param id
+     * @return
+     * @throws SQLException
+     * @throws JsonMappingException
+     * @throws JsonProcessingException
+     */
     @Override
     public FileType getFileTypeById(int id) throws SQLException, JsonMappingException, JsonProcessingException {
         FileType fileType = null;
@@ -92,6 +104,12 @@ public class FileTypeDaoImpl extends JdbcDaoSupport implements FileTypeDao {
 
     }
 
+    /**
+     * @param file_definition_id
+     * @return
+     * @throws SQLException
+     * @throws JsonProcessingException
+     */
     public boolean deleteFileDefinition(int file_definition_id) throws SQLException, JsonProcessingException {
         FileType fileType = getFileTypeById(file_definition_id);
         String fileTypeName = fileType.getFileTypeName();

@@ -9,10 +9,28 @@ import app.data_ingestion.data_layer.models.FileType;
 
 public interface FileTypeDao {
 
+    /**
+     * @param fileTypeDef
+     * @return
+     * @throws SQLException
+     */
     public int addFileDefinition(FileType fileTypeDef) throws SQLException;
 
+    /**
+     * @param fileTypeId
+     * @return
+     * @throws SQLException
+     * @throws JsonMappingException
+     * @throws JsonProcessingException
+     */
     public FileType getFileTypeById(int fileTypeId) throws SQLException, JsonMappingException, JsonProcessingException;
 
+    /**
+     * @param file_definition_id
+     * @return
+     * @throws SQLException
+     * @throws JsonProcessingException
+     */
     public boolean deleteFileDefinition(int file_definition_id) throws SQLException, JsonProcessingException;
 
 

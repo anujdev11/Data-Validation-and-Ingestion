@@ -31,6 +31,12 @@ public class FileDefinitionImpl implements FileDefinitionService {
         return UserServiceStatus.FAILURE;
     }
 
+    /**
+     * @param file_definition_id
+     * @return
+     * @throws SQLException
+     * @throws JsonProcessingException
+     */
     @Override
     public boolean deleteFileDefinition(int file_definition_id) throws SQLException, JsonProcessingException {
         boolean status = FileTypeDao.deleteFileDefinition(file_definition_id);

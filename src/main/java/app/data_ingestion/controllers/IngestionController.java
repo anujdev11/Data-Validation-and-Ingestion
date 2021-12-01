@@ -24,6 +24,13 @@ public class IngestionController {
     @Autowired
     IngestionService ingestionService;
 
+    /**
+     * @param file_definition_id
+     * @param multipartFile
+     * @param delimiter
+     * @return
+     * @throws Exception
+     */
     @PostMapping(path = "/ingestion", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
     @ResponseBody
     public ResponseEntity<Object> ingestDataFromFile(@RequestParam("file_definition_id") String file_definition_id,
@@ -55,6 +62,10 @@ public class IngestionController {
                 HttpStatus.OK);
     }
 
+    /**
+     * @param ruleType
+     * @return
+     */
     @GetMapping(path = "/getValidationRules")
     public ResponseEntity<Object> getValidationRules(@RequestParam String ruleType) {
         String[] validationRule = IngestionServiceImpl.getValidationRule(ruleType);

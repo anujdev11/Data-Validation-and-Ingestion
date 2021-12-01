@@ -39,17 +39,22 @@ public class QueryExecutorImpl extends JdbcDaoSupport implements QueryExecutor {
         setDataSource(dataSource);
     }
 
+    /**
+     * @param query
+     */
     @Override
     public void createTable(String query) {
         System.out.println("---createTable-- " + query);
         jdbcTemplate.execute(query);
     }
 
-    @Override
-    public void executeQuery(String query) {
-
-    }
-
+    /**
+     * @param headers
+     * @param table_name
+     * @param rows
+     * @param map_column_to_datatype
+     * @throws SQLException
+     */
     @Override
     public void insertRecords(List<String> headers, String table_name, List<List<String>> rows,
                               Map<String, String> map_column_to_datatype) throws SQLException {
@@ -110,6 +115,10 @@ public class QueryExecutorImpl extends JdbcDaoSupport implements QueryExecutor {
 
     }
 
+    /**
+     * @param query
+     * @return
+     */
     @Override
     public List<Map<String, Object>> fetchRecords(String query) {
         List<Map<String, Object>> data_records = jdbcTemplate.queryForList(query);

@@ -21,15 +21,15 @@ public class DataRetrievalController {
     @Autowired
     DataRetrievalService dataService;
 
+
     /**
-     * @param username
-     * @param password
+     * @param tableName
      * @return
      */
     @GetMapping(path = "/records/{table_name}")
-    public ResponseEntity<Object> fetchData(@PathVariable String table_name) {
+    public ResponseEntity<Object> fetchData(@PathVariable String tableName) {
 
-        HashMap<String, Object> responseBody = Helper.createResponseBody(dataService.fetchData(table_name));
+        HashMap<String, Object> responseBody = Helper.createResponseBody(dataService.fetchData(tableName));
         return ResponseEntity.status(HttpStatus.OK).body(responseBody);
     }
 }

@@ -7,6 +7,12 @@ import java.util.List;
 
 public class CSVExport {
 
+    /**
+     * @param path
+     * @param headers
+     * @param invalidRows
+     * @throws IOException
+     */
     public static void createCSV(String path, List<String> headers, List<List<String>> invalidRows) throws IOException {
         String content = "";
 
@@ -28,6 +34,11 @@ public class CSVExport {
 
     }
 
+    /**
+     * @param path
+     * @param content
+     * @throws IOException
+     */
     private static void writeToFile(String path, String content) throws IOException {
 
         File file = new File(path);
@@ -42,6 +53,10 @@ public class CSVExport {
         fileWriter.close();
     }
 
+    /**
+     * @param content
+     * @return
+     */
     private static String formatEnding(String content) {
         return content.substring(0, content.length() - 1) + "\n";
     }

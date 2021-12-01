@@ -10,6 +10,13 @@ import app.data_ingestion.data_layer.models.ValidationRule;
 
 public class ValidationRulesServiceImpl implements ValidationRulesService {
 
+    /**
+     * @param rules 
+     * @param header
+     * @param cellValue
+     * @param mapColumnToDatatype
+     * @return
+     */
     public String validate(List<ValidationRule> rules, String header, String cellValue, Map<String, String> mapColumnToDatatype) {
         System.out.println("-----rules-------------");
         System.out.println(rules);
@@ -46,6 +53,13 @@ public class ValidationRulesServiceImpl implements ValidationRulesService {
 
     }
 
+    /**
+     * @param operator
+     * @param rhsValue
+     * @param header
+     * @param cellValue
+     * @return
+     */
     private String numberValidation(String operator, String rhsValue, String header, String cellValue) {
         String violatedValidationRule = "";
         BigDecimal numCellValue = BigDecimal.ZERO;
@@ -101,6 +115,13 @@ public class ValidationRulesServiceImpl implements ValidationRulesService {
         return violatedValidationRule;
     }
 
+    /**
+     * @param operator
+     * @param rhsValue
+     * @param header
+     * @param cellValue
+     * @return
+     */
     private String dateValidation(String operator, String rhsValue, String header, String cellValue) {
         String violatedValidationRule = "";
         Date dateCellValue = null;//Date.valueOf(cellValue);
