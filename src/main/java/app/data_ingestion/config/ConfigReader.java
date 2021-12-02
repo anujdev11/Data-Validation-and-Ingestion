@@ -10,8 +10,12 @@ public class ConfigReader {
     final static String appConfigPath = ".//src//main//resources//app_config.properties";
     static Properties property;
 
-    public static String getProperty(String key){
-        if(property == null){
+    /**
+     * @param key
+     * @return
+     */
+    public static String getProperty(String key) {
+        if (property == null) {
             try (InputStream input = new FileInputStream(appConfigPath)) {
                 property = new Properties();
                 property.load(input);
@@ -22,7 +26,7 @@ public class ConfigReader {
         }
 
         return property.getProperty(key);
-        
+
     }
-    
+
 }

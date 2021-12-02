@@ -11,8 +11,8 @@ import java.util.Map;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import app.data_ingestion.business_logic_layer.services.ValidationRulesService;
-import app.data_ingestion.business_logic_layer.servicesImpl.ValidationRulesServiceImpl;
+import app.data_ingestion.service_layer.services.ValidationRulesService;
+import app.data_ingestion.service_layer.servicesImpl.ValidationRulesServiceImpl;
 import app.data_ingestion.data_layer.models.ValidationRule;
 
 @SpringBootTest

@@ -1,6 +1,6 @@
-package app.data_ingestion.business_logic_layer.servicesImpl;
+package app.data_ingestion.service_layer.servicesImpl;
 
-import app.data_ingestion.business_logic_layer.services.UserService;
+import app.data_ingestion.service_layer.services.UserService;
 import app.data_ingestion.data_layer.dao.UserDao;
 import app.data_ingestion.data_layer.models.User;
 
@@ -19,7 +19,6 @@ public class UserServiceImpl implements UserService {
     UserDao userDao;
     User user;
 
-    
 
     public User getUser() {
         return user;
@@ -36,11 +35,11 @@ public class UserServiceImpl implements UserService {
         try {
             List<User> users = userDao.getUsers();
             Optional<User> authenticatedUser = users.stream()
-                                                .filter(user -> user.getUsername().equalsIgnoreCase(username) &&
-                                                                user.getPassword().equalsIgnoreCase(password))
-                                                .findFirst();
-            
-            if(authenticatedUser.isPresent()){
+                    .filter(user -> user.getUsername().equalsIgnoreCase(username) &&
+                            user.getPassword().equalsIgnoreCase(password))
+                    .findFirst();
+
+            if (authenticatedUser.isPresent()) {
                 user = authenticatedUser.get();
                 return UserServiceStatus.SUCCESS;
             }
@@ -58,10 +57,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserServiceStatus userRegistration(User user) {
         try {
-            if(!userExists(user.getUsername())){
+            if (!userExists(user.getUsername())) {
                 return userDao.add(user) > 0 ? UserServiceStatus.SUCCESS : UserServiceStatus.FAILURE;
-            }
-            else{
+            } else {
                 return UserServiceStatus.USER_ALREADY_EXISTS;
             }
         } catch (SQLException e) {
@@ -78,8 +76,8 @@ public class UserServiceImpl implements UserService {
     private boolean userExists(String username) throws SQLException {
         List<User> users = userDao.getUsers();
         Optional<User> userExists = users.stream()
-                                                .filter(user -> user.getUsername().equalsIgnoreCase(username))
-                                                .findFirst();
+                .filter(user -> user.getUsername().equalsIgnoreCase(username))
+                .findFirst();
         return userExists.isPresent();
     }
 

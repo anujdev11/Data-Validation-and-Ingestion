@@ -1,4 +1,5 @@
 package app.data_ingestion.data_layer.databaseImpl;
+
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -23,7 +24,7 @@ public class QueryExecutorImpl extends JdbcDaoSupport implements QueryExecutor {
     final DataSource dataSource;
     final JdbcTemplate jdbcTemplate;
 
-    public QueryExecutorImpl(JdbcTemplate jdbcTemplate, DataSource dataSource){
+    public QueryExecutorImpl(JdbcTemplate jdbcTemplate, DataSource dataSource) {
         this.jdbcTemplate = jdbcTemplate;
         this.dataSource = dataSource;
         try {
@@ -38,40 +39,45 @@ public class QueryExecutorImpl extends JdbcDaoSupport implements QueryExecutor {
         setDataSource(dataSource);
     }
 
+    /**
+     * @param query
+     */
     @Override
     public void createTable(String query) {
-        System.out.println("---createTable-- "+query);
+        System.out.println("---createTable-- " + query);
         jdbcTemplate.execute(query);
     }
 
+    /**
+     * @param headers
+     * @param table_name
+     * @param rows
+     * @param map_column_to_datatype
+     * @throws SQLException
+     */
     @Override
-    public void executeQuery(String query) {
-        
-    }
+    public void insertRecords(List<String> headers, String table_name, List<List<String>> rows,
+                              Map<String, String> map_column_to_datatype) throws SQLException {
 
-    @Override
-    public void insertRecords(List<String> headers, String table_name, List<List<String>> rows, 
-                Map<String, String> map_column_to_datatype) throws SQLException {
-        
-        
-        System.out.println("---headers---- "+headers);
-        System.out.println("---table_name---- "+table_name);
-        System.out.println("---rows---- "+rows);
-        System.out.println("---map_column_to_datatype---- "+map_column_to_datatype);
+
+        System.out.println("---headers---- " + headers);
+        System.out.println("---table_name---- " + table_name);
+        System.out.println("---rows---- " + rows);
+        System.out.println("---map_column_to_datatype---- " + map_column_to_datatype);
 
         connection.setAutoCommit(false);
         String cols_placeholder = "?,".repeat(headers.size());
-        cols_placeholder = cols_placeholder.substring(0, cols_placeholder.length()-1);
+        cols_placeholder = cols_placeholder.substring(0, cols_placeholder.length() - 1);
         String query = String.format("insert into %s (%s) values (%s)", table_name, String.join(",", headers), cols_placeholder);
-        System.out.println("---query---- "+query);
+        System.out.println("---query---- " + query);
         PreparedStatement statement = connection.prepareStatement(query);
 
         int row_counter = 0;
-        for(List<String> row : rows){
+        for (List<String> row : rows) {
             int cell_counter = 1;
-            for(String value : row){
-                System.out.println("---header name---- "+map_column_to_datatype.get(headers.get(cell_counter-1)));
-                switch (map_column_to_datatype.get(headers.get(cell_counter-1))) {
+            for (String value : row) {
+                System.out.println("---header name---- " + map_column_to_datatype.get(headers.get(cell_counter - 1)));
+                switch (map_column_to_datatype.get(headers.get(cell_counter - 1))) {
                     case "STRING":
                         statement.setString(cell_counter, value);
                         break;
@@ -91,28 +97,32 @@ public class QueryExecutorImpl extends JdbcDaoSupport implements QueryExecutor {
                 ++cell_counter;
             }
             ++row_counter;
-            System.out.println("----row_counter---- "+row_counter);
+            System.out.println("----row_counter---- " + row_counter);
 
-            System.out.println("----rows.size()---- "+rows.size());
+            System.out.println("----rows.size()---- " + rows.size());
             statement.addBatch();
             if (row_counter % 500 == 0 || row_counter == rows.size()) {
                 System.out.println("executing batch");
-                System.out.println("---statement--- "+statement);
+                System.out.println("---statement--- " + statement);
                 int[] count = statement.executeBatch();
-                System.out.println("---count--- "+count.length);
-                
+                System.out.println("---count--- " + count.length);
+
             }
 
         }
         connection.commit();
         connection.setAutoCommit(true);
-           
+
     }
 
+    /**
+     * @param query
+     * @return
+     */
     @Override
     public List<Map<String, Object>> fetchRecords(String query) {
         List<Map<String, Object>> data_records = jdbcTemplate.queryForList(query);
         return data_records;
     }
-    
+
 }

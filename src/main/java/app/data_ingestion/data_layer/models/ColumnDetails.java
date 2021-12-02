@@ -10,7 +10,7 @@ public class ColumnDetails {
 
     @Override
     public String toString() {
-        return "ColumnDetails [column_name=" + columnName + ", dataType=" + dataType + ", rules=" + rules + "]";
+        return "{\"columnName\":\"" + columnName + "\", \"dataType\":\"" + dataType + "\", \"rules\":" + rules + "}";
     }
 
     public String getColumnName() {
@@ -37,6 +37,5 @@ public class ColumnDetails {
         this.rules = rules;
     }
 
-    
-    
+
 }

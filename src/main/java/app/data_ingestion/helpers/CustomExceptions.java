@@ -8,9 +8,9 @@ public class CustomExceptions {
             super();
         }
 
-        public EmptyFileException(String message){
+        public EmptyFileException(String message) {
             super(message);
         }
- }
-    
+    }
+
 }

@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 
-import app.data_ingestion.business_logic_layer.servicesImpl.IngestionServiceImpl;
+import app.data_ingestion.service_layer.servicesImpl.IngestionServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
@@ -14,7 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import app.data_ingestion.business_logic_layer.services.IngestionService;
+import app.data_ingestion.service_layer.services.IngestionService;
 import app.data_ingestion.config.ConfigReader;
 
 @CrossOrigin(origins = "http://localhost:5555")
@@ -24,11 +24,18 @@ public class IngestionController {
     @Autowired
     IngestionService ingestionService;
 
+    /**
+     * @param file_definition_id
+     * @param multipartFile
+     * @param delimiter
+     * @return
+     * @throws Exception
+     */
     @PostMapping(path = "/ingestion", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
     @ResponseBody
     public ResponseEntity<Object> ingestDataFromFile(@RequestParam("file_definition_id") String file_definition_id,
-            @RequestParam("input_file") MultipartFile multipartFile,
-            @RequestParam("delimiter") String delimiter) throws Exception {
+                                                     @RequestParam("input_file") MultipartFile multipartFile,
+                                                     @RequestParam("delimiter") String delimiter) throws Exception {
 
         System.out.println(file_definition_id);
         System.out.println(delimiter);
@@ -55,6 +62,10 @@ public class IngestionController {
                 HttpStatus.OK);
     }
 
+    /**
+     * @param ruleType
+     * @return
+     */
     @GetMapping(path = "/getValidationRules")
     public ResponseEntity<Object> getValidationRules(@RequestParam String ruleType) {
         String[] validationRule = IngestionServiceImpl.getValidationRule(ruleType);

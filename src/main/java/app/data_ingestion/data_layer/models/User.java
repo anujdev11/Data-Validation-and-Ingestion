@@ -1,7 +1,7 @@
 package app.data_ingestion.data_layer.models;
 
 public class User {
-    
+
     private String username;
     private String password;
     private String access_level;
@@ -23,16 +23,16 @@ public class User {
     public String getUsername() {
         return username;
     }
-    
+
     public String getPassword() {
         return password;
     }
-   
+
     public String getAccess_level() {
         return access_level;
     }
 
-    public String getOrganization(){
+    public String getOrganization() {
         return organization;
     }
 
@@ -41,7 +41,6 @@ public class User {
         return "User [access_level=" + access_level + ", organization=" + organization + ", password=" + password
                 + ", username=" + username + "]";
     }
-    
-    
-    
+
+
 }

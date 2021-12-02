@@ -1,4 +1,4 @@
-package app.data_ingestion.business_logic_layer.servicesImpl;
+package app.data_ingestion.service_layer.servicesImpl;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import app.data_ingestion.business_logic_layer.services.IngestionService;
+import app.data_ingestion.service_layer.services.IngestionService;
 import app.data_ingestion.config.ConfigReader;
 import app.data_ingestion.data_layer.dao.FileTypeDao;
 import app.data_ingestion.data_layer.database.QueryExecutor;
@@ -41,8 +41,8 @@ public class IngestionServiceImpl implements IngestionService {
 
         String contents = retrieveFileContentsAsString(file);
 
-        if(contents != null && !contents.trim().isEmpty()){
-            System.out.println("---fileTypeDao-- "+fileTypeDao);
+        if (contents != null && !contents.trim().isEmpty()) {
+            System.out.println("---fileTypeDao-- " + fileTypeDao);
             fileType = fileTypeDao.getFileTypeById(id);
             fileType = fileTypeDao.getFileTypeById(id);
             map_column_to_datatype = fileType.getColumn_to_datatype();
@@ -65,7 +65,7 @@ public class IngestionServiceImpl implements IngestionService {
 
             // insert data
             if (!validRows.isEmpty()) {
-                insertRecodsToDatabase();
+                insertRecordsToDatabase();
             }
 
         } else
@@ -131,7 +131,7 @@ public class IngestionServiceImpl implements IngestionService {
     }
 
     @Override
-    public void insertRecodsToDatabase() throws SQLException {
+    public void insertRecordsToDatabase() throws SQLException {
         queryExecutor.insertRecords(headers, fileType.getFileTypeName(), validRows, map_column_to_datatype);
     }
 
@@ -176,6 +176,6 @@ public class IngestionServiceImpl implements IngestionService {
     public List<List<String>> getValidRows() {
         return validRows;
     }
-    
-    
+
+
 }
