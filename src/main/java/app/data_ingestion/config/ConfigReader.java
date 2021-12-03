@@ -6,7 +6,6 @@ import java.io.InputStream;
 import java.util.Properties;
 
 public class ConfigReader {
-    // .//workspace//%s//logs//system.logs
     final static String appConfigPath = ".//src//main//resources//app_config.properties";
     static Properties property;
 
