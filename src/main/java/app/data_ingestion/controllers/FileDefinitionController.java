@@ -49,5 +49,22 @@ public class FileDefinitionController {
         boolean status = fileDefService.deleteFileDefinition(file_definition_id);
         return new ResponseEntity<>("Deleted", HttpStatus.OK);
     }
+    
+    /**
+     * @param fileType
+     * @return
+     */
+    @PostMapping(path = "/updateFileDefinition")
+    public ResponseEntity<Object> updateFileDefinition(@RequestBody FileType fileType){
+    	UserServiceStatus status = fileDefService.updateFileDefinition(fileType);
+
+        if(status == UserServiceStatus.SUCCESS){
+            return ResponseEntity.status(HttpStatus.CREATED).body(SUCCESS_MESSAGE);
+        }
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(SYSTEM_ERROR_MESSAGE);         
+    }
+    
+    
+
 
 }
