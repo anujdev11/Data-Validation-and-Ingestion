@@ -26,7 +26,7 @@ public class DataRetrievalController {
      * @param tableName
      * @return
      */
-    @GetMapping(path = "/records/{table_name}")
+    @GetMapping(path = "/records/{tableName}")
     public ResponseEntity<Object> fetchData(@PathVariable String tableName) {
 
         HashMap<String, Object> responseBody = Helper.createResponseBody(dataService.fetchData(tableName));
