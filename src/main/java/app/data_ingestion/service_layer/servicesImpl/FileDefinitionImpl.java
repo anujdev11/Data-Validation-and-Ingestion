@@ -47,5 +47,20 @@ public class FileDefinitionImpl implements FileDefinitionService {
             return false;
         }
     }
+    
+
+	@Override
+	public UserServiceStatus updateFileDefinition(FileType FileDef) {
+        try {
+        	return FileTypeDao.updateFileDefinition(FileDef) > 0 ? UserServiceStatus.SUCCESS : UserServiceStatus.FAILURE;
+           
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return UserServiceStatus.FAILURE;
+	}
+    
+    
+    
 
 }

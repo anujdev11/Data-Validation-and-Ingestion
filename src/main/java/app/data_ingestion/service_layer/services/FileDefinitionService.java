@@ -21,5 +21,11 @@ public interface FileDefinitionService {
      * @throws JsonProcessingException
      */
     public boolean deleteFileDefinition(int file_definition_id) throws SQLException, JsonProcessingException;
+    
+    /**
+	 * @param fileDef
+	 * @return
+	 */
+	public UserServiceStatus updateFileDefinition(FileType FileDef);
 
 }

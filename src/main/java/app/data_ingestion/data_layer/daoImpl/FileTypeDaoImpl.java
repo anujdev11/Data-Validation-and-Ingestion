@@ -121,6 +121,17 @@ public class FileTypeDaoImpl extends JdbcDaoSupport implements FileTypeDao {
         prepared_statement_table.executeUpdate();
         return true;
     }
+    
+    @Override
+    public int updateFileDefinition(FileType fileTypeDef) throws SQLException {    	   	
+    	String listString = fileTypeDef.getColumnDetails().stream().map(Object::toString)
+                .collect(Collectors.joining(", "));
+    	String fileDefinitionColumnDetails="["+listString+"]";	
+    	String updateQuery = "update file_definition set file_definition_name = ? ,file_definition_details = ? where file_definition_id = ? ";    	
+        PreparedStatement prepared_statment = DaoUtility.createPrepareStatement(connection, updateQuery,fileTypeDef.getFileTypeName(),fileDefinitionColumnDetails , fileTypeDef.getFileTypeId());
+        return prepared_statment.executeUpdate(); 	
+
+	}
 
 
 }
