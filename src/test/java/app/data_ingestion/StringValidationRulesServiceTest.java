@@ -11,9 +11,9 @@ import java.util.Map;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import app.data_ingestion.service_layer.services.ValidationRulesService;
-import app.data_ingestion.service_layer.servicesImpl.ValidationRulesServiceImpl;
-import app.data_ingestion.data_layer.models.ValidationRule;
+import app.data_ingestion.dataLayer.models.ValidationRule;
+import app.data_ingestion.services.validationAndIngestion.IValidationRulesService;
+import app.data_ingestion.services.validationAndIngestion.ValidationRulesService;
 
 @SpringBootTest
 public class StringValidationRulesServiceTest {
@@ -29,7 +29,7 @@ public class StringValidationRulesServiceTest {
         Map<String, String> mapColumnToDatatype = new HashMap<>();
         mapColumnToDatatype.put("NAME", "STRING");
 
-        ValidationRulesService service = new ValidationRulesServiceImpl();
+        IValidationRulesService service = new ValidationRulesService();
         String expected = String.format("%s %s", "NAME", rule.getOperator());
         assertEquals(expected, service.validate(rules, "NAME", "", mapColumnToDatatype)); ;
 
@@ -46,7 +46,7 @@ public class StringValidationRulesServiceTest {
         Map<String, String> mapColumnToDatatype = new HashMap<>();
         mapColumnToDatatype.put("NAME", "STRING");
 
-        ValidationRulesService service = new ValidationRulesServiceImpl();
+        IValidationRulesService service = new ValidationRulesService();
         assertEquals("", service.validate(rules, "NAME", "TestName", mapColumnToDatatype)); ;
 
     }
@@ -63,7 +63,7 @@ public class StringValidationRulesServiceTest {
         Map<String, String> mapColumnToDatatype = new HashMap<>();
         mapColumnToDatatype.put("NAME", "STRING");
 
-        ValidationRulesService service = new ValidationRulesServiceImpl();
+        IValidationRulesService service = new ValidationRulesService();
         assertEquals("", service.validate(rules, "NAME", "TestName", mapColumnToDatatype)); ;
 
     }
@@ -80,7 +80,7 @@ public class StringValidationRulesServiceTest {
         Map<String, String> mapColumnToDatatype = new HashMap<>();
         mapColumnToDatatype.put("NAME", "STRING");
 
-        ValidationRulesService service = new ValidationRulesServiceImpl();
+        IValidationRulesService service = new ValidationRulesService();
         String expected = String.format("%s %s %s", "NAME", rule.getOperator(), rule.getRhsValue());
         assertEquals(expected, service.validate(rules, "NAME", "TestName", mapColumnToDatatype)); ;
 
@@ -98,7 +98,7 @@ public class StringValidationRulesServiceTest {
         Map<String, String> mapColumnToDatatype = new HashMap<>();
         mapColumnToDatatype.put("NAME", "STRING");
 
-        ValidationRulesService service = new ValidationRulesServiceImpl();
+        IValidationRulesService service = new ValidationRulesService();
         assertThrows(NumberFormatException.class, () -> service.validate(rules, "NAME", "TestName", mapColumnToDatatype));
 
     }
@@ -115,7 +115,7 @@ public class StringValidationRulesServiceTest {
         Map<String, String> mapColumnToDatatype = new HashMap<>();
         mapColumnToDatatype.put("NAME", "STRING");
 
-        ValidationRulesService service = new ValidationRulesServiceImpl();
+        IValidationRulesService service = new ValidationRulesService();
         assertEquals("", service.validate(rules, "NAME", "TestN", mapColumnToDatatype));
 
     }
@@ -132,7 +132,7 @@ public class StringValidationRulesServiceTest {
         Map<String, String> mapColumnToDatatype = new HashMap<>();
         mapColumnToDatatype.put("NAME", "STRING");
 
-        ValidationRulesService service = new ValidationRulesServiceImpl();
+        IValidationRulesService service = new ValidationRulesService();
         String expected = String.format("%s %s %s", "NAME", rule.getOperator(), rule.getRhsValue());
         assertEquals(expected, service.validate(rules, "NAME", "TestName", mapColumnToDatatype));
 
@@ -150,7 +150,7 @@ public class StringValidationRulesServiceTest {
         Map<String, String> mapColumnToDatatype = new HashMap<>();
         mapColumnToDatatype.put("NAME", "STRING");
 
-        ValidationRulesService service = new ValidationRulesServiceImpl();
+        IValidationRulesService service = new ValidationRulesService();
         String expected = String.format("%s %s %s", "NAME", rule.getOperator(), rule.getRhsValue());
         assertEquals(expected, service.validate(rules, "NAME", "TestName", mapColumnToDatatype));
 
@@ -168,7 +168,7 @@ public class StringValidationRulesServiceTest {
         Map<String, String> mapColumnToDatatype = new HashMap<>();
         mapColumnToDatatype.put("NAME", "STRING");
 
-        ValidationRulesService service = new ValidationRulesServiceImpl();
+        IValidationRulesService service = new ValidationRulesService();
         assertEquals("", service.validate(rules, "NAME", "TestName", mapColumnToDatatype));
 
     }
@@ -185,7 +185,7 @@ public class StringValidationRulesServiceTest {
         Map<String, String> mapColumnToDatatype = new HashMap<>();
         mapColumnToDatatype.put("NAME", "STRING");
 
-        ValidationRulesService service = new ValidationRulesServiceImpl();
+        IValidationRulesService service = new ValidationRulesService();
         String expected = String.format("%s %s %s", "NAME", rule.getOperator(), rule.getRhsValue());
         assertEquals(expected, service.validate(rules, "NAME", "TestName", mapColumnToDatatype));
 
@@ -203,7 +203,7 @@ public class StringValidationRulesServiceTest {
         Map<String, String> mapColumnToDatatype = new HashMap<>();
         mapColumnToDatatype.put("NAME", "STRING");
 
-        ValidationRulesService service = new ValidationRulesServiceImpl();
+        IValidationRulesService service = new ValidationRulesService();
         assertEquals("", service.validate(rules, "NAME", "TestName", mapColumnToDatatype));
 
     }
