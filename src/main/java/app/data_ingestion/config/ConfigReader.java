@@ -5,15 +5,28 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+import app.data_ingestion.helpers.LiteralConstants;
+
 public class ConfigReader {
-    final static String appConfigPath = ".//src//main//resources//app_config.properties";
-    static Properties property;
+    final static String appConfigPath = LiteralConstants.APP_CONFIG_PATH;
+    
+
+    //implementing singleton design pattern for CSVUtil
+    private static ConfigReader configReader = new ConfigReader();
+    Properties property;
+
+    private ConfigReader(){
+    }
+
+    public static ConfigReader getInstance(){
+        return configReader;
+     }
 
     /**
      * @param key
      * @return
      */
-    public static String getProperty(String key) {
+    public String getProperty(String key) {
         if (property == null) {
             try (InputStream input = new FileInputStream(appConfigPath)) {
                 property = new Properties();

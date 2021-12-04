@@ -11,9 +11,9 @@ import java.util.Map;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import app.data_ingestion.service_layer.services.ValidationRulesService;
-import app.data_ingestion.service_layer.servicesImpl.ValidationRulesServiceImpl;
-import app.data_ingestion.data_layer.models.ValidationRule;
+import app.data_ingestion.dataLayer.models.ValidationRule;
+import app.data_ingestion.services.validationAndIngestion.IValidationRulesService;
+import app.data_ingestion.services.validationAndIngestion.ValidationRulesService;
 
 @SpringBootTest
 public class NumberValidationRulesServiceTest {
@@ -29,7 +29,7 @@ public class NumberValidationRulesServiceTest {
         Map<String, String> mapColumnToDatatype = new HashMap<>();
         mapColumnToDatatype.put("SALES", "FLOAT");
 
-        ValidationRulesService service = new ValidationRulesServiceImpl();
+        IValidationRulesService service = new ValidationRulesService();
         String expected = String.format("%s %s", "SALES", rule.getOperator());
         assertEquals(expected, service.validate(rules, "SALES", "", mapColumnToDatatype)); ;
 
@@ -46,7 +46,7 @@ public class NumberValidationRulesServiceTest {
         Map<String, String> mapColumnToDatatype = new HashMap<>();
         mapColumnToDatatype.put("SALES", "FLOAT");
 
-        ValidationRulesService service = new ValidationRulesServiceImpl();
+        IValidationRulesService service = new ValidationRulesService();
         String expected = "";
         assertEquals(expected, service.validate(rules, "SALES", "10", mapColumnToDatatype)); ;
 
@@ -64,7 +64,7 @@ public class NumberValidationRulesServiceTest {
         Map<String, String> mapColumnToDatatype = new HashMap<>();
         mapColumnToDatatype.put("SALES", "FLOAT");
 
-        ValidationRulesService service = new ValidationRulesServiceImpl();
+        IValidationRulesService service = new ValidationRulesService();
         String expected = String.format("%s %s %s", "SALES", rule.getOperator(), rule.getRhsValue());
         assertEquals(expected, service.validate(rules, "SALES", "1700.01", mapColumnToDatatype)); ;
 
@@ -82,7 +82,7 @@ public class NumberValidationRulesServiceTest {
         Map<String, String> mapColumnToDatatype = new HashMap<>();
         mapColumnToDatatype.put("SALES", "FLOAT");
 
-        ValidationRulesService service = new ValidationRulesServiceImpl();
+        IValidationRulesService service = new ValidationRulesService();
         String expected = "";
         assertEquals(expected, service.validate(rules, "SALES", "1700.00", mapColumnToDatatype)); ;
 
@@ -100,7 +100,7 @@ public class NumberValidationRulesServiceTest {
         Map<String, String> mapColumnToDatatype = new HashMap<>();
         mapColumnToDatatype.put("SALES", "FLOAT");
 
-        ValidationRulesService service = new ValidationRulesServiceImpl();
+        IValidationRulesService service = new ValidationRulesService();
         String expected = String.format("%s %s %s", "SALES", rule.getOperator(), rule.getRhsValue());
         assertEquals(expected, service.validate(rules, "SALES", "1700", mapColumnToDatatype));
 
@@ -118,7 +118,7 @@ public class NumberValidationRulesServiceTest {
         Map<String, String> mapColumnToDatatype = new HashMap<>();
         mapColumnToDatatype.put("SALES", "FLOAT");
 
-        ValidationRulesService service = new ValidationRulesServiceImpl();
+        IValidationRulesService service = new ValidationRulesService();
         String expected = "";
         assertEquals(expected, service.validate(rules, "SALES", "170", mapColumnToDatatype));
 
@@ -136,7 +136,7 @@ public class NumberValidationRulesServiceTest {
         Map<String, String> mapColumnToDatatype = new HashMap<>();
         mapColumnToDatatype.put("SALES", "FLOAT");
 
-        ValidationRulesService service = new ValidationRulesServiceImpl();
+        IValidationRulesService service = new ValidationRulesService();
         String expected = String.format("%s %s %s", "SALES", rule.getOperator(), rule.getRhsValue());
         assertAll(
             () -> assertEquals(expected, service.validate(rules, "SALES", "1700", mapColumnToDatatype)),
@@ -156,7 +156,7 @@ public class NumberValidationRulesServiceTest {
         Map<String, String> mapColumnToDatatype = new HashMap<>();
         mapColumnToDatatype.put("SALES", "FLOAT");
 
-        ValidationRulesService service = new ValidationRulesServiceImpl();
+        IValidationRulesService service = new ValidationRulesService();
         String expected = "";
         assertAll(
             () -> assertEquals(expected, service.validate(rules, "SALES", "1900", mapColumnToDatatype)),
@@ -176,7 +176,7 @@ public class NumberValidationRulesServiceTest {
         Map<String, String> mapColumnToDatatype = new HashMap<>();
         mapColumnToDatatype.put("SALES", "FLOAT");
 
-        ValidationRulesService service = new ValidationRulesServiceImpl();
+        IValidationRulesService service = new ValidationRulesService();
         String expected = String.format("%s %s %s", "SALES", rule.getOperator(), rule.getRhsValue());
         assertAll(
             () -> assertEquals(expected, service.validate(rules, "SALES", "1700", mapColumnToDatatype)),
@@ -196,7 +196,7 @@ public class NumberValidationRulesServiceTest {
         Map<String, String> mapColumnToDatatype = new HashMap<>();
         mapColumnToDatatype.put("SALES", "FLOAT");
 
-        ValidationRulesService service = new ValidationRulesServiceImpl();
+        IValidationRulesService service = new ValidationRulesService();
         String expected = "";
         assertAll(
             () -> assertEquals(expected, service.validate(rules, "SALES", "1900", mapColumnToDatatype)),
@@ -216,7 +216,7 @@ public class NumberValidationRulesServiceTest {
         Map<String, String> mapColumnToDatatype = new HashMap<>();
         mapColumnToDatatype.put("SALES", "FLOAT");
 
-        ValidationRulesService service = new ValidationRulesServiceImpl();
+        IValidationRulesService service = new ValidationRulesService();
         String expected = String.format("%s %s %s", "SALES", rule.getOperator(), rule.getRhsValue());
         assertAll(
             () -> assertEquals(expected, service.validate(rules, "SALES", "1900", mapColumnToDatatype)),
@@ -236,7 +236,7 @@ public class NumberValidationRulesServiceTest {
         Map<String, String> mapColumnToDatatype = new HashMap<>();
         mapColumnToDatatype.put("SALES", "FLOAT");
 
-        ValidationRulesService service = new ValidationRulesServiceImpl();
+        IValidationRulesService service = new ValidationRulesService();
         String expected = "";
         assertAll(
             () -> assertEquals(expected, service.validate(rules, "SALES", "1800", mapColumnToDatatype)),
@@ -256,7 +256,7 @@ public class NumberValidationRulesServiceTest {
         Map<String, String> mapColumnToDatatype = new HashMap<>();
         mapColumnToDatatype.put("SALES", "FLOAT");
 
-        ValidationRulesService service = new ValidationRulesServiceImpl();
+        IValidationRulesService service = new ValidationRulesService();
         String expected = String.format("%s %s %s", "SALES", rule.getOperator(), rule.getRhsValue());
         assertAll(
             () -> assertEquals(expected, service.validate(rules, "SALES", "1900", mapColumnToDatatype)),
@@ -276,7 +276,7 @@ public class NumberValidationRulesServiceTest {
         Map<String, String> mapColumnToDatatype = new HashMap<>();
         mapColumnToDatatype.put("SALES", "FLOAT");
 
-        ValidationRulesService service = new ValidationRulesServiceImpl();
+        IValidationRulesService service = new ValidationRulesService();
         String expected = "";
         assertAll(
             () -> assertEquals(expected, service.validate(rules, "SALES", "1700", mapColumnToDatatype)),

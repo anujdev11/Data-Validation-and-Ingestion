@@ -21,17 +21,17 @@ import org.springframework.http.MediaType;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.mock.web.MockMultipartFile;
 
-import app.data_ingestion.service_layer.services.IngestionService;
-import app.data_ingestion.data_layer.dao.FileTypeDao;
-import app.data_ingestion.data_layer.database.QueryExecutor;
-import app.data_ingestion.data_layer.models.ColumnDetails;
-import app.data_ingestion.data_layer.models.FileType;
+import app.data_ingestion.dataLayer.dao.FileTypeDao;
+import app.data_ingestion.dataLayer.database.QueryExecutor;
+import app.data_ingestion.dataLayer.models.ColumnDetails;
+import app.data_ingestion.dataLayer.models.FileType;
+import app.data_ingestion.services.validationAndIngestion.IIngestionService;
 
 @SpringBootTest
 public class IngestionWithValidationTest {
 
     @Autowired
-    IngestionService ingestionService;
+    IIngestionService ingestionService;
 
     @MockBean
     FileTypeDao fileTypeDao;
@@ -78,7 +78,7 @@ public class IngestionWithValidationTest {
             doNothing().when(queryExecutor).insertRecords(headers, tableName, rows, mapColumnToDatatype);
 
             // IngestionService ingestionService = new IngestionServiceImpl();
-            ingestionService.ingestData(1, multipartFile, ",");
+            ingestionService.ingestData(1, multipartFile, ",", "append");
             assertAll(
                     () -> assertEquals(1, ingestionService.getInvalidRows().size()),
                     () -> assertEquals(1, ingestionService.getValidRows().size())

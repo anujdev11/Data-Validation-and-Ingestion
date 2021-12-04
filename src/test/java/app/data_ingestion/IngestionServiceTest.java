@@ -26,18 +26,19 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.multipart.MultipartFile;
 
-import app.data_ingestion.service_layer.services.IngestionService;
-import app.data_ingestion.data_layer.dao.FileTypeDao;
-import app.data_ingestion.data_layer.database.QueryExecutor;
-import app.data_ingestion.data_layer.models.ColumnDetails;
-import app.data_ingestion.data_layer.models.FileType;
+import app.data_ingestion.dataLayer.dao.FileTypeDao;
+import app.data_ingestion.dataLayer.database.QueryExecutor;
+import app.data_ingestion.dataLayer.models.ColumnDetails;
+import app.data_ingestion.dataLayer.models.FileType;
+import app.data_ingestion.services.validationAndIngestion.IIngestionService;
+import app.data_ingestion.services.validationAndIngestion.LoadDataState;
 
 
 @SpringBootTest
 public class IngestionServiceTest {
 
     @Autowired
-    IngestionService ingestService;
+    IIngestionService ingestService;
 
     @MockBean
     FileTypeDao fileTypeDao;
@@ -148,9 +149,10 @@ public class IngestionServiceTest {
     @Test
     void retrieveFileContentsAsStringTest() {
         try {
+            LoadDataState loadDataState = new LoadDataState();
             MultipartFile multipartFile = initializeMultipartFileSales();
             String fileContent = "name,sales" + System.lineSeparator() + "Prachi,90" + System.lineSeparator() + "Shan,100";
-            String actualContent = ingestService.retrieveFileContentsAsString(multipartFile);
+            String actualContent = loadDataState.retrieveFileContentsAsString(multipartFile);
             assertEquals(fileContent, actualContent);
         } catch (IOException e) {
             e.printStackTrace();
@@ -159,16 +161,18 @@ public class IngestionServiceTest {
 
     @Test
     void retrieveFileContentsAsStringWithNoInputFile() {
-        assertThrows(NullPointerException.class, () -> ingestService.retrieveFileContentsAsString(null));
+        LoadDataState loadDataState = new LoadDataState();
+        assertThrows(Exception.class, () -> loadDataState.retrieveFileContentsAsString(null));
     }
 
     @Test
     void retrieveFileContentsAsStringWithDifferentFiles() {
+        LoadDataState loadDataState = new LoadDataState();
         MultipartFile sales = initializeMultipartFileSales();
         MultipartFile employees = initializeMultipartFileEmployee();
         try {
-            String salesContent = ingestService.retrieveFileContentsAsString(sales);
-            String employeesContent = ingestService.retrieveFileContentsAsString(employees);
+            String salesContent = loadDataState.retrieveFileContentsAsString(sales);
+            String employeesContent = loadDataState.retrieveFileContentsAsString(employees);
             assertNotEquals(salesContent, employeesContent);
         } catch (IOException e) {
             e.printStackTrace();
@@ -178,10 +182,12 @@ public class IngestionServiceTest {
 
     @Test
     void ingestDataWithoutValidations() throws Exception {
+        
+        // IIngestionService ingestService = new IngestionService();
         initializeFileTypeDaoBeans();
         MultipartFile multipartFile = initializeMultipartFileSales();
         initializeQueryExecutorBean();
-        ingestService.ingestData(1, multipartFile, ",");
+        ingestService.ingestData(1, multipartFile, ",", "append");
         assertAll(
                 () -> assertEquals(2, ingestService.getValidRows().size()),
                 () -> assertEquals(0, ingestService.getInvalidRows().size())
@@ -190,17 +196,28 @@ public class IngestionServiceTest {
 
     @Test
     void ingestDataWithIncorrectDelimiter() throws Exception {
-
+        // IIngestionService ingestService = new IngestionService();
         initializeFileTypeDaoBeans();
         MultipartFile multipartFile = initializeMultipartFileSales();
         initializeQueryExecutorBean();
-        //ingestService.ingestData(1, multipartFile, "-");
-        assertThrows(Exception.class, () -> ingestService.ingestData(1, multipartFile, "-"));
+        assertThrows(Exception.class, () -> ingestService.ingestData(1, multipartFile, "-", "append"));
 
         try {
-            ingestService.ingestData(1, multipartFile, "-");
+            ingestService.ingestData(1, multipartFile, "-", "append");
         } catch (Exception e) {
             String expectedMessage = "Invalid headers. Correct headers are: SALES, NAME";
+            String actualMessage = e.getMessage();
+            assertEquals(expectedMessage, actualMessage);
+        }
+    } 
+
+    @Test
+    void ingestDataWithEmptyFileExceptionMessage() throws Exception {
+        MultipartFile empty = initializeMultipartFileEmpty();
+        try {
+            ingestService.ingestData(1, empty, ",", "append");
+        } catch (Exception e) {
+            String expectedMessage = "Data Ingestion cannot be performed on an empty file. Please try again.";
             String actualMessage = e.getMessage();
             assertEquals(expectedMessage, actualMessage);
         }
@@ -209,19 +226,7 @@ public class IngestionServiceTest {
     @Test
     void ingestDataWithEmptyFile() {
         MultipartFile empty = initializeMultipartFileEmpty();
-        assertThrows(Exception.class, () -> ingestService.ingestData(1, empty, ","));
-    }
-
-    @Test
-    void ingestDataWithEmptyFileExceptionMessage() throws Exception {
-        MultipartFile empty = initializeMultipartFileEmpty();
-        try {
-            ingestService.ingestData(1, empty, ",");
-        } catch (Exception e) {
-            String expectedMessage = "Data Ingestion cannot be performed on an empty file. Please try again.";
-            String actualMessage = e.getMessage();
-            assertEquals(expectedMessage, actualMessage);
-        }
+        assertThrows(Exception.class, () -> ingestService.ingestData(1, empty, ",", "append"));
     }
 
 }
