@@ -24,6 +24,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.mock.web.MockMultipartFile;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.web.multipart.MultipartFile;
 
 import app.data_ingestion.dataLayer.dao.FileTypeDao;
@@ -33,8 +34,8 @@ import app.data_ingestion.dataLayer.models.FileType;
 import app.data_ingestion.services.validationAndIngestion.IIngestionService;
 import app.data_ingestion.services.validationAndIngestion.LoadDataState;
 
-
 @SpringBootTest
+@ContextConfiguration
 public class IngestionServiceTest {
 
     @Autowired
@@ -50,7 +51,6 @@ public class IngestionServiceTest {
     JdbcTemplate jdbcTemplate;
 
     FileType fileType;
-
 
     void initializeFileTypeDaoBeans() {
 
@@ -72,17 +72,16 @@ public class IngestionServiceTest {
         }
     }
 
-
     MockMultipartFile initializeMultipartFileSales() {
 
         try {
-            String fileContent = "name,sales" + System.lineSeparator() + "Prachi,90" + System.lineSeparator() + "Shan,100";
+            String fileContent = "name,sales" + System.lineSeparator() + "Prachi,90" + System.lineSeparator()
+                    + "Shan,100";
             MockMultipartFile multipartFile = new MockMultipartFile(
                     "file",
                     "sales.csv",
                     MediaType.APPLICATION_OCTET_STREAM_VALUE,
-                    fileContent.getBytes()
-            );
+                    fileContent.getBytes());
             return multipartFile;
         } catch (Exception e) {
             e.printStackTrace();
@@ -93,13 +92,13 @@ public class IngestionServiceTest {
     MockMultipartFile initializeMultipartFileEmployee() {
 
         try {
-            String fileContent = "id,name" + System.lineSeparator() + "1,Prachi Kabtiyal" + System.lineSeparator() + "2,Shan Malhotra";
+            String fileContent = "id,name" + System.lineSeparator() + "1,Prachi Kabtiyal" + System.lineSeparator()
+                    + "2,Shan Malhotra";
             MockMultipartFile multipartFile = new MockMultipartFile(
                     "file",
                     "employees.csv",
                     MediaType.APPLICATION_OCTET_STREAM_VALUE,
-                    fileContent.getBytes()
-            );
+                    fileContent.getBytes());
             return multipartFile;
         } catch (Exception e) {
             e.printStackTrace();
@@ -115,15 +114,13 @@ public class IngestionServiceTest {
                     "file",
                     "empty.csv",
                     MediaType.APPLICATION_OCTET_STREAM_VALUE,
-                    fileContent.getBytes()
-            );
+                    fileContent.getBytes());
             return multipartFile;
         } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
     }
-
 
     void initializeQueryExecutorBean() {
 
@@ -151,7 +148,8 @@ public class IngestionServiceTest {
         try {
             LoadDataState loadDataState = new LoadDataState();
             MultipartFile multipartFile = initializeMultipartFileSales();
-            String fileContent = "name,sales" + System.lineSeparator() + "Prachi,90" + System.lineSeparator() + "Shan,100";
+            String fileContent = "name,sales" + System.lineSeparator() + "Prachi,90" + System.lineSeparator()
+                    + "Shan,100";
             String actualContent = loadDataState.retrieveFileContentsAsString(multipartFile);
             assertEquals(fileContent, actualContent);
         } catch (IOException e) {
@@ -182,7 +180,7 @@ public class IngestionServiceTest {
 
     @Test
     void ingestDataWithoutValidations() throws Exception {
-        
+
         // IIngestionService ingestService = new IngestionService();
         initializeFileTypeDaoBeans();
         MultipartFile multipartFile = initializeMultipartFileSales();
@@ -190,8 +188,7 @@ public class IngestionServiceTest {
         ingestService.ingestData(1, multipartFile, ",", "append");
         assertAll(
                 () -> assertEquals(2, ingestService.getValidRows().size()),
-                () -> assertEquals(0, ingestService.getInvalidRows().size())
-        );
+                () -> assertEquals(0, ingestService.getInvalidRows().size()));
     }
 
     @Test
@@ -209,7 +206,7 @@ public class IngestionServiceTest {
             String actualMessage = e.getMessage();
             assertEquals(expectedMessage, actualMessage);
         }
-    } 
+    }
 
     @Test
     void ingestDataWithEmptyFileExceptionMessage() throws Exception {

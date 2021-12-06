@@ -20,6 +20,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.mock.web.MockMultipartFile;
+import org.springframework.test.context.ContextConfiguration;
 
 import app.data_ingestion.dataLayer.dao.FileTypeDao;
 import app.data_ingestion.dataLayer.database.QueryExecutor;
@@ -28,6 +29,7 @@ import app.data_ingestion.dataLayer.models.FileType;
 import app.data_ingestion.services.validationAndIngestion.IIngestionService;
 
 @SpringBootTest
+@ContextConfiguration
 public class IngestionWithValidationTest {
 
     @Autowired
@@ -55,13 +57,13 @@ public class IngestionWithValidationTest {
             fileType.setColumnDetails(Arrays.asList(colDetailsArray));
             when(fileTypeDao.getFileTypeById(1)).thenReturn(fileType);
 
-            String fileContent = "name,sales" + System.lineSeparator() + "Prachi,90" + System.lineSeparator() + "Shan,-100";
+            String fileContent = "name,sales" + System.lineSeparator() + "Prachi,90" + System.lineSeparator()
+                    + "Shan,-100";
             MockMultipartFile multipartFile = new MockMultipartFile(
                     "file",
                     "sales.csv",
                     MediaType.APPLICATION_OCTET_STREAM_VALUE,
-                    fileContent.getBytes()
-            );
+                    fileContent.getBytes());
 
             String query = "create table if not exists `SALES` (`NAME` nvarchar(1000),`SALES` INTEGER)";
             doNothing().when(jdbcTemplate).execute(query);
@@ -81,8 +83,7 @@ public class IngestionWithValidationTest {
             ingestionService.ingestData(1, multipartFile, ",", "append");
             assertAll(
                     () -> assertEquals(1, ingestionService.getInvalidRows().size()),
-                    () -> assertEquals(1, ingestionService.getValidRows().size())
-            );
+                    () -> assertEquals(1, ingestionService.getValidRows().size()));
 
         } catch (Exception e) {
             e.printStackTrace();
