@@ -26,8 +26,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.multipart.MultipartFile;
 
-import app.data_ingestion.dataLayer.dao.FileTypeDao;
-import app.data_ingestion.dataLayer.database.QueryExecutor;
+import app.data_ingestion.dataLayer.dao.IFileTypeDao;
+import app.data_ingestion.dataLayer.database.IQueryExecutor;
 import app.data_ingestion.dataLayer.models.ColumnDetails;
 import app.data_ingestion.dataLayer.models.FileType;
 import app.data_ingestion.services.validationAndIngestion.IIngestionService;
@@ -41,10 +41,10 @@ public class IngestionServiceTest {
     IIngestionService ingestService;
 
     @MockBean
-    FileTypeDao fileTypeDao;
+    IFileTypeDao fileTypeDao;
 
     @MockBean
-    QueryExecutor queryExecutor;
+    IQueryExecutor queryExecutor;
 
     @Mock
     JdbcTemplate jdbcTemplate;

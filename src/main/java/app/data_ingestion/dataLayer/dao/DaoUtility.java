@@ -1,4 +1,4 @@
-package app.data_ingestion.dataLayer.daoImpl;
+package app.data_ingestion.dataLayer.dao;
 
 import java.sql.Connection;
 import java.sql.Date;

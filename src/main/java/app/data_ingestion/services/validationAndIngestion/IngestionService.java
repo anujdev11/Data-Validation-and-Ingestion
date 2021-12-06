@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import app.data_ingestion.dataLayer.dao.FileTypeDao;
-import app.data_ingestion.dataLayer.database.QueryExecutor;
+import app.data_ingestion.dataLayer.dao.IFileTypeDao;
+import app.data_ingestion.dataLayer.database.IQueryExecutor;
 import app.data_ingestion.dataLayer.models.FileType;
 import app.data_ingestion.helpers.ValidationRules;
 
@@ -16,10 +16,10 @@ import app.data_ingestion.helpers.ValidationRules;
 public class IngestionService implements IIngestionService {
 
     @Autowired
-    FileTypeDao fileTypeDao;
+    IFileTypeDao fileTypeDao;
 
     @Autowired
-    QueryExecutor queryExecutor;
+    IQueryExecutor queryExecutor;
 
     List<String> headers;
     List<List<String>> rows;
@@ -43,15 +43,15 @@ public class IngestionService implements IIngestionService {
         return validRows;
     }
 
-    public FileTypeDao getFileTypeDao() {
+    public IFileTypeDao getFileTypeDao() {
         return fileTypeDao;
     }
 
-    public void setFileTypeDao(FileTypeDao fileTypeDao) {
+    public void setFileTypeDao(IFileTypeDao fileTypeDao) {
         this.fileTypeDao = fileTypeDao;
     }
 
-    public QueryExecutor getQueryExecutor() {
+    public IQueryExecutor getQueryExecutor() {
         return queryExecutor;
     }
 

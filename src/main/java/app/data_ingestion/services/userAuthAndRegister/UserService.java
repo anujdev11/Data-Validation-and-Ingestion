@@ -7,7 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import app.data_ingestion.dataLayer.dao.UserDao;
+import app.data_ingestion.dataLayer.dao.IUserDao;
 import app.data_ingestion.dataLayer.models.User;
 
 
@@ -15,7 +15,7 @@ import app.data_ingestion.dataLayer.models.User;
 public class UserService implements IUserService {
 
     @Autowired
-    UserDao userDao;
+    IUserDao userDao;
     User user;
 
 
