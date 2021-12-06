@@ -2,8 +2,8 @@ package app.data_ingestion.controllers.userAuthAndRegister;
 
 import app.data_ingestion.dataLayer.models.User;
 import app.data_ingestion.helpers.LiteralConstants;
-import app.data_ingestion.services.userAuthAndRegister.IUserService;
-import app.data_ingestion.services.userAuthAndRegister.UserServiceStatus;
+import app.data_ingestion.services.user_service.IUserService;
+import app.data_ingestion.services.user_service.UserServiceStatus;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

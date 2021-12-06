@@ -7,7 +7,6 @@ import app.data_ingestion.dataLayer.models.User;
 
 public interface UserDao {
 
-
     /**
      * @param user
      * @return
@@ -39,5 +38,45 @@ public interface UserDao {
      * @throws SQLException
      */
     public void update(User user) throws SQLException;
+
+    /**
+     *
+     * @param user
+     * @return
+     * @throws SQLException
+     */
+    public User getOrganizationAdmin(String username) throws SQLException;
+
+    /**
+     *
+     * @param user
+     * @return
+     * @throws SQLException
+     */
+    public List<User> listAllOrganizations() throws SQLException;
+
+    /**
+     *
+     * @param user
+     * @return
+     * @throws SQLException
+     */
+    public User addOrganization(User user) throws SQLException;
+
+    /**
+     *
+     * @param user
+     * @return
+     * @throws SQLException
+     */
+    public User deleteOrganization(User user) throws SQLException;
+
+    /**
+     *
+     * @param user
+     * @return
+     * @throws SQLException
+     */
+    public User updatedOrganization(User user) throws SQLException;
 
 }

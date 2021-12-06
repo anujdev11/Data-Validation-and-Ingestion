@@ -10,7 +10,6 @@ public class FileType {
     String fileTypeName;
     List<ColumnDetails> columnDetails;
 
-
     public FileType(int fileTypeId, String fileTypeName, List<ColumnDetails> columnDetails) {
         super();
         this.fileTypeId = fileTypeId;
@@ -18,36 +17,29 @@ public class FileType {
         this.columnDetails = columnDetails;
     }
 
-
     public FileType() {
         super();
     }
-
 
     public int getFileTypeId() {
         return fileTypeId;
     }
 
-
     public void setFileTypeId(int fileTypeId) {
         this.fileTypeId = fileTypeId;
     }
-
 
     public String getFileTypeName() {
         return fileTypeName;
     }
 
-
     public void setFileTypeName(String fileTypeName) {
         this.fileTypeName = fileTypeName.toUpperCase();
     }
 
-
     public List<ColumnDetails> getColumnDetails() {
         return columnDetails;
     }
-
 
     public void setColumnDetails(List<ColumnDetails> columnDetails) {
         this.columnDetails = columnDetails;
@@ -70,12 +62,10 @@ public class FileType {
         return colToRules;
     }
 
-
     @Override
     public String toString() {
         return "FileType [fileTypeId=" + fileTypeId + ", fileTypeName=" + fileTypeName + ", columnDetails="
                 + columnDetails + "]";
     }
-
 
 }

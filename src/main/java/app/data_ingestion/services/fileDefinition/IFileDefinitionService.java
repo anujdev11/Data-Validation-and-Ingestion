@@ -1,7 +1,7 @@
 package app.data_ingestion.services.fileDefinition;
 
 import app.data_ingestion.dataLayer.models.FileType;
-import app.data_ingestion.services.userAuthAndRegister.UserServiceStatus;
+import app.data_ingestion.services.user_service.UserServiceStatus;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
@@ -16,17 +16,17 @@ public interface IFileDefinitionService {
     public UserServiceStatus fileDefinition(FileType fileDef);
 
     /**
-     * @param file_definition_id
+     * @param fileDefinitionId
      * @return
      * @throws SQLException
      * @throws JsonProcessingException
      */
-    public boolean deleteFileDefinition(int file_definition_id) throws SQLException, JsonProcessingException;
-    
+    public boolean deleteFileDefinition(int fileDefinitionId) throws SQLException, JsonProcessingException;
+
     /**
-	 * @param fileDef
-	 * @return
-	 */
-	public UserServiceStatus updateFileDefinition(FileType FileDef);
+     * @param fileType
+     * @return
+     */
+    public UserServiceStatus updateFileDefinition(FileType fileType);
 
 }

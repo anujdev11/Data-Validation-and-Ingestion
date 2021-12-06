@@ -1,4 +1,4 @@
-package app.data_ingestion.services.userAuthAndRegister;
+package app.data_ingestion.services.user_service;
 
 public enum UserServiceStatus {
     SUCCESS,
@@ -6,4 +6,3 @@ public enum UserServiceStatus {
     FAILURE,
     INVALID_CREDENTIALS
 }
-

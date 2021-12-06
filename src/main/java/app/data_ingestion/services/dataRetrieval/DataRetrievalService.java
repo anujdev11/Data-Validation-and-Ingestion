@@ -1,6 +1,5 @@
 package app.data_ingestion.services.dataRetrieval;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,8 +17,8 @@ public class DataRetrievalService implements IDataRetrievalService {
      * @return
      */
     @Override
-    public Object fetchData(String table_name) {
-        String query = String.format(QueryConstants.SELECT_WITHOUT_CONDITION, table_name);
+    public Object fetchData(String tableName) {
+        String query = String.format(QueryConstants.SELECT_WITHOUT_CONDITION, tableName);
         return queryExecutor.fetchRecords(query);
     }
 

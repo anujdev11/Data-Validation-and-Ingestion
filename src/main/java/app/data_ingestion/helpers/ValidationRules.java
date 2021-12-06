@@ -1,9 +1,14 @@
 package app.data_ingestion.helpers;
 
 public class ValidationRules {
-    static String[] integer = {"NOT NULL", "EQUALS TO", "MIN LENGTH", ">=", ">", "<", "<="};
-    static String[] string = {"NOT NULL", "EQUALS TO", "MAX LENGTH", "NOT CONTAINS", "CONTAINS"};
-    static String[] date = {"NOT NULL", "EQUALS TO", ">=", ">", "<", "<="};
+
+    private ValidationRules() {
+        throw new IllegalStateException("Helper Class");
+    }
+
+    static String[] integer = { "NOT NULL", "EQUALS TO", "MIN LENGTH", ">=", ">", "<", "<=" };
+    static String[] string = { "NOT NULL", "EQUALS TO", "MAX LENGTH", "NOT CONTAINS", "CONTAINS" };
+    static String[] date = { "NOT NULL", "EQUALS TO", ">=", ">", "<", "<=" };
 
     public static String[] getValidationRule(String ruleDataType) {
         switch (ruleDataType) {
@@ -16,7 +21,6 @@ public class ValidationRules {
             default:
                 break;
         }
-        String[] emptyArray = {};
-        return emptyArray;
+        return new String[] {};
     }
 }

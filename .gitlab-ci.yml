@@ -10,6 +10,7 @@ stages:
 before_script:
   - echo "DATA VALIDATION AND DATA INGESTION"
   - echo "CI/CD Pipeline"
+  - echo $CI_PROJECT_DIR
 
 build:
   stage: build

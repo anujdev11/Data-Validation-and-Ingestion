@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 import app.data_ingestion.dataLayer.models.User;
 import app.data_ingestion.helpers.GenericControllerOperations;
 import app.data_ingestion.helpers.LiteralConstants;
-import app.data_ingestion.services.userAuthAndRegister.IUserService;
-import app.data_ingestion.services.userAuthAndRegister.UserServiceStatus;
+import app.data_ingestion.services.user_service.IUserService;
+import app.data_ingestion.services.user_service.UserServiceStatus;
 
 @CrossOrigin(origins = "http://localhost:5555")
 @RestController
@@ -41,14 +41,17 @@ public class UserAuthenticationController {
         if (status == UserServiceStatus.SUCCESS) {
             body_map.put("status", "200");
             body_map.put("message", SUCCESS_MESSAGE);
-            body_map.put("access_level", userService.getUser().getAccess_level());
-            return ResponseEntity.status(HttpStatus.OK).body(GenericControllerOperations.getInstance().createResponseBody(body_map));
+            body_map.put("access_level", userService.getUser().getAccessLevel());
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(GenericControllerOperations.getInstance().createResponseBody(body_map));
         } else if (status == UserServiceStatus.INVALID_CREDENTIALS) {
             body_map.put("message", INVALID_CREDENTIALS_MESSAGE);
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(GenericControllerOperations.getInstance().createResponseBody(body_map));
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body(GenericControllerOperations.getInstance().createResponseBody(body_map));
         }
         body_map.put("message", SYSTEM_ERROR_MESSAGE);
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(GenericControllerOperations.getInstance().createResponseBody(body_map));
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(GenericControllerOperations.getInstance().createResponseBody(body_map));
     }
 
 }

@@ -51,26 +51,27 @@ public class QueryExecutorImpl extends JdbcDaoSupport implements QueryExecutor {
 
     /**
      * @param headers
-     * @param table_name
+     * @param tableName
      * @param rows
-     * @param map_column_to_datatype
+     * @param mapColumnToDataMap
      * @throws SQLException
      */
     @Override
-    public void insertRecords(List<String> headers, String table_name, List<List<String>> rows,
-                              Map<String, String> map_column_to_datatype) throws SQLException {
+    public void insertRecords(List<String> headers, String tableName, List<List<String>> rows,
+            Map<String, String> mapColumnToDataMap) throws SQLException {
 
         connection.setAutoCommit(false);
-        String cols_placeholder = "?,".repeat(headers.size());
-        cols_placeholder = cols_placeholder.substring(0, cols_placeholder.length() - 1);
-        String query = String.format(QueryConstants.INSERT_QUERY, table_name, String.join(",", headers), cols_placeholder);
+        String colsPlaceholder = "?,".repeat(headers.size());
+        colsPlaceholder = colsPlaceholder.substring(0, colsPlaceholder.length() - 1);
+        String query = String.format(QueryConstants.INSERT_QUERY, tableName, String.join(",", headers),
+                colsPlaceholder);
         PreparedStatement statement = connection.prepareStatement(query);
 
         int row_counter = 0;
         for (List<String> row : rows) {
             int cell_counter = 1;
             for (String value : row) {
-                switch (map_column_to_datatype.get(headers.get(cell_counter - 1))) {
+                switch (mapColumnToDataMap.get(headers.get(cell_counter - 1))) {
                     case LiteralConstants.STRING:
                         statement.setString(cell_counter, value);
                         break;
@@ -109,6 +110,5 @@ public class QueryExecutorImpl extends JdbcDaoSupport implements QueryExecutor {
         List<Map<String, Object>> data_records = jdbcTemplate.queryForList(query);
         return data_records;
     }
-
 
 }

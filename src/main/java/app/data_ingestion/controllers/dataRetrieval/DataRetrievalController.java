@@ -1,7 +1,6 @@
 package app.data_ingestion.controllers.dataRetrieval;
 
-
-import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,7 +20,6 @@ public class DataRetrievalController {
     @Autowired
     IDataRetrievalService dataService;
 
-
     /**
      * @param tableName
      * @return
@@ -29,8 +27,8 @@ public class DataRetrievalController {
     @GetMapping(path = "/records/{tableName}")
     public ResponseEntity<Object> fetchData(@PathVariable String tableName) {
 
-        HashMap<String, Object> responseBody = GenericControllerOperations.getInstance()
-                                                .createResponseBody(dataService.fetchData(tableName));
+        Map<String, Object> responseBody = GenericControllerOperations.getInstance()
+                .createResponseBody(dataService.fetchData(tableName));
         return ResponseEntity.status(HttpStatus.OK).body(responseBody);
     }
 }

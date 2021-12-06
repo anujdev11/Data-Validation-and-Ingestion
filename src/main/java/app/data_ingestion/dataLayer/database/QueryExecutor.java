@@ -18,15 +18,15 @@ public interface QueryExecutor {
      * @param map_column_to_datatype
      * @throws SQLException
      */
-    //for batch insertion
+    // for batch insertion
     public void insertRecords(List<String> headers, String table_name, List<List<String>> rows,
-                              Map<String, String> map_column_to_datatype) throws SQLException;
+            Map<String, String> map_column_to_datatype) throws SQLException;
 
     /**
      * @param query
      * @return
      */
-    //for fetching records- select statment
+    // for fetching records- select statement
     public List<Map<String, Object>> fetchRecords(String query);
 
 }
