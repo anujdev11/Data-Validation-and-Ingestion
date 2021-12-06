@@ -8,13 +8,13 @@ import org.springframework.stereotype.Service;
 
 import app.data_ingestion.dataLayer.dao.FileTypeDao;
 import app.data_ingestion.dataLayer.models.FileType;
-import app.data_ingestion.services.userAuthAndRegister.UserServiceStatus;
+import app.data_ingestion.services.user_service.UserServiceStatus;
 
 @Service
 public class FileDefinition implements IFileDefinitionService {
 
     @Autowired
-    FileTypeDao FileTypeDao;
+    FileTypeDao fileTypeDao;
 
     /**
      * @param fileDef
@@ -23,7 +23,7 @@ public class FileDefinition implements IFileDefinitionService {
     @Override
     public UserServiceStatus fileDefinition(FileType fileDef) {
         try {
-            return FileTypeDao.addFileDefinition(fileDef) > 0 ? UserServiceStatus.SUCCESS : UserServiceStatus.FAILURE;
+            return fileTypeDao.addFileDefinition(fileDef) > 0 ? UserServiceStatus.SUCCESS : UserServiceStatus.FAILURE;
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -38,29 +38,25 @@ public class FileDefinition implements IFileDefinitionService {
      * @throws JsonProcessingException
      */
     @Override
-    public boolean deleteFileDefinition(int file_definition_id) throws SQLException, JsonProcessingException {
-        boolean status = FileTypeDao.deleteFileDefinition(file_definition_id);
-        if (status){
+    public boolean deleteFileDefinition(int fileDefinitionId) throws SQLException, JsonProcessingException {
+        boolean status = fileTypeDao.deleteFileDefinition(fileDefinitionId);
+        if (status) {
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }
-    
 
-	@Override
-	public UserServiceStatus updateFileDefinition(FileType FileDef) {
+    @Override
+    public UserServiceStatus updateFileDefinition(FileType fileType) {
         try {
-        	return FileTypeDao.updateFileDefinition(FileDef) > 0 ? UserServiceStatus.SUCCESS : UserServiceStatus.FAILURE;
-           
+            return fileTypeDao.updateFileDefinition(fileType) > 0 ? UserServiceStatus.SUCCESS
+                    : UserServiceStatus.FAILURE;
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return UserServiceStatus.FAILURE;
-	}
-    
-    
-    
+    }
 
 }

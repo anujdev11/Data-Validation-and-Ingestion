@@ -5,5 +5,5 @@ public interface IDataRetrievalService {
      * @param table_name
      * @return
      */
-    public Object fetchData(String table_name);
+    public Object fetchData(String tableName);
 }

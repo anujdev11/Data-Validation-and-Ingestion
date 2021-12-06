@@ -10,17 +10,18 @@ stages:
 before_script:
   - echo "DATA VALIDATION AND DATA INGESTION"
   - echo "CI/CD Pipeline"
+  - echo $CI_PROJECT_DIR
 
 build:
   stage: build
   tags:
-    - dalfcs_gitlab_docker_ci
+    - ugrad
   script: "mvn clean install"
 
 test:
   stage: test
   tags:
-    - dalfcs_gitlab_docker_ci
+    - ugrad
   script: "mvn clean test"
   artifacts:
     when: always

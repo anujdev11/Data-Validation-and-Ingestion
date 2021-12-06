@@ -1,4 +1,4 @@
-package app.data_ingestion.services.userAuthAndRegister;
+package app.data_ingestion.services.user_service;
 
 import app.data_ingestion.dataLayer.models.User;
 
