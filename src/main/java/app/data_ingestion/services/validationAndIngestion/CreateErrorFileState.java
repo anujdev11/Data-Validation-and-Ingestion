@@ -9,6 +9,16 @@ import app.data_ingestion.helpers.ConfigPropertiesKeyConstants;
 @Service
 public class CreateErrorFileState implements IState{
 
+    
+    /** 
+     * @param ingestionService
+     * @param id
+     * @param file
+     * @param delimiter
+     * @param action
+     * @return IState
+     * @throws Exception
+     */
     @Override
     public IState execute(IngestionService ingestionService, int id, MultipartFile file, String delimiter, String action)
             throws Exception {

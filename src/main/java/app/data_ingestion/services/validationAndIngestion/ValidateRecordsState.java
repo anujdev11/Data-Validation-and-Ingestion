@@ -12,6 +12,16 @@ import app.data_ingestion.dataLayer.models.ValidationRule;
 @Service
 public class ValidateRecordsState implements IState{
 
+    
+    /** 
+     * @param ingestionService
+     * @param id
+     * @param file
+     * @param delimiter
+     * @param action
+     * @return IState
+     * @throws Exception
+     */
     @Override
     public IState execute(IngestionService ingestionService, int id, MultipartFile file, String delimiter, String action)
             throws Exception {
@@ -21,6 +31,10 @@ public class ValidateRecordsState implements IState{
         return new CreateErrorFileState();
     }
 
+    
+    /** 
+     * @param ingestionService
+     */
     private void validateRecords(IngestionService ingestionService) {
 
         ingestionService.setValidRows(new ArrayList<>());

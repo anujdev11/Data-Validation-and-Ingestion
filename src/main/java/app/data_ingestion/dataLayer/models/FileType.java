@@ -24,35 +24,63 @@ public class FileType {
     }
 
 
+    
+    /** 
+     * @return int
+     */
     public int getFileTypeId() {
         return fileTypeId;
     }
 
 
+    
+    /** 
+     * @param fileTypeId
+     */
     public void setFileTypeId(int fileTypeId) {
         this.fileTypeId = fileTypeId;
     }
 
 
+    
+    /** 
+     * @return String
+     */
     public String getFileTypeName() {
         return fileTypeName;
     }
 
 
+    
+    /** 
+     * @param fileTypeName
+     */
     public void setFileTypeName(String fileTypeName) {
         this.fileTypeName = fileTypeName.toUpperCase();
     }
 
 
+    
+    /** 
+     * @return List<ColumnDetails>
+     */
     public List<ColumnDetails> getColumnDetails() {
         return columnDetails;
     }
 
 
+    
+    /** 
+     * @param columnDetails
+     */
     public void setColumnDetails(List<ColumnDetails> columnDetails) {
         this.columnDetails = columnDetails;
     }
 
+    
+    /** 
+     * @return Map<String, String>
+     */
     public Map<String, String> getColumnToDatatype() {
         Map<String, String> colDatatype = new HashMap<>();
         for (ColumnDetails cd : columnDetails) {
@@ -61,6 +89,10 @@ public class FileType {
         return colDatatype;
     }
 
+    
+    /** 
+     * @return Map<String, List<ValidationRule>>
+     */
     public Map<String, List<ValidationRule>> getColumnToRules() {
         Map<String, List<ValidationRule>> colToRules = new HashMap<>();
         for (ColumnDetails cd : columnDetails) {
@@ -71,6 +103,10 @@ public class FileType {
     }
 
 
+    
+    /** 
+     * @return String
+     */
     @Override
     public String toString() {
         return "FileType [fileTypeId=" + fileTypeId + ", fileTypeName=" + fileTypeName + ", columnDetails="

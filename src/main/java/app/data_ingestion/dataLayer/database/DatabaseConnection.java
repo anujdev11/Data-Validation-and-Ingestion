@@ -7,6 +7,12 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 public class DatabaseConnection {
 
+    
+    /** 
+     * @param jdbcTemplate
+     * @return Connection
+     * @throws SQLException
+     */
     public static Connection getConnection(JdbcTemplate jdbcTemplate) throws SQLException {
         return jdbcTemplate.getDataSource().getConnection();
     }

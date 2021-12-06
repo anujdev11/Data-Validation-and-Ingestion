@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import app.data_ingestion.config.ConfigReader;
 import app.data_ingestion.helpers.ConfigPropertiesKeyConstants;
+import app.data_ingestion.helpers.LiteralConstants;
 import app.data_ingestion.services.validationAndIngestion.IIngestionService;
 import app.data_ingestion.services.validationAndIngestion.IngestionService;
 
@@ -34,14 +35,12 @@ public class IngestionController {
      */
     @PostMapping(path = "/ingestion", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
     @ResponseBody
-    public ResponseEntity<Object> ingestDataFromFileAppend(@RequestParam("file_definition_id") String file_definition_id,
+    public ResponseEntity<Object> ingestDataFromFile(@RequestParam("file_definition_id") String fileDefinitionId,
                                                      @RequestParam("input_file") MultipartFile multipartFile,
                                                      @RequestParam("delimiter") String delimiter,
                                                      @RequestParam("action") String action) throws Exception {
 
-        System.out.println(file_definition_id);
-        System.out.println(delimiter);
-        ingestionService.ingestData(Integer.valueOf(file_definition_id), multipartFile, delimiter, action);
+        ingestionService.ingestData(Integer.valueOf(fileDefinitionId), multipartFile, delimiter, action);
         String fileName = ConfigReader.getInstance().getProperty(ConfigPropertiesKeyConstants.INVALID_ROWS_CSV_PATH);
         InputStreamResource fileInputStream = null;
         File file = new File(fileName);
@@ -50,14 +49,13 @@ public class IngestionController {
             fileInputStream = new InputStreamResource(in);
 
             HttpHeaders headers = new HttpHeaders();
-            headers.set(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + fileName);
-            headers.set(HttpHeaders.CONTENT_TYPE, "text/csv");
+            headers.set(HttpHeaders.CONTENT_DISPOSITION, LiteralConstants.CONTENT_DISPOSITION_ATTACHMENT + fileName);
+            headers.set(HttpHeaders.CONTENT_TYPE, LiteralConstants.INGEST_CONTENT_TYPE);
 
             return new ResponseEntity<>(
                     fileInputStream,
                     headers,
                     HttpStatus.OK);
-
         }
 
         return new ResponseEntity<>(

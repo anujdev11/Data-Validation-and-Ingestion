@@ -57,7 +57,7 @@ public class UserService implements IUserService {
     public UserServiceStatus userRegistration(User user) {
         try {
             if (!userExists(user.getUsername())) {
-                return userDao.add(user) > 0 ? UserServiceStatus.SUCCESS : UserServiceStatus.FAILURE;
+                return userDao.addUser(user) > 0 ? UserServiceStatus.SUCCESS : UserServiceStatus.FAILURE;
             } else {
                 return UserServiceStatus.USER_ALREADY_EXISTS;
             }

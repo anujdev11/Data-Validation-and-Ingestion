@@ -37,18 +37,23 @@ public class UserAuthenticationController {
     @ResponseBody
     public ResponseEntity<Object> userAuthentication(@RequestBody User users) {
         UserServiceStatus status = userService.userAuthentication(users.getUsername(), users.getPassword());
-        Map<String, String> body_map = new HashMap<String, String>();
+        Map<String, String> bodyMap = new HashMap<String, String>();
+
         if (status == UserServiceStatus.SUCCESS) {
-            body_map.put("status", "200");
-            body_map.put("message", SUCCESS_MESSAGE);
-            body_map.put("access_level", userService.getUser().getAccess_level());
-            return ResponseEntity.status(HttpStatus.OK).body(GenericControllerOperations.getInstance().createResponseBody(body_map));
-        } else if (status == UserServiceStatus.INVALID_CREDENTIALS) {
-            body_map.put("message", INVALID_CREDENTIALS_MESSAGE);
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(GenericControllerOperations.getInstance().createResponseBody(body_map));
+            bodyMap.put(LiteralConstants.STATUS, String.valueOf(HttpStatus.OK.value()));
+            bodyMap.put(LiteralConstants.MESSAGE, SUCCESS_MESSAGE);
+            bodyMap.put(LiteralConstants.ACCESS_LEVEL, userService.getUser().getAccess_level());
+
+            return ResponseEntity.status(HttpStatus.OK).body(GenericControllerOperations.getInstance().createResponseBody(bodyMap));
+        } 
+        else if (status == UserServiceStatus.INVALID_CREDENTIALS) {
+
+            bodyMap.put(LiteralConstants.MESSAGE, INVALID_CREDENTIALS_MESSAGE);
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(GenericControllerOperations.getInstance().createResponseBody(bodyMap));
         }
-        body_map.put("message", SYSTEM_ERROR_MESSAGE);
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(GenericControllerOperations.getInstance().createResponseBody(body_map));
+        
+        bodyMap.put(LiteralConstants.MESSAGE, SYSTEM_ERROR_MESSAGE);
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(GenericControllerOperations.getInstance().createResponseBody(bodyMap));
     }
 
 }

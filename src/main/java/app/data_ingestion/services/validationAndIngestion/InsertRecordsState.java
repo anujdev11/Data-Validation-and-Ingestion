@@ -15,6 +15,16 @@ public class InsertRecordsState implements IState{
     final String FlAG_FOR_REPLACE = "1";
 
 
+    
+    /** 
+     * @param ingestionService
+     * @param id
+     * @param file
+     * @param delimiter
+     * @param action
+     * @return IState
+     * @throws Exception
+     */
     @Override
     public IState execute(IngestionService ingestionService, int id, MultipartFile file, String delimiter, String action)
             throws Exception {
@@ -35,6 +45,10 @@ public class InsertRecordsState implements IState{
     }
 
 
+    
+    /** 
+     * @param ingestionService
+     */
     public void createTable(IngestionService ingestionService) {
         String colDetail = "";
 
@@ -47,6 +61,10 @@ public class InsertRecordsState implements IState{
         ingestionService.getQueryExecutor().execute(query);
     }
 
+    
+    /** 
+     * @param ingestionService
+     */
     public void deleteRecordsFromDatabase(IngestionService ingestionService) {
         
         String query = String.format(QueryConstants.DELETE_QUERY, ingestionService.getFileType().getFileTypeName());
@@ -54,6 +72,11 @@ public class InsertRecordsState implements IState{
     }
 
 
+    
+    /** 
+     * @param ingestionService
+     * @throws SQLException
+     */
     public void insertRecordsToDatabase(IngestionService ingestionService) throws SQLException {
         ingestionService.queryExecutor.insertRecords(ingestionService.getHeaders(), 
                                                 ingestionService.getFileType().getFileTypeName(), 

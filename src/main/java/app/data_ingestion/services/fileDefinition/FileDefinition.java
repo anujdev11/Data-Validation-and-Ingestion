@@ -32,14 +32,14 @@ public class FileDefinition implements IFileDefinitionService {
     }
 
     /**
-     * @param file_definition_id
+     * @param fileDefinitionId
      * @return
      * @throws SQLException
      * @throws JsonProcessingException
      */
     @Override
-    public boolean deleteFileDefinition(int file_definition_id) throws SQLException, JsonProcessingException {
-        boolean status = FileTypeDao.deleteFileDefinition(file_definition_id);
+    public boolean deleteFileDefinition(int fileDefinitionId) throws SQLException, JsonProcessingException {
+        boolean status = FileTypeDao.deleteFileDefinition(fileDefinitionId);
         if (status){
             return true;
         }

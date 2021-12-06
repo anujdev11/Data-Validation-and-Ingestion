@@ -11,6 +11,16 @@ import app.data_ingestion.helpers.LiteralConstants;
 @Service
 public class ValidateHeadersState implements IState{
 
+    
+    /** 
+     * @param ingestionService
+     * @param id
+     * @param file
+     * @param delimiter
+     * @param action
+     * @return IState
+     * @throws Exception
+     */
     @Override
     public IState execute(IngestionService ingestionService, int id, MultipartFile file, String delimiter, String action)
             throws Exception {
@@ -20,6 +30,12 @@ public class ValidateHeadersState implements IState{
         return new ValidateRecordsState();
     }
 
+    
+    /** 
+     * @param ingestionService
+     * @param headers
+     * @throws Exception
+     */
     public void validateFileHeaders(IngestionService ingestionService, List<String> headers) throws Exception {
 
         List<String> columns = new ArrayList<>(ingestionService.getMapColumnToDatatype().keySet());

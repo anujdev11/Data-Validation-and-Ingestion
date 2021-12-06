@@ -7,7 +7,7 @@ import java.util.List;
 
 public class CSVUtil {
 
-    //implementing singleton design pattern for CSVUtil
+    //implementing singleton design pattern
     private static CSVUtil csvUtil = new CSVUtil();
 
     private CSVUtil(){

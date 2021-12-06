@@ -12,10 +12,12 @@ public class QueryConstants {
                                                             + "file_definition_details) VALUES (?, ?)";
     public static final String FILE_DEFINITION_SELECT_QUERY = "select * from file_definition where file_definition_id = ? limit 1";
     public static final String FILE_DEFINITION_DELETE_QUERY = "delete from file_definition where file_definition_id = ?";
+    public static final String FILE_DEFINITION_UPDATE_QUERY = "update file_definition set file_definition_name = ? ,file_definition_details = ? where file_definition_id = ? ";
 
     public static final String USER_INSERT_QUERY = "insert into user (username, "
                                                     + "password, access_level, "
                                                     + "organization) VALUES (?, ?, ?, ?)";
+
     public static final String USER_DELETE_QUERY = "delete from user where username = ?";
     public static final String USER_SELECT_QUERY = "select * from user where username= ? limit 1";
     public static final String USER_UPDATE_QUERY = "update user set password= ?, access_level= ?, organization= ? where username = ?";

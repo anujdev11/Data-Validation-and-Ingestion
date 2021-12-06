@@ -8,10 +8,19 @@ public class GenericControllerOperations {
 
     private GenericControllerOperations(){}
 
+    
+    /** 
+     * @return GenericControllerOperations
+     */
     public static GenericControllerOperations getInstance(){
         return genericControllerOperations;
     }
 
+    
+    /** 
+     * @param data
+     * @return HashMap<String, Object>
+     */
     public HashMap<String, Object> createResponseBody(Object data) {
         HashMap<String, Object> body = new HashMap<>();
         body.put("data", data);

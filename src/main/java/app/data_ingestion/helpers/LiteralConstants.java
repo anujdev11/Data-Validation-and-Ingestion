@@ -25,11 +25,17 @@ public class LiteralConstants {
     public final static String PASSWORD = "password";
     public final static String ACCESS_LEVEL = "access_level";
     public final static String ORGANIZATION = "organization";
+    public final static String STATUS = "status";
+    public final static String MESSAGE = "message";
+    public final static String CONTENT_DISPOSITION_ATTACHMENT = "attachment; filename=";
+    public final static String INGEST_CONTENT_TYPE = "text/csv";
 
     public final static String STRING = "STRING";
     public final static String INTEGER = "INTEGER";
     public final static String FLOAT = "FLOAT";
     public final static String DATE = "DATE";
+    public final static String SIZED_NVARCHAR = "nvarchar(1000)";
+    public final static String UNDERSCORE = "_";
     
     public final static String INGESTION_EMPTY_FILE_MESSAGE = "Data Ingestion cannot be performed on an empty file. Please try again.";
     public final static String INGESTION_INVALID_HEADERS_MESSAGE = "Invalid headers. Correct headers are: ";
@@ -44,5 +50,6 @@ public class LiteralConstants {
     public final static String GREATER_THAN = ">";
     public final static String LESS_THAN_EQUAL_TO = "<=";
     public final static String LESS_THAN = "<";
+
     // public final static String
 }

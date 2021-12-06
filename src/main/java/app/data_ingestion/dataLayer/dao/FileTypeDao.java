@@ -14,6 +14,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
@@ -26,6 +27,12 @@ import app.data_ingestion.helpers.QueryConstants;
 
 @Repository
 public class FileTypeDao extends JdbcDaoSupport implements IFileTypeDao {
+
+    @Autowired
+    FileType fileType;
+
+    @Autowired
+    ObjectMapper objectMapper;
 
     static Connection connection;
     final DataSource dataSource;
@@ -59,10 +66,10 @@ public class FileTypeDao extends JdbcDaoSupport implements IFileTypeDao {
                 .collect(Collectors.joining(", "));
         String fileDefinitionColumnDetails = "[" + listString + "]";
 
-        String insert_query = QueryConstants.FILE_DEFINITION_INSERT_QUERY;
-        PreparedStatement prepared_statment = DaoUtility.createPrepareStatement(connection, insert_query, fileTypeDef.getFileTypeName(), fileDefinitionColumnDetails);
+        String insertQuery = QueryConstants.FILE_DEFINITION_INSERT_QUERY;
+        PreparedStatement preparedStatment = DaoUtility.createPrepareStatement(connection, insertQuery, fileTypeDef.getFileTypeName(), fileDefinitionColumnDetails);
 
-        return prepared_statment.executeUpdate();
+        return preparedStatment.executeUpdate();
     }
 
     /**
@@ -74,20 +81,20 @@ public class FileTypeDao extends JdbcDaoSupport implements IFileTypeDao {
      */
     @Override
     public FileType getFileTypeById(int id) throws SQLException, JsonMappingException, JsonProcessingException {
-        FileType fileType = null;
+        // FileType fileType = null;
 
         String query = QueryConstants.FILE_DEFINITION_SELECT_QUERY;
-        PreparedStatement prepared_statment = DaoUtility.createPrepareStatement(connection, query, id);
-        ResultSet rs = prepared_statment.executeQuery();
+        PreparedStatement preparedStatment = DaoUtility.createPrepareStatement(connection, query, id);
+        ResultSet rs = preparedStatment.executeQuery();
         if (rs.next() == false) {
             throw new SQLException(LiteralConstants.NO_FILE_DEFINITION_FOR_ID + id);
         } 
         else {
-            fileType = new FileType();
+            // fileType = new FileType();
             fileType.setFileTypeId(rs.getInt(LiteralConstants.FILE_DEFINITION_ID));
             fileType.setFileTypeName(rs.getString(LiteralConstants.FILE_DEFINITION_NAME));
             String columnDetails = rs.getString(LiteralConstants.FILE_DEFINITION_DETAILS);
-            ObjectMapper objectMapper = new ObjectMapper();
+            // ObjectMapper objectMapper = new ObjectMapper();
             ColumnDetails[] colDetailsArray = objectMapper.readValue(columnDetails, ColumnDetails[].class);
             fileType.setColumnDetails(Arrays.asList(colDetailsArray));
         }
@@ -95,20 +102,20 @@ public class FileTypeDao extends JdbcDaoSupport implements IFileTypeDao {
     }
 
     /**
-     * @param file_definition_id
+     * @param fileDefinitionId
      * @return
      * @throws SQLException
      * @throws JsonProcessingException
      */
-    public boolean deleteFileDefinition(int file_definition_id) throws SQLException, JsonProcessingException {
-        FileType fileType = getFileTypeById(file_definition_id);
+    public boolean deleteFileDefinition(int fileDefinitionId) throws SQLException, JsonProcessingException {
+        FileType fileType = getFileTypeById(fileDefinitionId);
         String fileTypeName = fileType.getFileTypeName();
-        String delete_query = QueryConstants.FILE_DEFINITION_DELETE_QUERY;
-        String delete_table = String.format(QueryConstants.DROP_QUERY, fileTypeName);
-        PreparedStatement prepared_statement = DaoUtility.createPrepareStatement(connection, delete_query, file_definition_id);
-        prepared_statement.executeUpdate();
-        PreparedStatement prepared_statement_table = DaoUtility.createPrepareStatement(connection, delete_table);
-        prepared_statement_table.executeUpdate();
+        String deleteQuery = QueryConstants.FILE_DEFINITION_DELETE_QUERY;
+        String deleteTable = String.format(QueryConstants.DROP_QUERY, fileTypeName);
+        PreparedStatement preparedStatement = DaoUtility.createPrepareStatement(connection, deleteQuery, fileDefinitionId);
+        preparedStatement.executeUpdate();
+        preparedStatement = DaoUtility.createPrepareStatement(connection, deleteTable);
+        preparedStatement.executeUpdate();
         return true;
     }
     
@@ -117,9 +124,9 @@ public class FileTypeDao extends JdbcDaoSupport implements IFileTypeDao {
     	String listString = fileTypeDef.getColumnDetails().stream().map(Object::toString)
                 .collect(Collectors.joining(", "));
     	String fileDefinitionColumnDetails="["+listString+"]";	
-    	String updateQuery = "update file_definition set file_definition_name = ? ,file_definition_details = ? where file_definition_id = ? ";    	
-        PreparedStatement prepared_statment = DaoUtility.createPrepareStatement(connection, updateQuery,fileTypeDef.getFileTypeName(),fileDefinitionColumnDetails , fileTypeDef.getFileTypeId());
-        return prepared_statment.executeUpdate(); 	
+    	String updateQuery = QueryConstants.FILE_DEFINITION_UPDATE_QUERY;    	
+        PreparedStatement preparedStatement = DaoUtility.createPrepareStatement(connection, updateQuery,fileTypeDef.getFileTypeName(),fileDefinitionColumnDetails , fileTypeDef.getFileTypeId());
+        return preparedStatement.executeUpdate(); 	
 
 	}
 

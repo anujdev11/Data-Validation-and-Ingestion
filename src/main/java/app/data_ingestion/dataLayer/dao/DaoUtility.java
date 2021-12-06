@@ -19,7 +19,6 @@ public class DaoUtility {
         PreparedStatement prepared_statment = connection.prepareStatement(sql);
         int counter = 1;
         for (Object param : params) {
-            System.out.println("----param.getClass().getName()---- " + param.getClass().getName());
             switch (param.getClass().getName()) {
                 case LiteralConstants.STRING_CLASS_NAME:
                     prepared_statment.setString(counter, (String) param);

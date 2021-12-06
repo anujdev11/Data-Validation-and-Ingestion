@@ -50,15 +50,15 @@ public class UserDao extends JdbcDaoSupport implements IUserDao {
      * @throws SQLException
      */
     @Override
-    public int add(User user) throws SQLException {
-        String insert_query = QueryConstants.USER_INSERT_QUERY;
-        PreparedStatement prepared_statment = DaoUtility.createPrepareStatement(connection, insert_query,
+    public int addUser(User user) throws SQLException {
+        String insertQuery = QueryConstants.USER_INSERT_QUERY;
+        PreparedStatement preparedStatment = DaoUtility.createPrepareStatement(connection, insertQuery,
                 user.getUsername(),
                 user.getPassword(),
                 user.getAccess_level(),
                 user.getOrganization());
 
-        return prepared_statment.executeUpdate();
+        return preparedStatment.executeUpdate();
     }
 
     /**
@@ -66,10 +66,10 @@ public class UserDao extends JdbcDaoSupport implements IUserDao {
      * @throws SQLException
      */
     @Override
-    public void delete(String username) throws SQLException {
-        String delete_query = QueryConstants.USER_DELETE_QUERY;
-        PreparedStatement prepared_statment = DaoUtility.createPrepareStatement(connection, delete_query, username);
-        prepared_statment.executeUpdate();
+    public void deleteUser(String username) throws SQLException {
+        String deleteQuery = QueryConstants.USER_DELETE_QUERY;
+        PreparedStatement preparedStatment = DaoUtility.createPrepareStatement(connection, deleteQuery, username);
+        preparedStatment.executeUpdate();
     }
 
     /**
@@ -79,9 +79,9 @@ public class UserDao extends JdbcDaoSupport implements IUserDao {
      */
     @Override
     public User getUser(String username) throws SQLException {
-        String select_query = QueryConstants.USER_SELECT_QUERY;
-        PreparedStatement prepared_statment = DaoUtility.createPrepareStatement(connection, select_query, username);
-        ResultSet rs = prepared_statment.executeQuery();
+        String selectQuery = QueryConstants.USER_SELECT_QUERY;
+        PreparedStatement preparedStatment = DaoUtility.createPrepareStatement(connection, selectQuery, username);
+        ResultSet rs = preparedStatment.executeQuery();
         User user = null;
         while (rs.next()) {
             user = new User(rs.getString(LiteralConstants.USERNAME),
@@ -98,9 +98,9 @@ public class UserDao extends JdbcDaoSupport implements IUserDao {
      */
     @Override
     public List<User> getUsers() throws SQLException {
-        String select_query = QueryConstants.USER_SELECT_QUERY;
-        PreparedStatement prepared_statment = connection.prepareStatement(select_query);
-        ResultSet rs = prepared_statment.executeQuery();
+        String selectQuery = QueryConstants.USER_SELECT_QUERY;
+        PreparedStatement preparedStatment = connection.prepareStatement(selectQuery);
+        ResultSet rs = preparedStatment.executeQuery();
         List<User> users = new ArrayList<User>();
 
         while (rs.next()) {
@@ -119,13 +119,13 @@ public class UserDao extends JdbcDaoSupport implements IUserDao {
      * @throws SQLException
      */
     @Override
-    public void update(User user) throws SQLException {
-        String update_query = QueryConstants.USER_UPDATE_QUERY;
-        PreparedStatement prepared_statment = DaoUtility.createPrepareStatement(connection, update_query,
+    public void updateUser(User user) throws SQLException {
+        String updateQuery = QueryConstants.USER_UPDATE_QUERY;
+        PreparedStatement preparedStatment = DaoUtility.createPrepareStatement(connection, updateQuery,
                 user.getPassword(),
                 user.getAccess_level(),
                 user.getOrganization());
-        prepared_statment.executeUpdate();
+        preparedStatment.executeUpdate();
 
     }
 

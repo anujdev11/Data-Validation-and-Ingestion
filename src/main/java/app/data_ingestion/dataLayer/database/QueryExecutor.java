@@ -49,47 +49,47 @@ public class QueryExecutor extends JdbcDaoSupport implements IQueryExecutor {
 
     /**
      * @param headers
-     * @param table_name
+     * @param tableName
      * @param rows
-     * @param map_column_to_datatype
+     * @param mapColumnToDatatype
      * @throws SQLException
      */
     @Override
-    public void insertRecords(List<String> headers, String table_name, List<List<String>> rows,
-                              Map<String, String> map_column_to_datatype) throws SQLException {
+    public void insertRecords(List<String> headers, String tableName, List<List<String>> rows,
+                              Map<String, String> mapColumnToDatatype) throws SQLException {
 
         connection.setAutoCommit(false);
-        String cols_placeholder = "?,".repeat(headers.size());
-        cols_placeholder = cols_placeholder.substring(0, cols_placeholder.length() - 1);
-        String query = String.format(QueryConstants.INSERT_QUERY, table_name, String.join(",", headers), cols_placeholder);
+        String colsPlaceholder = "?,".repeat(headers.size());
+        colsPlaceholder = colsPlaceholder.substring(0, colsPlaceholder.length() - 1);
+        String query = String.format(QueryConstants.INSERT_QUERY, tableName, String.join(",", headers), colsPlaceholder);
         PreparedStatement statement = connection.prepareStatement(query);
 
-        int row_counter = 0;
+        int rowCounter = 0;
         for (List<String> row : rows) {
-            int cell_counter = 1;
+            int cellCounter = 1;
             for (String value : row) {
-                switch (map_column_to_datatype.get(headers.get(cell_counter - 1))) {
+                switch (mapColumnToDatatype.get(headers.get(cellCounter - 1))) {
                     case LiteralConstants.STRING:
-                        statement.setString(cell_counter, value);
+                        statement.setString(cellCounter, value);
                         break;
                     case LiteralConstants.INTEGER:
-                        statement.setInt(cell_counter, Integer.valueOf(value));
+                        statement.setInt(cellCounter, Integer.valueOf(value));
                         break;
                     case LiteralConstants.FLOAT:
-                        statement.setFloat(cell_counter, Float.valueOf(value));
+                        statement.setFloat(cellCounter, Float.valueOf(value));
                         break;
                     case LiteralConstants.DATE:
-                        statement.setDate(cell_counter, Date.valueOf(value));
+                        statement.setDate(cellCounter, Date.valueOf(value));
                         break;
                     default:
-                        statement.setString(cell_counter, value);
+                        statement.setString(cellCounter, value);
                         break;
                 }
-                ++cell_counter;
+                ++cellCounter;
             }
-            ++row_counter;
+            ++rowCounter;
             statement.addBatch();
-            if (row_counter % 500 == 0 || row_counter == rows.size()) {
+            if (rowCounter % 500 == 0 || rowCounter == rows.size()) {
                 int[] count = statement.executeBatch();
             }
         }
@@ -104,8 +104,8 @@ public class QueryExecutor extends JdbcDaoSupport implements IQueryExecutor {
      */
     @Override
     public List<Map<String, Object>> fetchRecords(String query) {
-        List<Map<String, Object>> data_records = jdbcTemplate.queryForList(query);
-        return data_records;
+        List<Map<String, Object>> dataRecords = jdbcTemplate.queryForList(query);
+        return dataRecords;
     }
 
 

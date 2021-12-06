@@ -14,12 +14,12 @@ public class DataRetrievalService implements IDataRetrievalService {
     IQueryExecutor queryExecutor;
 
     /**
-     * @param table_name
-     * @return
+     * @param tableName
+     * @return List of records as Object
      */
     @Override
-    public Object fetchData(String table_name) {
-        String query = String.format(QueryConstants.SELECT_WITHOUT_CONDITION, table_name);
+    public Object fetchData(String tableName) {
+        String query = String.format(QueryConstants.SELECT_WITHOUT_CONDITION, tableName);
         return queryExecutor.fetchRecords(query);
     }
 

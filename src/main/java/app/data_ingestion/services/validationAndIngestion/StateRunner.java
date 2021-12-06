@@ -12,6 +12,15 @@ public class StateRunner {
         currentState = new LoadDataState();
     }
 
+    
+    /** 
+     * @param ingestionService
+     * @param id
+     * @param file
+     * @param delimiter
+     * @param action
+     * @throws Exception
+     */
     public void run(IngestionService ingestionService, int id, MultipartFile file, String delimiter, String action) throws Exception{
 
         do{

@@ -8,10 +8,10 @@ import java.util.Properties;
 import app.data_ingestion.helpers.LiteralConstants;
 
 public class ConfigReader {
-    final static String appConfigPath = LiteralConstants.APP_CONFIG_PATH;
-    
 
-    //implementing singleton design pattern for CSVUtil
+    final static String appConfigPath = LiteralConstants.APP_CONFIG_PATH;
+
+    //singleton design pattern
     private static ConfigReader configReader = new ConfigReader();
     Properties property;
 
@@ -20,9 +20,10 @@ public class ConfigReader {
 
     public static ConfigReader getInstance(){
         return configReader;
-     }
+    }
 
-    /**
+    /** read app_config.properties file 
+     * and return prop value
      * @param key
      * @return
      */
@@ -36,9 +37,7 @@ public class ConfigReader {
                 return null;
             }
         }
-
         return property.getProperty(key);
-
     }
 
 }

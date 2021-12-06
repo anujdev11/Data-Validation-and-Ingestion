@@ -1,17 +1,24 @@
 package app.data_ingestion.helpers;
 
 public class ValidationRules {
-    static String[] integer = {"NOT NULL", "EQUALS TO", "MIN LENGTH", ">=", ">", "<", "<="};
-    static String[] string = {"NOT NULL", "EQUALS TO", "MAX LENGTH", "NOT CONTAINS", "CONTAINS"};
-    static String[] date = {"NOT NULL", "EQUALS TO", ">=", ">", "<", "<="};
+    static final String[] integer = {"NOT NULL", "EQUALS TO", "MIN LENGTH", ">=", ">", "<", "<="};
+    static final String[] string = {"NOT NULL", "EQUALS TO", "MAX LENGTH", "NOT CONTAINS", "CONTAINS"};
+    static final String[] date = {"NOT NULL", "EQUALS TO", ">=", ">", "<", "<="};
 
+    
+    /** 
+     * @param ruleDataType
+     * @return String[]
+     */
     public static String[] getValidationRule(String ruleDataType) {
-        switch (ruleDataType) {
-            case "Integer":
+
+        String ruleDataTypeUpperCase = ruleDataType.toUpperCase();
+        switch (ruleDataTypeUpperCase) {
+            case LiteralConstants.INTEGER:
                 return integer;
-            case "String":
+            case LiteralConstants.STRING:
                 return string;
-            case "Date":
+            case LiteralConstants.DATE:
                 return date;
             default:
                 break;

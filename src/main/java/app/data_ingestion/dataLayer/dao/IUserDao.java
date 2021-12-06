@@ -13,13 +13,13 @@ public interface IUserDao {
      * @return
      * @throws SQLException
      */
-    public int add(User user) throws SQLException;
+    public int addUser(User user) throws SQLException;
 
     /**
      * @param username
      * @throws SQLException
      */
-    public void delete(String username) throws SQLException;
+    public void deleteUser(String username) throws SQLException;
 
     /**
      * @param username
@@ -38,6 +38,6 @@ public interface IUserDao {
      * @param user
      * @throws SQLException
      */
-    public void update(User user) throws SQLException;
+    public void updateUser(User user) throws SQLException;
 
 }

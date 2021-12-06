@@ -20,22 +20,42 @@ public class User {
         this.organization = organization;
     }
 
+    
+    /** 
+     * @return String
+     */
     public String getUsername() {
         return username;
     }
 
+    
+    /** 
+     * @return String
+     */
     public String getPassword() {
         return password;
     }
 
+    
+    /** 
+     * @return String
+     */
     public String getAccess_level() {
         return access_level;
     }
 
+    
+    /** 
+     * @return String
+     */
     public String getOrganization() {
         return organization;
     }
 
+    
+    /** 
+     * @return String
+     */
     @Override
     public String toString() {
         return "User [access_level=" + access_level + ", organization=" + organization + ", password=" + password
