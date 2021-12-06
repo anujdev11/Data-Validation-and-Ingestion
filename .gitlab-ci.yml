@@ -15,13 +15,13 @@ before_script:
 build:
   stage: build
   tags:
-    - grad
+    - ugrad
   script: "mvn clean install"
 
 test:
   stage: test
   tags:
-    - grad
+    - ugrad
   script: "mvn clean test"
   artifacts:
     when: always
