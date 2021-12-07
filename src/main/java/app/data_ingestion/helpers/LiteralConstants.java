@@ -20,6 +20,7 @@ public class LiteralConstants {
     public static final String SQL_USER_INSERTION_FAILED_STRING = "Creating user failed, no rows affected.";
     public static final String SQL_FETCHING_ID_FAILED_STRING = "Creating user failed, no ID obtained.";
     public static final String SQL_USER_UPDATING_FAILED_STRING = "Updating user failed, no rows affected.";
+    public static final String SQL_UPDATE_DONE="Record has been updated successfully!";
 
     public static final String STRING_CLASS_NAME = "java.lang.String";
     public static final String INTEGER_CLASS_NAME = "java.lang.Integer";
@@ -63,4 +64,5 @@ public class LiteralConstants {
     public static final String GREATER_THAN = ">";
     public static final String LESS_THAN_EQUAL_TO = "<=";
     public static final String LESS_THAN = "<";
+    public static final String SET_TEXT=" set ";
 }
