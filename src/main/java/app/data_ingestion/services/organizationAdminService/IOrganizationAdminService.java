@@ -18,7 +18,7 @@ public interface IOrganizationAdminService {
     public User deleteOrganization(String username) throws SQLException, ResourceNotFoundException;
 
     public User updateOrganization(User systemUser) throws SQLException, ResourceNotFoundException;
-    
+
     public List<User> listAllOrganizationUser(String organizationName) throws SQLException, ResourceNotFoundException;
 
 }

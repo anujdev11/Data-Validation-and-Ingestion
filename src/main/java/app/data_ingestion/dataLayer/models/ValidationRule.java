@@ -6,8 +6,7 @@ public class ValidationRule {
     String rhsValue;
 
 
-    
-    /** 
+    /**
      * @return String
      */
     public String getOperator() {
@@ -15,8 +14,7 @@ public class ValidationRule {
     }
 
 
-    
-    /** 
+    /**
      * @param operator
      */
     public void setOperator(String operator) {
@@ -24,8 +22,7 @@ public class ValidationRule {
     }
 
 
-    
-    /** 
+    /**
      * @return String
      */
     public String getRhsValue() {
@@ -33,8 +30,7 @@ public class ValidationRule {
     }
 
 
-    
-    /** 
+    /**
      * @param rhsValue
      */
     public void setRhsValue(String rhsValue) {
@@ -42,8 +38,7 @@ public class ValidationRule {
     }
 
 
-    
-    /** 
+    /**
      * @return String
      */
     @Override

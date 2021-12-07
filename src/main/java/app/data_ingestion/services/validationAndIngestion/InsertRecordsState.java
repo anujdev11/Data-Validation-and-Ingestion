@@ -10,13 +10,12 @@ import app.data_ingestion.helpers.QueryConstants;
 import app.data_ingestion.helpers.QueryModificationHelper;
 
 @Service
-public class InsertRecordsState implements IState{
+public class InsertRecordsState implements IState {
 
     final String FlAG_FOR_REPLACE = "1";
 
 
-    
-    /** 
+    /**
      * @param ingestionService
      * @param id
      * @param file
@@ -28,14 +27,14 @@ public class InsertRecordsState implements IState{
     @Override
     public IState execute(IngestionService ingestionService, int id, MultipartFile file, String delimiter, String action)
             throws Exception {
-        
+
         System.out.println("----inside InsertRecordsState-------");
         // insert data
         if (!ingestionService.getValidRows().isEmpty()) {
             createTable(ingestionService);
-            
+
             String actionFlagFromConfig = ConfigReader.getInstance().getProperty(action);
-            if(actionFlagFromConfig!=null && actionFlagFromConfig.equals(FlAG_FOR_REPLACE)){
+            if (actionFlagFromConfig != null && actionFlagFromConfig.equals(FlAG_FOR_REPLACE)) {
                 deleteRecordsFromDatabase(ingestionService);
             }
 
@@ -45,8 +44,7 @@ public class InsertRecordsState implements IState{
     }
 
 
-    
-    /** 
+    /**
      * @param ingestionService
      */
     public void createTable(IngestionService ingestionService) {
@@ -61,27 +59,26 @@ public class InsertRecordsState implements IState{
         ingestionService.getQueryExecutor().execute(query);
     }
 
-    
-    /** 
+
+    /**
      * @param ingestionService
      */
     public void deleteRecordsFromDatabase(IngestionService ingestionService) {
-        
+
         String query = String.format(QueryConstants.DELETE_QUERY, ingestionService.getFileType().getFileTypeName());
         ingestionService.getQueryExecutor().execute(query);
     }
 
 
-    
-    /** 
+    /**
      * @param ingestionService
      * @throws SQLException
      */
     public void insertRecordsToDatabase(IngestionService ingestionService) throws SQLException {
-        ingestionService.queryExecutor.insertRecords(ingestionService.getHeaders(), 
-                                                ingestionService.getFileType().getFileTypeName(), 
-                                                ingestionService.getValidRows(), 
-                                                ingestionService.getMapColumnToDatatype());
+        ingestionService.queryExecutor.insertRecords(ingestionService.getHeaders(),
+                ingestionService.getFileType().getFileTypeName(),
+                ingestionService.getValidRows(),
+                ingestionService.getMapColumnToDatatype());
     }
-    
+
 }

@@ -44,7 +44,7 @@ public class FileDefinitionController {
     @PostMapping(path = "/fileDefinition/delete")
     public ResponseEntity<Object> deleteFileDefinition(@RequestParam("file_definition_id") int file_definition_id)
             throws SQLException, JsonProcessingException {
-        boolean status = fileDefService.deleteFileDefinition(file_definition_id);
+        fileDefService.deleteFileDefinition(file_definition_id);
         return new ResponseEntity<>("Deleted", HttpStatus.OK);
     }
 
