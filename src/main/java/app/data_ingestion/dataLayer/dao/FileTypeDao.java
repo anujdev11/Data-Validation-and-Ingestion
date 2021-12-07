@@ -179,7 +179,6 @@ public class FileTypeDao extends JdbcDaoSupport implements IFileTypeDao {
 
 	}
     
-    
 
 
 
