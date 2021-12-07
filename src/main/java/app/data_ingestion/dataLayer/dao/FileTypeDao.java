@@ -22,14 +22,12 @@ import org.springframework.stereotype.Repository;
 import app.data_ingestion.dataLayer.database.DatabaseConnection;
 import app.data_ingestion.dataLayer.models.ColumnDetails;
 import app.data_ingestion.dataLayer.models.FileType;
+import app.data_ingestion.dataLayer.models.FileTypeFactory;
 import app.data_ingestion.helpers.LiteralConstants;
 import app.data_ingestion.helpers.QueryConstants;
 
 @Repository
 public class FileTypeDao extends JdbcDaoSupport implements IFileTypeDao {
-
-    @Autowired
-    FileType fileType;
 
     @Autowired
     ObjectMapper objectMapper;
@@ -81,7 +79,7 @@ public class FileTypeDao extends JdbcDaoSupport implements IFileTypeDao {
      */
     @Override
     public FileType getFileTypeById(int id) throws SQLException, JsonMappingException, JsonProcessingException {
-        // FileType fileType = null;
+        FileType fileType = FileTypeFactory.getInstance().createFileType();
 
         String query = QueryConstants.FILE_DEFINITION_SELECT_QUERY;
         PreparedStatement preparedStatment = DaoUtility.createPrepareStatement(connection, query, false, id);
