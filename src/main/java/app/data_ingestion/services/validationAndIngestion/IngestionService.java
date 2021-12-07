@@ -1,5 +1,6 @@
 package app.data_ingestion.services.validationAndIngestion;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -10,7 +11,11 @@ import org.springframework.web.multipart.MultipartFile;
 import app.data_ingestion.dataLayer.dao.IFileTypeDao;
 import app.data_ingestion.dataLayer.database.IQueryExecutor;
 import app.data_ingestion.dataLayer.models.FileType;
+import app.data_ingestion.dataLayer.models.User;
+import app.data_ingestion.exceptions.ResourceNotFoundException;
+import app.data_ingestion.helpers.LiteralConstants;
 import app.data_ingestion.helpers.ValidationRules;
+import app.data_ingestion.services.userAuthAndRegister.UserServiceStatus;
 
 @Service
 public class IngestionService implements IIngestionService {
@@ -170,6 +175,18 @@ public class IngestionService implements IIngestionService {
      */
     public static String[] getValidationRule(String ruleDataType) {
         return ValidationRules.getValidationRule(ruleDataType);
+    }
+    
+    
+    public  UserServiceStatus editInlineData( Map<String,Object> data) throws Exception {
+    	try {
+            return fileTypeDao.editInlineData(data) > 0 ? UserServiceStatus.SUCCESS
+                    : UserServiceStatus.FAILURE;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return UserServiceStatus.FAILURE;
     }
 
 

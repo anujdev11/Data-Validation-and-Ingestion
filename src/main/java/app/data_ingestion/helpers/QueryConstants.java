@@ -13,6 +13,8 @@ public class QueryConstants {
     public static final String DELETE_QUERY = "DELETE FROM `%s`";
     public static final String DROP_QUERY = "DROP TABLE `%s` ";
     public static final String INSERT_QUERY = "INSERT INTO %s (%s) VALUES (%s)";
+    public static final String UPDATE_QUERY_TEXT = "update ";
+    
     public static final String FILE_DEFINITION_INSERT_QUERY = "INSERT INTO file_definition ("
             + "file_definition_name,"
             + "file_definition_details) VALUES (?, ?)";

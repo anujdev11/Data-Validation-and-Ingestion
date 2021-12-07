@@ -1,6 +1,7 @@
 package app.data_ingestion.dataLayer.dao;
 
 import java.sql.SQLException;
+import java.util.Map;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -39,6 +40,13 @@ public interface IFileTypeDao {
      * @throws SQLException
      */
     public int updateFileDefinition(FileType fileTypeDef) throws SQLException;
+
+	/** 
+	 * @param data
+	 * @return int
+	 * @throws SQLException
+	 */
+	public int editInlineData(Map<String, Object> data) throws SQLException;
 
 
 }

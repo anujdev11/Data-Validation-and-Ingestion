@@ -4,7 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
@@ -131,7 +134,52 @@ public class FileTypeDao extends JdbcDaoSupport implements IFileTypeDao {
         PreparedStatement preparedStatement = DaoUtility.createPrepareStatement(connection, updateQuery, false, fileTypeDef.getFileTypeName(), fileDefinitionColumnDetails, fileTypeDef.getFileTypeId());
         return preparedStatement.executeUpdate();
 
-    }
+	}
+    
+    
+    /** 
+     * @param data
+     * @return int
+     * @throws SQLException
+     */
+    @Override
+    public  int editInlineData(Map<String,Object> data) throws SQLException {    	   	
+	
+    	
+    	int id = (int) data.get("id");
+    	String tableName = (String) data.get("tableName");
+    	
+    	
+    	 Map<String,Object> mapFields=(Map<String, Object>) data.get("fields");
+    	
+    	 String  query = "update "+tableName+" set "; 	
+    	 String updateInlineDataQuery = QueryConstants.UPDATE_QUERY_TEXT + tableName +LiteralConstants.SET_TEXT;
+    	
+    	
+    	
+    	for (Map.Entry<String, Object> entry : mapFields.entrySet()) {
+    		
+    		if(entry.getValue().getClass().getName().equals(LiteralConstants.STRING_CLASS_NAME)) {
+    			
+    			updateInlineDataQuery+=  entry.getKey()+" = '"+entry.getValue().toString()+"' ,";
+    		} else {
+    			
+    			updateInlineDataQuery+= entry.getKey()+" = "+entry.getValue().toString()+",";
+    		}
+    		
+    	}
+    	updateInlineDataQuery=updateInlineDataQuery.substring(0, updateInlineDataQuery.length() - 1); 
+
+    	updateInlineDataQuery+=" where id = "+id;
+    	 System.out.println(updateInlineDataQuery);
+  	
+    	   	
+        PreparedStatement preparedStatement = DaoUtility.createPrepareStatement(connection, updateInlineDataQuery,false);
+        return preparedStatement.executeUpdate(); 	
+
+	}
+    
+
 
 
 }
