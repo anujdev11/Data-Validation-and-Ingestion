@@ -89,8 +89,7 @@ public class FileTypeDao extends JdbcDaoSupport implements IFileTypeDao {
         ResultSet rs = preparedStatment.executeQuery();
         if (rs.next() == false) {
             throw new SQLException(LiteralConstants.NO_FILE_DEFINITION_FOR_ID + id);
-        } 
-        else {
+        } else {
             // fileType = new FileType();
             fileType.setFileTypeId(rs.getInt(LiteralConstants.FILE_DEFINITION_ID));
             fileType.setFileTypeName(rs.getString(LiteralConstants.FILE_DEFINITION_NAME));
@@ -119,21 +118,21 @@ public class FileTypeDao extends JdbcDaoSupport implements IFileTypeDao {
         preparedStatement.executeUpdate();
         return true;
     }
-    
-    
-    /** 
+
+
+    /**
      * @param fileTypeDef
      * @return int
      * @throws SQLException
      */
     @Override
-    public int updateFileDefinition(FileType fileTypeDef) throws SQLException {    	   	
-    	String listString = fileTypeDef.getColumnDetails().stream().map(Object::toString)
+    public int updateFileDefinition(FileType fileTypeDef) throws SQLException {
+        String listString = fileTypeDef.getColumnDetails().stream().map(Object::toString)
                 .collect(Collectors.joining(", "));
-    	String fileDefinitionColumnDetails="["+listString+"]";	
-    	String updateQuery = QueryConstants.FILE_DEFINITION_UPDATE_QUERY;    	
-        PreparedStatement preparedStatement = DaoUtility.createPrepareStatement(connection, updateQuery,false, fileTypeDef.getFileTypeName(),fileDefinitionColumnDetails , fileTypeDef.getFileTypeId());
-        return preparedStatement.executeUpdate(); 	
+        String fileDefinitionColumnDetails = "[" + listString + "]";
+        String updateQuery = QueryConstants.FILE_DEFINITION_UPDATE_QUERY;
+        PreparedStatement preparedStatement = DaoUtility.createPrepareStatement(connection, updateQuery, false, fileTypeDef.getFileTypeName(), fileDefinitionColumnDetails, fileTypeDef.getFileTypeId());
+        return preparedStatement.executeUpdate();
 
 	}
     

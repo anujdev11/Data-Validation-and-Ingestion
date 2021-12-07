@@ -20,8 +20,8 @@ public class OrganizationAdminService implements IOrganizationAdminService {
     UserDao userDao;
     User user;
 
-    
-    /** 
+
+    /**
      * @param user
      * @return User
      * @throws SQLException
@@ -37,8 +37,8 @@ public class OrganizationAdminService implements IOrganizationAdminService {
         }
     }
 
-    
-    /** 
+
+    /**
      * @param username
      * @return User
      * @throws SQLException
@@ -53,8 +53,8 @@ public class OrganizationAdminService implements IOrganizationAdminService {
         return userDao.deleteOrganization(user);
     }
 
-    
-    /** 
+
+    /**
      * @param user
      * @return User
      * @throws SQLException
@@ -69,8 +69,8 @@ public class OrganizationAdminService implements IOrganizationAdminService {
         return userDao.updatedOrganization(user);
     }
 
-    
-    /** 
+
+    /**
      * @param username
      * @return User
      * @throws SQLException
@@ -85,8 +85,8 @@ public class OrganizationAdminService implements IOrganizationAdminService {
         return user;
     }
 
-    
-    /** 
+
+    /**
      * @return List<User>
      * @throws SQLException
      * @throws ResourceNotFoundException
@@ -95,8 +95,8 @@ public class OrganizationAdminService implements IOrganizationAdminService {
     public List<User> listAllOrganizationAdmin() throws SQLException, ResourceNotFoundException {
         return userDao.listAllOrganizations();
     }
-    
-    /** 
+
+    /**
      * @return List<User>
      * @throws SQLException
      * @throws ResourceNotFoundException

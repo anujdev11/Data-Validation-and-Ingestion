@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -11,10 +12,10 @@ import app.data_ingestion.helpers.CustomExceptions;
 import app.data_ingestion.helpers.LiteralConstants;
 
 @Service
-public class LoadDataState implements IState{
+public class LoadDataState implements IState {
 
-    
-    /** 
+
+    /**
      * @param ingestionService
      * @param id
      * @param file
@@ -24,8 +25,8 @@ public class LoadDataState implements IState{
      * @throws Exception
      */
     @Override
-    public IState execute(IngestionService ingestionService, int id, MultipartFile file, String delimiter, String action) 
-                    throws Exception {
+    public IState execute(IngestionService ingestionService, int id, MultipartFile file, String delimiter, String action)
+            throws Exception {
 
         String contents = retrieveFileContentsAsString(file);
         System.out.println(contents);
@@ -34,16 +35,15 @@ public class LoadDataState implements IState{
             ingestionService.setMapColumnToDatatype(ingestionService.getFileType().getColumnToDatatype());
 
             populateHeadersAndRows(ingestionService, contents, delimiter);
-        }
-        else{
+        } else {
             throw new CustomExceptions.EmptyFileException(
                     LiteralConstants.INGESTION_EMPTY_FILE_MESSAGE);
         }
         return new ValidateHeadersState();
     }
 
-    
-    /** 
+
+    /**
      * @param inputFile
      * @return String
      * @throws IOException
@@ -54,8 +54,8 @@ public class LoadDataState implements IState{
         return content;
     }
 
-    
-    /** 
+
+    /**
      * @param ingestionService
      * @param fileContent
      * @param delimiter
@@ -72,5 +72,5 @@ public class LoadDataState implements IState{
         }
 
     }
-    
+
 }

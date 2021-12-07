@@ -8,6 +8,8 @@ public class QueryConstants {
 
     public static final String SELECT_WITHOUT_CONDITION = "SELECT * FROM %s";
     public static final String CREATE_TABLE_QUERY = "CREATE TABLE IF NOT EXISTS `%s` (%s)";
+    public static final String ID_AUTO_INCREMENT = "`id` int(11) not null auto_increment,";
+    public static final String ID_PRIMARY_KEY = "primary key (`id`)";
     public static final String DELETE_QUERY = "DELETE FROM `%s`";
     public static final String DROP_QUERY = "DROP TABLE `%s` ";
     public static final String INSERT_QUERY = "INSERT INTO %s (%s) VALUES (%s)";
