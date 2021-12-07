@@ -1,7 +1,7 @@
 package app.data_ingestion.services.fileDefinition;
 
 import app.data_ingestion.dataLayer.models.FileType;
-import app.data_ingestion.services.userService.UserServiceStatus;
+import app.data_ingestion.services.userAuthAndRegister.UserServiceStatus;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 

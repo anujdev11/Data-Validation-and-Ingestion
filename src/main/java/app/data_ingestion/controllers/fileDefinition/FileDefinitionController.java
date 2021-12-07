@@ -3,7 +3,7 @@ package app.data_ingestion.controllers.fileDefinition;
 import app.data_ingestion.dataLayer.models.FileType;
 import app.data_ingestion.helpers.LiteralConstants;
 import app.data_ingestion.services.fileDefinition.IFileDefinitionService;
-import app.data_ingestion.services.userService.UserServiceStatus;
+import app.data_ingestion.services.userAuthAndRegister.UserServiceStatus;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package app.data_ingestion.services.userService;
+package app.data_ingestion.services.userAuthAndRegister;
 
 import java.sql.SQLException;
 import java.util.List;

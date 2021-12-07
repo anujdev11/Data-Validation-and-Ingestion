@@ -1,4 +1,4 @@
-package app.data_ingestion.services.userService;
+package app.data_ingestion.services.userAuthAndRegister;
 
 public enum UserServiceStatus {
     SUCCESS,

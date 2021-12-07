@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import app.data_ingestion.dataLayer.dao.IFileTypeDao;
 import app.data_ingestion.dataLayer.models.FileType;
-import app.data_ingestion.services.userService.UserServiceStatus;
+import app.data_ingestion.services.userAuthAndRegister.UserServiceStatus;
 
 @Service
 public class FileDefinition implements IFileDefinitionService {
