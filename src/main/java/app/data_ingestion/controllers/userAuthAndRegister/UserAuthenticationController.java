@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 import app.data_ingestion.dataLayer.models.User;
 import app.data_ingestion.helpers.GenericControllerOperations;
 import app.data_ingestion.helpers.LiteralConstants;
-import app.data_ingestion.services.userAuthAndRegister.IUserService;
-import app.data_ingestion.services.userAuthAndRegister.UserServiceStatus;
+import app.data_ingestion.services.userService.IUserService;
+import app.data_ingestion.services.userService.UserServiceStatus;
 
 @CrossOrigin(origins = "http://localhost:5555")
 @RestController
@@ -42,7 +42,7 @@ public class UserAuthenticationController {
         if (status == UserServiceStatus.SUCCESS) {
             bodyMap.put(LiteralConstants.STATUS, String.valueOf(HttpStatus.OK.value()));
             bodyMap.put(LiteralConstants.MESSAGE, SUCCESS_MESSAGE);
-            bodyMap.put(LiteralConstants.ACCESS_LEVEL, userService.getUser().getAccess_level());
+            bodyMap.put(LiteralConstants.ACCESS_LEVEL, userService.getUser().getAccessLevel());
 
             return ResponseEntity.status(HttpStatus.OK).body(GenericControllerOperations.getInstance().createResponseBody(bodyMap));
         } 

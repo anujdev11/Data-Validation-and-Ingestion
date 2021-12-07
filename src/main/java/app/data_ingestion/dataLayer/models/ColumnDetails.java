@@ -65,5 +65,4 @@ public class ColumnDetails {
         this.rules = rules;
     }
 
-
 }

@@ -18,6 +18,10 @@ public class ConfigReader {
     private ConfigReader(){
     }
 
+    
+    /** 
+     * @return ConfigReader
+     */
     public static ConfigReader getInstance(){
         return configReader;
     }

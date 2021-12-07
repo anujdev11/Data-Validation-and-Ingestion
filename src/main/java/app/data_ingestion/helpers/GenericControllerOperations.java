@@ -6,7 +6,8 @@ public class GenericControllerOperations {
 
     private static GenericControllerOperations genericControllerOperations = new GenericControllerOperations();
 
-    private GenericControllerOperations(){}
+    private GenericControllerOperations() {
+    }
 
     
     /** 
@@ -26,5 +27,5 @@ public class GenericControllerOperations {
         body.put("data", data);
         return body;
     }
-    
+
 }

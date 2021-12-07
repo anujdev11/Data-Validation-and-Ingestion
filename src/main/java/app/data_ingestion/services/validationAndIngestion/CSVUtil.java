@@ -13,6 +13,10 @@ public class CSVUtil {
     private CSVUtil(){
     }
 
+    
+    /** 
+     * @return CSVUtil
+     */
     public static CSVUtil getInstance(){
         return csvUtil;
      }

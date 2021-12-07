@@ -2,7 +2,10 @@ package app.data_ingestion.helpers;
 
 public class QueryModificationHelper {
 
-    
+    private QueryModificationHelper() {
+        throw new IllegalStateException("Helper class");
+    }
+
     /** 
      * @param name
      * @return String
@@ -16,10 +19,10 @@ public class QueryModificationHelper {
      * @param dtype
      * @return String
      */
-    public static String getDataType(String dtype) {
-        if (dtype.equalsIgnoreCase(LiteralConstants.STRING)) {
+    public static String getDataType(String dType) {
+        if (dType.equalsIgnoreCase(LiteralConstants.STRING)) {
             return LiteralConstants.SIZED_NVARCHAR;
         }
-        return dtype;
+        return dType;
     }
 }

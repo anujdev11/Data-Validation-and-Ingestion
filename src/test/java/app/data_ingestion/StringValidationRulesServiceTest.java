@@ -10,16 +10,18 @@ import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ContextConfiguration;
 
 import app.data_ingestion.dataLayer.models.ValidationRule;
 import app.data_ingestion.services.validationAndIngestion.IValidationRulesService;
 import app.data_ingestion.services.validationAndIngestion.ValidationRulesService;
 
 @SpringBootTest
+@ContextConfiguration
 public class StringValidationRulesServiceTest {
-    
+
     @Test
-    void stringValidationNotNullInValid(){
+    void stringValidationNotNullInValid() {
 
         ValidationRule rule = new ValidationRule();
         rule.setOperator("not null");
@@ -31,12 +33,13 @@ public class StringValidationRulesServiceTest {
 
         IValidationRulesService service = new ValidationRulesService();
         String expected = String.format("%s %s", "NAME", rule.getOperator());
-        assertEquals(expected, service.validate(rules, "NAME", "", mapColumnToDatatype)); ;
+        assertEquals(expected, service.validate(rules, "NAME", "", mapColumnToDatatype));
+        ;
 
     }
 
     @Test
-    void stringValidationNotNullValid(){
+    void stringValidationNotNullValid() {
 
         ValidationRule rule = new ValidationRule();
         rule.setOperator("not null");
@@ -47,12 +50,13 @@ public class StringValidationRulesServiceTest {
         mapColumnToDatatype.put("NAME", "STRING");
 
         IValidationRulesService service = new ValidationRulesService();
-        assertEquals("", service.validate(rules, "NAME", "TestName", mapColumnToDatatype)); ;
+        assertEquals("", service.validate(rules, "NAME", "TestName", mapColumnToDatatype));
+        ;
 
     }
 
     @Test
-    void stringValidationEqualsToValid(){
+    void stringValidationEqualsToValid() {
 
         ValidationRule rule = new ValidationRule();
         rule.setOperator("EQUALS TO");
@@ -64,12 +68,13 @@ public class StringValidationRulesServiceTest {
         mapColumnToDatatype.put("NAME", "STRING");
 
         IValidationRulesService service = new ValidationRulesService();
-        assertEquals("", service.validate(rules, "NAME", "TestName", mapColumnToDatatype)); ;
+        assertEquals("", service.validate(rules, "NAME", "TestName", mapColumnToDatatype));
+        ;
 
     }
 
     @Test
-    void stringValidationEqualsToInValid(){
+    void stringValidationEqualsToInValid() {
 
         ValidationRule rule = new ValidationRule();
         rule.setOperator("EQUALS TO");
@@ -82,12 +87,13 @@ public class StringValidationRulesServiceTest {
 
         IValidationRulesService service = new ValidationRulesService();
         String expected = String.format("%s %s %s", "NAME", rule.getOperator(), rule.getRhsValue());
-        assertEquals(expected, service.validate(rules, "NAME", "TestName", mapColumnToDatatype)); ;
+        assertEquals(expected, service.validate(rules, "NAME", "TestName", mapColumnToDatatype));
+        ;
 
     }
 
     @Test
-    void stringValidationInvalidMaxLength(){
+    void stringValidationInvalidMaxLength() {
 
         ValidationRule rule = new ValidationRule();
         rule.setOperator("MAX LENGTH");
@@ -99,12 +105,13 @@ public class StringValidationRulesServiceTest {
         mapColumnToDatatype.put("NAME", "STRING");
 
         IValidationRulesService service = new ValidationRulesService();
-        assertThrows(NumberFormatException.class, () -> service.validate(rules, "NAME", "TestName", mapColumnToDatatype));
+        assertThrows(NumberFormatException.class,
+                () -> service.validate(rules, "NAME", "TestName", mapColumnToDatatype));
 
     }
 
     @Test
-    void stringValidationMaxLengthValid(){
+    void stringValidationMaxLengthValid() {
 
         ValidationRule rule = new ValidationRule();
         rule.setOperator("MAX LENGTH");
@@ -121,7 +128,7 @@ public class StringValidationRulesServiceTest {
     }
 
     @Test
-    void stringValidationMaxLengthInValid(){
+    void stringValidationMaxLengthInValid() {
 
         ValidationRule rule = new ValidationRule();
         rule.setOperator("MAX LENGTH");
@@ -139,7 +146,7 @@ public class StringValidationRulesServiceTest {
     }
 
     @Test
-    void stringValidationNotContainsInValid(){
+    void stringValidationNotContainsInValid() {
 
         ValidationRule rule = new ValidationRule();
         rule.setOperator("NOT CONTAINS");
@@ -157,7 +164,7 @@ public class StringValidationRulesServiceTest {
     }
 
     @Test
-    void stringValidationNotContainsValid(){
+    void stringValidationNotContainsValid() {
 
         ValidationRule rule = new ValidationRule();
         rule.setOperator("NOT CONTAINS");
@@ -174,7 +181,7 @@ public class StringValidationRulesServiceTest {
     }
 
     @Test
-    void stringValidationContainsInValid(){
+    void stringValidationContainsInValid() {
 
         ValidationRule rule = new ValidationRule();
         rule.setOperator("CONTAINS");
@@ -192,7 +199,7 @@ public class StringValidationRulesServiceTest {
     }
 
     @Test
-    void stringValidationContainsValid(){
+    void stringValidationContainsValid() {
 
         ValidationRule rule = new ValidationRule();
         rule.setOperator("CONTAINS");

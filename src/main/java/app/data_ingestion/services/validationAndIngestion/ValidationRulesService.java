@@ -161,6 +161,14 @@ public class ValidationRulesService implements IValidationRulesService {
         return violatedValidationRule;
     }
 
+    
+    /** 
+     * @param operator
+     * @param rhsValue
+     * @param header
+     * @param cellValue
+     * @return String
+     */
     private String stringValidation(String operator, String rhsValue, String header, String cellValue) {
         String violatedValidationRule = "";
         switch (operator) {

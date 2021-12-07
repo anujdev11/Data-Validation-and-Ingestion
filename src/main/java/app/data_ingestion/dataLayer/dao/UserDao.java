@@ -43,7 +43,6 @@ public class UserDao extends JdbcDaoSupport implements IUserDao {
         setDataSource(dataSource);
     }
 
-
     /**
      * @param user
      * @return
@@ -52,10 +51,10 @@ public class UserDao extends JdbcDaoSupport implements IUserDao {
     @Override
     public int addUser(User user) throws SQLException {
         String insertQuery = QueryConstants.USER_INSERT_QUERY;
-        PreparedStatement preparedStatment = DaoUtility.createPrepareStatement(connection, insertQuery,
+        PreparedStatement preparedStatment = DaoUtility.createPrepareStatement(connection, insertQuery, false, 
                 user.getUsername(),
                 user.getPassword(),
-                user.getAccess_level(),
+                user.getAccessLevel(),
                 user.getOrganization());
 
         return preparedStatment.executeUpdate();
@@ -68,7 +67,7 @@ public class UserDao extends JdbcDaoSupport implements IUserDao {
     @Override
     public void deleteUser(String username) throws SQLException {
         String deleteQuery = QueryConstants.USER_DELETE_QUERY;
-        PreparedStatement preparedStatment = DaoUtility.createPrepareStatement(connection, deleteQuery, username);
+        PreparedStatement preparedStatment = DaoUtility.createPrepareStatement(connection, deleteQuery, false, username);
         preparedStatment.executeUpdate();
     }
 
@@ -80,7 +79,7 @@ public class UserDao extends JdbcDaoSupport implements IUserDao {
     @Override
     public User getUser(String username) throws SQLException {
         String selectQuery = QueryConstants.USER_SELECT_QUERY;
-        PreparedStatement preparedStatment = DaoUtility.createPrepareStatement(connection, selectQuery, username);
+        PreparedStatement preparedStatment = DaoUtility.createPrepareStatement(connection, selectQuery, false, username);
         ResultSet rs = preparedStatment.executeQuery();
         User user = null;
         while (rs.next()) {
@@ -121,12 +120,115 @@ public class UserDao extends JdbcDaoSupport implements IUserDao {
     @Override
     public void updateUser(User user) throws SQLException {
         String updateQuery = QueryConstants.USER_UPDATE_QUERY;
-        PreparedStatement preparedStatment = DaoUtility.createPrepareStatement(connection, updateQuery,
+        PreparedStatement preparedStatment = DaoUtility.createPrepareStatement(connection, updateQuery, false,
                 user.getPassword(),
-                user.getAccess_level(),
+                user.getAccessLevel(),
                 user.getOrganization());
         preparedStatment.executeUpdate();
 
+    }
+
+    
+    /** 
+     * @param username
+     * @return User
+     * @throws SQLException
+     */
+    @Override
+    public User getOrganizationAdmin(String username) throws SQLException {
+        String selectQuery = QueryConstants.ORGANIZATION_ADMIN_SELECT_QUERY;
+        User user = null;
+        try (PreparedStatement preparedStatement = DaoUtility.createPrepareStatement(connection, selectQuery, false,
+                username);
+                ResultSet resultSet = preparedStatement.executeQuery();) {
+            while (resultSet.next()) {
+                user = new User(resultSet.getString(LiteralConstants.USERNAME),
+                        resultSet.getString(LiteralConstants.ACCESS_LEVEL),
+                        resultSet.getString(LiteralConstants.ORGANIZATION));
+            }
+            return user;
+        }
+    }
+
+    
+    /** 
+     * @param user
+     * @return User
+     * @throws SQLException
+     */
+    @Override
+    public User addOrganization(User user) throws SQLException {
+        String insertQuery = QueryConstants.ORGANIZATION_ADMIN_INSERT_QUERY;
+        try (PreparedStatement preparedStatement = DaoUtility.createPrepareStatement(connection, insertQuery, true,
+                user.getUsername(), user.getPassword(), user.getOrganization(), user.getAccessLevel());) {
+            int affectedRows = preparedStatement.executeUpdate();
+
+            if (affectedRows == 0) {
+                throw new SQLException(LiteralConstants.SQL_USER_INSERTION_FAILED_STRING);
+            }
+            return user;
+        }
+    }
+
+    
+    /** 
+     * @param user
+     * @return User
+     * @throws SQLException
+     */
+    @Override
+    public User deleteOrganization(User user) throws SQLException {
+        String selectQuery = QueryConstants.ORGANIZATION_ADMIN_DELETE_QUERY;
+        try (PreparedStatement preparedStatement = DaoUtility.createPrepareStatement(connection, selectQuery, false,
+                user.getUsername());) {
+            int affectedRows = preparedStatement.executeUpdate();
+
+            if (affectedRows == 0) {
+                throw new SQLException(LiteralConstants.SQL_USER_UPDATING_FAILED_STRING);
+            }
+            return user;
+        }
+    }
+
+    
+    /** 
+     * @param user
+     * @return User
+     * @throws SQLException
+     */
+    @Override
+    public User updatedOrganization(User user) throws SQLException {
+        String updateQuery = QueryConstants.ORGANIZATION_ADMIN_UPDATE_QUERY;
+        try (PreparedStatement preparedStatement = DaoUtility.createPrepareStatement(connection, updateQuery, true,
+                user.getPassword(), user.getOrganization(), user.getAccessLevel(), user.getUsername());) {
+            int affectedRows = preparedStatement.executeUpdate();
+
+            if (affectedRows == 0) {
+                throw new SQLException(LiteralConstants.SQL_USER_UPDATING_FAILED_STRING);
+            }
+            return user;
+        }
+    }
+
+    
+    /** 
+     * @return List<User>
+     * @throws SQLException
+     */
+    @Override
+    public List<User> listAllOrganizations() throws SQLException {
+        String selectQuery = QueryConstants.ORGANIZATION_ADMIN_LIST_SELECT_QUERY;
+        try (PreparedStatement preparedStatement = DaoUtility.createPrepareStatement(connection, selectQuery, true);
+                ResultSet resultSet = preparedStatement.executeQuery();) {
+            List<User> users = new ArrayList<>();
+            while (resultSet.next()) {
+                users.add(
+                        new User(resultSet.getString(LiteralConstants.USERNAME),
+                                resultSet.getString(LiteralConstants.ACCESS_LEVEL),
+                                resultSet.getString(LiteralConstants.ORGANIZATION)));
+            }
+            return users;
+        }
     }
 
 }

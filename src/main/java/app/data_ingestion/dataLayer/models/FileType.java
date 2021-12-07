@@ -10,14 +10,12 @@ public class FileType {
     String fileTypeName;
     List<ColumnDetails> columnDetails;
 
-
     public FileType(int fileTypeId, String fileTypeName, List<ColumnDetails> columnDetails) {
         super();
         this.fileTypeId = fileTypeId;
         this.fileTypeName = fileTypeName;
         this.columnDetails = columnDetails;
     }
-
 
     public FileType() {
         super();
@@ -112,6 +110,5 @@ public class FileType {
         return "FileType [fileTypeId=" + fileTypeId + ", fileTypeName=" + fileTypeName + ", columnDetails="
                 + columnDetails + "]";
     }
-
 
 }

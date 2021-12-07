@@ -1,4 +1,4 @@
-package app.data_ingestion.services.userAuthAndRegister;
+package app.data_ingestion.services.userService;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import app.data_ingestion.dataLayer.dao.IUserDao;
 import app.data_ingestion.dataLayer.models.User;
 
-
 @Service
 public class UserService implements IUserService {
 
@@ -18,7 +17,10 @@ public class UserService implements IUserService {
     IUserDao userDao;
     User user;
 
-
+    
+    /** 
+     * @return User
+     */
     public User getUser() {
         return user;
     }
@@ -79,6 +81,5 @@ public class UserService implements IUserService {
                 .findFirst();
         return userExists.isPresent();
     }
-
 
 }

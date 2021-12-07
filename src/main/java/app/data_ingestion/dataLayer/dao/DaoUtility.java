@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import app.data_ingestion.helpers.LiteralConstants;
 
@@ -15,29 +16,36 @@ public class DaoUtility {
      * @return
      * @throws SQLException
      */
-    public static PreparedStatement createPrepareStatement(Connection connection, String sql, Object... params) throws SQLException {
-        PreparedStatement prepared_statment = connection.prepareStatement(sql);
+    public static PreparedStatement createPrepareStatement(Connection connection, String sql,
+            Boolean returnGeneratedKeys, Object... params)
+            throws SQLException {
+        PreparedStatement preparedStatement = null;
+        if (Boolean.TRUE.equals(returnGeneratedKeys)) {
+            preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        } else {
+            preparedStatement = connection.prepareStatement(sql);
+        }
         int counter = 1;
         for (Object param : params) {
             switch (param.getClass().getName()) {
                 case LiteralConstants.STRING_CLASS_NAME:
-                    prepared_statment.setString(counter, (String) param);
+                    preparedStatement.setString(counter, (String) param);
                     break;
                 case LiteralConstants.INTEGER_CLASS_NAME:
-                    prepared_statment.setInt(counter, (int) param);
+                    preparedStatement.setInt(counter, (int) param);
                     break;
                 case LiteralConstants.FLOAT_CLASS_NAME:
-                    prepared_statment.setFloat(counter, (float) param);
+                    preparedStatement.setFloat(counter, (float) param);
                     break;
                 case LiteralConstants.DATE_CLASS_NAME:
-                    prepared_statment.setDate(counter, (Date) param);
+                    preparedStatement.setDate(counter, (Date) param);
                     break;
                 default:
-                    prepared_statment.setString(counter, String.valueOf(param));
+                    preparedStatement.setString(counter, String.valueOf(param));
                     break;
             }
             counter++;
         }
-        return prepared_statment;
+        return preparedStatement;
     }
 }

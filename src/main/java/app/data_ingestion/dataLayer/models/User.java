@@ -1,10 +1,13 @@
 package app.data_ingestion.dataLayer.models;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class User {
 
     private String username;
     private String password;
-    private String access_level;
+    private String accessLevel;
     private String organization;
 
     /**
@@ -13,54 +16,55 @@ public class User {
      * @param access_level
      * @param organization
      */
-    public User(String username, String password, String access_level, String organization) {
+    public User(String username, String password, String accessLevel, String organization) {
         this.username = username;
         this.password = password;
-        this.access_level = access_level;
+        this.accessLevel = accessLevel;
         this.organization = organization;
     }
 
-    
-    /** 
-     * @return String
-     */
+    public User(String username, String accessLevel, String organization) {
+        this.username = username;
+        this.accessLevel = accessLevel;
+        this.organization = organization;
+    }
+
+    public User() {
+    }
+
     public String getUsername() {
         return username;
     }
 
-    
-    /** 
-     * @return String
-     */
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     public String getPassword() {
         return password;
     }
 
-    
-    /** 
-     * @return String
-     */
-    public String getAccess_level() {
-        return access_level;
+    public String getAccessLevel() {
+        return accessLevel;
     }
 
-    
-    /** 
-     * @return String
-     */
     public String getOrganization() {
         return organization;
     }
 
-    
-    /** 
-     * @return String
-     */
+    public Map<String, String> toJson() {
+        Map<String, String> jsonObject = new HashMap<>();
+        jsonObject.put("username", username);
+        jsonObject.put("organization", organization);
+        jsonObject.put("accessLevel", accessLevel);
+        return jsonObject;
+    }
+
     @Override
     public String toString() {
-        return "User [access_level=" + access_level + ", organization=" + organization + ", password=" + password
+        return "User [accessLevel=" + accessLevel + ", organization=" + organization + ", password=" + password
                 + ", username=" + username + "]";
     }
 
-
 }
+
