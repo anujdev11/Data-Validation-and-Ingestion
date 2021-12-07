@@ -37,4 +37,8 @@ public class QueryConstants {
     public static final String ORGANIZATION_ADMIN_UPDATE_QUERY = "UPDATE user SET password= ?, access_level= ?, organization= ?, updated_at = current_timestamp() WHERE username = ? AND ISNULL(deleted_at)";
     public static final String ORGANIZATION_ADMIN_SELECT_QUERY = "SELECT username, access_level, organization FROM user WHERE username = ? AND ISNULL(deleted_at)";
     public static final String ORGANIZATION_ADMIN_LIST_SELECT_QUERY = "SELECT username, access_level, organization FROM user WHERE ISNULL(deleted_at)";
+    
+    public static final String ORGANIZATION_USER_LIST_SELECT_QUERY = "SELECT username, access_level, organization FROM user WHERE access_level != 'admin' AND organization = ? AND  ISNULL(deleted_at)";
+    
 }
+

@@ -102,7 +102,7 @@ public class OrganizationAdminService implements IOrganizationAdminService {
      * @throws ResourceNotFoundException
      */
     @Override
-    public List<User> listAllOrganizationUser() throws SQLException, ResourceNotFoundException {
-        return userDao.listAllOrganizationsUser();
+    public List<User> listAllOrganizationUser(String organizationName) throws SQLException, ResourceNotFoundException {
+        return userDao.listAllOrganizationsUser(organizationName);
     }
 }

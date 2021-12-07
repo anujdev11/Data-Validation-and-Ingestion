@@ -80,4 +80,10 @@ public interface IUserDao {
      */
     public User updatedOrganization(User user) throws SQLException;
 
+	/** 
+	 * @return List<User>
+	 * @throws SQLException
+	 */
+	List<User> listAllOrganizationsUser(String organizationName) throws SQLException;
+
 }
