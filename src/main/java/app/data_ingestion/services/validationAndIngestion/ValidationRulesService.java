@@ -18,7 +18,7 @@ public class ValidationRulesService implements IValidationRulesService {
      * @return
      */
     public String validate(List<ValidationRule> rules, String header, String cellValue, Map<String, String> mapColumnToDatatype) {
-        
+
         String violatedValidationRule = "";
         for (ValidationRule rule : rules) {
             String operator = rule.getOperator();
@@ -161,8 +161,8 @@ public class ValidationRulesService implements IValidationRulesService {
         return violatedValidationRule;
     }
 
-    
-    /** 
+
+    /**
      * @param operator
      * @param rhsValue
      * @param header

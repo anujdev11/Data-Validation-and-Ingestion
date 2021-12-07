@@ -33,7 +33,7 @@ public interface IFileTypeDao {
      * @throws JsonProcessingException
      */
     public boolean deleteFileDefinition(int file_definition_id) throws SQLException, JsonProcessingException;
-    
+
     /**
      * @param fileTypeDef
      * @return

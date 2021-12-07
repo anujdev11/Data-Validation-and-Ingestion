@@ -19,8 +19,8 @@ public class SystemUserService implements ISystemUserService {
     ISystemUserDao systemUserDao;
     SystemUser systemUser;
 
-    
-    /** 
+
+    /**
      * @return SystemUser
      */
     @Override
@@ -28,8 +28,8 @@ public class SystemUserService implements ISystemUserService {
         return systemUser;
     }
 
-    
-    /** 
+
+    /**
      * @param username
      * @param password
      * @return SystemUser
@@ -46,8 +46,8 @@ public class SystemUserService implements ISystemUserService {
         return systemUser;
     }
 
-    
-    /** 
+
+    /**
      * @param systemUser
      * @return SystemUser
      * @throws SQLException
@@ -63,8 +63,8 @@ public class SystemUserService implements ISystemUserService {
         }
     }
 
-    
-    /** 
+
+    /**
      * @param username
      * @return SystemUser
      * @throws SQLException
@@ -79,8 +79,8 @@ public class SystemUserService implements ISystemUserService {
         return systemUserDao.deleteSystemUser(systemUser);
     }
 
-    
-    /** 
+
+    /**
      * @param systemUser
      * @return SystemUser
      * @throws SQLException

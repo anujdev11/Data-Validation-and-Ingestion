@@ -15,19 +15,21 @@ public class ConfigReader {
     private static ConfigReader configReader = new ConfigReader();
     Properties property;
 
-    private ConfigReader(){
+    private ConfigReader() {
     }
 
-    
-    /** 
+
+    /**
      * @return ConfigReader
      */
-    public static ConfigReader getInstance(){
+    public static ConfigReader getInstance() {
         return configReader;
     }
 
-    /** read app_config.properties file 
+    /**
+     * read app_config.properties file
      * and return prop value
+     *
      * @param key
      * @return
      */

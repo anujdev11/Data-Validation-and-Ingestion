@@ -33,8 +33,8 @@ public class IngestionService implements IIngestionService {
     FileType fileType;
     Map<String, String> mapColumnToDatatype;
 
-    
-    /** 
+
+    /**
      * @param id
      * @param file
      * @param delimiter
@@ -45,131 +45,131 @@ public class IngestionService implements IIngestionService {
 
         StateRunner stateRunner = StateRunnerFactory.getInstance().createStateRunner();
         stateRunner.run(this, id, file, delimiter, action);
-    
-    } 
 
-    
-    /** 
-     * @return List<List<String>>
+    }
+
+
+    /**
+     * @return List<List < String>>
      */
     public List<List<String>> getInvalidRows() {
         return invalidRows;
     }
 
-    
-    /** 
-     * @return List<List<String>>
+
+    /**
+     * @return List<List < String>>
      */
     public List<List<String>> getValidRows() {
         return validRows;
     }
 
-    
-    /** 
+
+    /**
      * @return IFileTypeDao
      */
     public IFileTypeDao getFileTypeDao() {
         return fileTypeDao;
     }
 
-    
-    /** 
+
+    /**
      * @param fileTypeDao
      */
     public void setFileTypeDao(IFileTypeDao fileTypeDao) {
         this.fileTypeDao = fileTypeDao;
     }
 
-    
-    /** 
+
+    /**
      * @return IQueryExecutor
      */
     public IQueryExecutor getQueryExecutor() {
         return queryExecutor;
     }
 
-    
-    /** 
+
+    /**
      * @return List<String>
      */
     public List<String> getHeaders() {
         return headers;
     }
 
-    
-    /** 
+
+    /**
      * @param headers
      */
     public void setHeaders(List<String> headers) {
         this.headers = headers;
     }
 
-    
-    /** 
-     * @return List<List<String>>
+
+    /**
+     * @return List<List < String>>
      */
     public List<List<String>> getRows() {
         return rows;
     }
 
-    
-    /** 
+
+    /**
      * @param rows
      */
     public void setRows(List<List<String>> rows) {
         this.rows = rows;
     }
 
-    
-    /** 
+
+    /**
      * @param invalidRows
      */
     public void setInvalidRows(List<List<String>> invalidRows) {
         this.invalidRows = invalidRows;
     }
 
-    
-    /** 
+
+    /**
      * @param validRows
      */
     public void setValidRows(List<List<String>> validRows) {
         this.validRows = validRows;
     }
 
-    
-    /** 
+
+    /**
      * @return FileType
      */
     public FileType getFileType() {
         return fileType;
     }
 
-    
-    /** 
+
+    /**
      * @param fileType
      */
     public void setFileType(FileType fileType) {
         this.fileType = fileType;
     }
 
-    
-    /** 
+
+    /**
      * @return Map<String, String>
      */
     public Map<String, String> getMapColumnToDatatype() {
         return mapColumnToDatatype;
     }
 
-    
-    /** 
+
+    /**
      * @param mapColumnToDatatype
      */
     public void setMapColumnToDatatype(Map<String, String> mapColumnToDatatype) {
         this.mapColumnToDatatype = mapColumnToDatatype;
     }
 
-    
-    /** 
+
+    /**
      * @param ruleDataType
      * @return String[]
      */

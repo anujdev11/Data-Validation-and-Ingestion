@@ -40,8 +40,8 @@ public class SystemUserDao extends JdbcDaoSupport implements ISystemUserDao {
         setDataSource(dataSource);
     }
 
-    
-    /** 
+
+    /**
      * @param systemUser
      * @return SystemUser
      * @throws SQLException
@@ -71,8 +71,8 @@ public class SystemUserDao extends JdbcDaoSupport implements ISystemUserDao {
         }
     }
 
-    
-    /** 
+
+    /**
      * @param systemUser
      * @return SystemUser
      * @throws SQLException
@@ -92,8 +92,8 @@ public class SystemUserDao extends JdbcDaoSupport implements ISystemUserDao {
 
     }
 
-    
-    /** 
+
+    /**
      * @param username
      * @param password
      * @return SystemUser
@@ -105,7 +105,7 @@ public class SystemUserDao extends JdbcDaoSupport implements ISystemUserDao {
         SystemUser systemUser = null;
         try (PreparedStatement preparedStatement = DaoUtility.createPrepareStatement(connection, selectQuery, false,
                 username, password);
-                ResultSet resultSet = preparedStatement.executeQuery();) {
+             ResultSet resultSet = preparedStatement.executeQuery();) {
             while (resultSet.next()) {
                 systemUser = new SystemUser(resultSet.getInt(LiteralConstants.ID),
                         resultSet.getString(LiteralConstants.FIRST_NAME),
@@ -116,8 +116,8 @@ public class SystemUserDao extends JdbcDaoSupport implements ISystemUserDao {
         }
     }
 
-    
-    /** 
+
+    /**
      * @param username
      * @return SystemUser
      * @throws SQLException
@@ -128,7 +128,7 @@ public class SystemUserDao extends JdbcDaoSupport implements ISystemUserDao {
         SystemUser systemUser = null;
         try (PreparedStatement preparedStatement = DaoUtility.createPrepareStatement(connection, selectQuery, false,
                 username);
-                ResultSet resultSet = preparedStatement.executeQuery();) {
+             ResultSet resultSet = preparedStatement.executeQuery();) {
             while (resultSet.next()) {
                 systemUser = new SystemUser(resultSet.getInt(LiteralConstants.ID),
                         resultSet.getString(LiteralConstants.FIRST_NAME),
@@ -139,8 +139,8 @@ public class SystemUserDao extends JdbcDaoSupport implements ISystemUserDao {
         }
     }
 
-    
-    /** 
+
+    /**
      * @param systemUser
      * @return SystemUser
      * @throws SQLException

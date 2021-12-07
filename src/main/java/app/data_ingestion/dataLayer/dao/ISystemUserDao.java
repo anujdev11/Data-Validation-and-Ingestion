@@ -7,7 +7,6 @@ import app.data_ingestion.dataLayer.models.SystemUser;
 public interface ISystemUserDao {
 
     /**
-     *
      * @param systemUser
      * @return
      * @throws SQLException
@@ -35,7 +34,6 @@ public interface ISystemUserDao {
     public SystemUser getSystemUser(String username) throws SQLException;
 
     /**
-     *
      * @param systemUser
      * @throws SQLException
      */

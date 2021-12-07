@@ -10,16 +10,16 @@ public class CSVUtil {
     //implementing singleton design pattern
     private static CSVUtil csvUtil = new CSVUtil();
 
-    private CSVUtil(){
+    private CSVUtil() {
     }
 
-    
-    /** 
+
+    /**
      * @return CSVUtil
      */
-    public static CSVUtil getInstance(){
+    public static CSVUtil getInstance() {
         return csvUtil;
-     }
+    }
 
     /**
      * @param path
