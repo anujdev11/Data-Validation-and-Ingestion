@@ -238,10 +238,10 @@ public class UserDao extends JdbcDaoSupport implements IUserDao {
     @Override
     public List<User> listAllOrganizationsUser(String organizationName) throws SQLException {
         String selectQuery = QueryConstants.ORGANIZATION_USER_LIST_SELECT_QUERY;
-        System.out.println("Hi");
+        
         try (PreparedStatement preparedStatement = DaoUtility.createPrepareStatement(connection, selectQuery, false , organizationName);
                 ResultSet resultSet = preparedStatement.executeQuery();){
-        	 System.out.println(resultSet);
+        	
             List<User> users = new ArrayList<>();
             while (resultSet.next()) {
                 users.add(
