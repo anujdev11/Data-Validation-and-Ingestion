@@ -9,10 +9,10 @@ import org.springframework.web.multipart.MultipartFile;
 import app.data_ingestion.helpers.LiteralConstants;
 
 @Service
-public class ValidateHeadersState implements IState{
+public class ValidateHeadersState implements IState {
 
-    
-    /** 
+
+    /**
      * @param ingestionService
      * @param id
      * @param file
@@ -24,14 +24,14 @@ public class ValidateHeadersState implements IState{
     @Override
     public IState execute(IngestionService ingestionService, int id, MultipartFile file, String delimiter, String action)
             throws Exception {
-        
+
         validateFileHeaders(ingestionService, ingestionService.getHeaders());
-        
+
         return new ValidateRecordsState();
     }
 
-    
-    /** 
+
+    /**
      * @param ingestionService
      * @param headers
      * @throws Exception
@@ -48,5 +48,5 @@ public class ValidateHeadersState implements IState{
             }
         }
     }
-    
+
 }

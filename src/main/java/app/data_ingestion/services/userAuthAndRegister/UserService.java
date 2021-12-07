@@ -17,8 +17,8 @@ public class UserService implements IUserService {
     IUserDao userDao;
     User user;
 
-    
-    /** 
+
+    /**
      * @return User
      */
     public User getUser() {
@@ -59,9 +59,9 @@ public class UserService implements IUserService {
     public UserServiceStatus userRegistration(User user) {
         try {
             if (!userExists(user.getUsername())) {
-                if (userDao.addUser(user) > 0){
+                if (userDao.addUser(user) > 0) {
                     return UserServiceStatus.SUCCESS;
-                }else {
+                } else {
                     return UserServiceStatus.FAILURE;
                 }
             } else {

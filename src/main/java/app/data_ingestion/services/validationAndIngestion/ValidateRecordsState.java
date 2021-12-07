@@ -10,10 +10,10 @@ import org.springframework.web.multipart.MultipartFile;
 import app.data_ingestion.dataLayer.models.ValidationRule;
 
 @Service
-public class ValidateRecordsState implements IState{
+public class ValidateRecordsState implements IState {
 
-    
-    /** 
+
+    /**
      * @param ingestionService
      * @param id
      * @param file
@@ -25,14 +25,14 @@ public class ValidateRecordsState implements IState{
     @Override
     public IState execute(IngestionService ingestionService, int id, MultipartFile file, String delimiter, String action)
             throws Exception {
-        
+
         validateRecords(ingestionService);
-        
+
         return new CreateErrorFileState();
     }
 
-    
-    /** 
+
+    /**
      * @param ingestionService
      */
     private void validateRecords(IngestionService ingestionService) {
@@ -42,7 +42,7 @@ public class ValidateRecordsState implements IState{
         ValidationRulesService validator = new ValidationRulesService();
 
         Map<String, List<ValidationRule>> colToRules = ingestionService.getFileType().getColumnToRules();
-        for (List<String> row : ingestionService.getRows()){
+        for (List<String> row : ingestionService.getRows()) {
             String violatedValidationRule = null;
             int counter = 0;
             for (String cellValue : row) {
@@ -50,7 +50,7 @@ public class ValidateRecordsState implements IState{
 
                 if (colToRules.containsKey(header)) {
                     violatedValidationRule = validator.validate(colToRules.get(header), header, cellValue,
-                                            ingestionService.getMapColumnToDatatype());
+                            ingestionService.getMapColumnToDatatype());
 
                     if (!violatedValidationRule.isBlank()) {
                         List<String> temp_list = new ArrayList<>(row);
@@ -66,5 +66,5 @@ public class ValidateRecordsState implements IState{
             }
         }
     }
-    
+
 }

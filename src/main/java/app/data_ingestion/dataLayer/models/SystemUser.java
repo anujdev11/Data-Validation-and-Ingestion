@@ -57,88 +57,88 @@ public class SystemUser {
         this.password = password;
     }
 
-    
-    /** 
+
+    /**
      * @return int
      */
     public int getId() {
         return id;
     }
 
-    
-    /** 
+
+    /**
      * @return String
      */
     public String getFirstName() {
         return firstName;
     }
 
-    
-    /** 
+
+    /**
      * @return String
      */
     public String getLastName() {
         return lastName;
     }
 
-    
-    /** 
+
+    /**
      * @return String
      */
     public String getUsername() {
         return username;
     }
 
-    
-    /** 
+
+    /**
      * @return String
      */
     public String getPassword() {
         return password;
     }
 
-    
-    /** 
+
+    /**
      * @param id
      */
     public void setId(int id) {
         this.id = id;
     }
 
-    
-    /** 
+
+    /**
      * @param firstName
      */
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
-    
-    /** 
+
+    /**
      * @param lastName
      */
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
-    
-    /** 
+
+    /**
      * @param username
      */
     public void setUsername(String username) {
         this.username = username;
     }
 
-    
-    /** 
+
+    /**
      * @param password
      */
     public void setPassword(String password) {
         this.password = password;
     }
 
-    
-    /** 
+
+    /**
      * @return Map<String, String>
      */
     public Map<String, String> toJson() {
@@ -150,8 +150,8 @@ public class SystemUser {
         return jsonObject;
     }
 
-    
-    /** 
+
+    /**
      * @return String
      */
     @Override

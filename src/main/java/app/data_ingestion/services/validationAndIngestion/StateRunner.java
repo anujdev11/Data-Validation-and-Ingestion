@@ -8,12 +8,12 @@ public class StateRunner {
 
     private IState currentState;
 
-    public StateRunner(){
+    public StateRunner() {
         currentState = new LoadDataState();
     }
 
-    
-    /** 
+
+    /**
      * @param ingestionService
      * @param id
      * @param file
@@ -21,13 +21,13 @@ public class StateRunner {
      * @param action
      * @throws Exception
      */
-    public void run(IngestionService ingestionService, int id, MultipartFile file, String delimiter, String action) throws Exception{
+    public void run(IngestionService ingestionService, int id, MultipartFile file, String delimiter, String action) throws Exception {
 
-        do{
-            currentState= currentState.execute(ingestionService, id, file, delimiter, action);
-        } while(currentState != null);
-        
-        
+        do {
+            currentState = currentState.execute(ingestionService, id, file, delimiter, action);
+        } while (currentState != null);
+
+
     }
-    
+
 }

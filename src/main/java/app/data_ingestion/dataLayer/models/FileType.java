@@ -22,8 +22,7 @@ public class FileType {
     }
 
 
-    
-    /** 
+    /**
      * @return int
      */
     public int getFileTypeId() {
@@ -31,8 +30,7 @@ public class FileType {
     }
 
 
-    
-    /** 
+    /**
      * @param fileTypeId
      */
     public void setFileTypeId(int fileTypeId) {
@@ -40,8 +38,7 @@ public class FileType {
     }
 
 
-    
-    /** 
+    /**
      * @return String
      */
     public String getFileTypeName() {
@@ -49,8 +46,7 @@ public class FileType {
     }
 
 
-    
-    /** 
+    /**
      * @param fileTypeName
      */
     public void setFileTypeName(String fileTypeName) {
@@ -58,8 +54,7 @@ public class FileType {
     }
 
 
-    
-    /** 
+    /**
      * @return List<ColumnDetails>
      */
     public List<ColumnDetails> getColumnDetails() {
@@ -67,16 +62,15 @@ public class FileType {
     }
 
 
-    
-    /** 
+    /**
      * @param columnDetails
      */
     public void setColumnDetails(List<ColumnDetails> columnDetails) {
         this.columnDetails = columnDetails;
     }
 
-    
-    /** 
+
+    /**
      * @return Map<String, String>
      */
     public Map<String, String> getColumnToDatatype() {
@@ -87,9 +81,9 @@ public class FileType {
         return colDatatype;
     }
 
-    
-    /** 
-     * @return Map<String, List<ValidationRule>>
+
+    /**
+     * @return Map<String, List < ValidationRule>>
      */
     public Map<String, List<ValidationRule>> getColumnToRules() {
         Map<String, List<ValidationRule>> colToRules = new HashMap<>();
@@ -101,8 +95,7 @@ public class FileType {
     }
 
 
-    
-    /** 
+    /**
      * @return String
      */
     @Override

@@ -23,9 +23,9 @@ public class FileDefinition implements IFileDefinitionService {
     @Override
     public UserServiceStatus fileDefinition(FileType fileDef) {
         try {
-            if(fileTypeDao.addFileDefinition(fileDef) > 0){
+            if (fileTypeDao.addFileDefinition(fileDef) > 0) {
                 return UserServiceStatus.SUCCESS;
-            }else{
+            } else {
                 return UserServiceStatus.FAILURE;
             }
 
@@ -51,20 +51,20 @@ public class FileDefinition implements IFileDefinitionService {
         }
     }
 
-    
-    /** 
+
+    /**
      * @param fileType
      * @return UserServiceStatus
      */
     @Override
     public UserServiceStatus updateFileDefinition(FileType fileType) {
         try {
-           if (fileTypeDao.updateFileDefinition(fileType) > 0){
-               return UserServiceStatus.SUCCESS;
-           }else {
-              return UserServiceStatus.FAILURE;
+            if (fileTypeDao.updateFileDefinition(fileType) > 0) {
+                return UserServiceStatus.SUCCESS;
+            } else {
+                return UserServiceStatus.FAILURE;
 
-           }
+            }
 
         } catch (SQLException e) {
             e.printStackTrace();

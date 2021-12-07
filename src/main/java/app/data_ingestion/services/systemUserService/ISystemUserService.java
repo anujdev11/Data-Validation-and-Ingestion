@@ -9,13 +9,11 @@ import app.data_ingestion.exceptions.ResourceNotFoundException;
 public interface ISystemUserService {
 
     /**
-     *
      * @return
      */
     public SystemUser getSystemUser();
 
     /**
-     *
      * @param username
      * @param password
      * @return
