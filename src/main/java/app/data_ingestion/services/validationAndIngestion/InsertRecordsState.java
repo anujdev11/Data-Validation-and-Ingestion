@@ -48,13 +48,13 @@ public class InsertRecordsState implements IState {
      * @param ingestionService
      */
     public void createTable(IngestionService ingestionService) {
-        String colDetail = "";
+        String colDetail = QueryConstants.ID_AUTO_INCREMENT;
 
         for (String col : ingestionService.getMapColumnToDatatype().keySet()) {
             String dtype = ingestionService.getMapColumnToDatatype().get(col);
             colDetail += String.format("`%s` %s,", col, QueryModificationHelper.getDataType(dtype));
         }
-        colDetail = colDetail.substring(0, colDetail.length() - 1);
+        colDetail += QueryConstants.ID_PRIMARY_KEY;
         String query = String.format(QueryConstants.CREATE_TABLE_QUERY, ingestionService.getFileType().getFileTypeName(), colDetail);
         ingestionService.getQueryExecutor().execute(query);
     }
