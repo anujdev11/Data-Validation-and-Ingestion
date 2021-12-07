@@ -41,7 +41,6 @@ public interface IUserDao {
     public void updateUser(User user) throws SQLException;
 
     /**
-     *
      * @param user
      * @return
      * @throws SQLException
@@ -49,7 +48,6 @@ public interface IUserDao {
     public User getOrganizationAdmin(String username) throws SQLException;
 
     /**
-     *
      * @param user
      * @return
      * @throws SQLException
@@ -57,7 +55,6 @@ public interface IUserDao {
     public List<User> listAllOrganizations() throws SQLException;
 
     /**
-     *
      * @param user
      * @return
      * @throws SQLException
@@ -65,7 +62,6 @@ public interface IUserDao {
     public User addOrganization(User user) throws SQLException;
 
     /**
-     *
      * @param user
      * @return
      * @throws SQLException
@@ -73,7 +69,6 @@ public interface IUserDao {
     public User deleteOrganization(User user) throws SQLException;
 
     /**
-     *
      * @param user
      * @return
      * @throws SQLException

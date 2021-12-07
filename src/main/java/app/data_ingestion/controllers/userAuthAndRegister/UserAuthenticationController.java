@@ -45,13 +45,12 @@ public class UserAuthenticationController {
             bodyMap.put(LiteralConstants.ACCESS_LEVEL, userService.getUser().getAccessLevel());
 
             return ResponseEntity.status(HttpStatus.OK).body(GenericControllerOperations.getInstance().createResponseBody(bodyMap));
-        } 
-        else if (status == UserServiceStatus.INVALID_CREDENTIALS) {
+        } else if (status == UserServiceStatus.INVALID_CREDENTIALS) {
 
             bodyMap.put(LiteralConstants.MESSAGE, INVALID_CREDENTIALS_MESSAGE);
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(GenericControllerOperations.getInstance().createResponseBody(bodyMap));
         }
-        
+
         bodyMap.put(LiteralConstants.MESSAGE, SYSTEM_ERROR_MESSAGE);
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(GenericControllerOperations.getInstance().createResponseBody(bodyMap));
     }

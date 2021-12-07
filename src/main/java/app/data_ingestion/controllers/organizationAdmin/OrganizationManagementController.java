@@ -34,7 +34,6 @@ public class OrganizationManagementController {
     static final String SYSTEM_ERROR_MESSAGE = LiteralConstants.SYSTEM_ERROR_MESSAGE;
 
     /**
-     *
      * @param systemUser
      * @return
      */
@@ -57,8 +56,8 @@ public class OrganizationManagementController {
         }
     }
 
-    
-    /** 
+
+    /**
      * @param false
      * @param "username"
      * @return ResponseEntity<Object>
@@ -66,7 +65,7 @@ public class OrganizationManagementController {
     @PutMapping(path = "/organization/admin/{username}")
     @ResponseBody
     public ResponseEntity<Object> updateSystemUser(@PathVariable(required = false, name = "username") String username,
-            @RequestBody User user) {
+                                                   @RequestBody User user) {
         User response;
         user.setUsername(username);
         try {
@@ -84,8 +83,8 @@ public class OrganizationManagementController {
         }
     }
 
-    
-    /** 
+
+    /**
      * @param deleteOrganizationUser(
      * @return ResponseEntity<Object>
      */
@@ -108,8 +107,8 @@ public class OrganizationManagementController {
         }
     }
 
-    
-    /** 
+
+    /**
      * @param getOrganizationUser(
      * @return ResponseEntity<Object>
      */
@@ -132,8 +131,8 @@ public class OrganizationManagementController {
         }
     }
 
-    
-    /** 
+
+    /**
      * @return ResponseEntity<Object>
      */
     @GetMapping(path = "/organization/admin/")

@@ -51,7 +51,7 @@ public class UserDao extends JdbcDaoSupport implements IUserDao {
     @Override
     public int addUser(User user) throws SQLException {
         String insertQuery = QueryConstants.USER_INSERT_QUERY;
-        PreparedStatement preparedStatment = DaoUtility.createPrepareStatement(connection, insertQuery, false, 
+        PreparedStatement preparedStatment = DaoUtility.createPrepareStatement(connection, insertQuery, false,
                 user.getUsername(),
                 user.getPassword(),
                 user.getAccessLevel(),
@@ -104,10 +104,10 @@ public class UserDao extends JdbcDaoSupport implements IUserDao {
 
         while (rs.next()) {
             users.add(
-                new User(rs.getString(LiteralConstants.USERNAME),
-                        rs.getString(LiteralConstants.PASSWORD),
-                        rs.getString(LiteralConstants.ACCESS_LEVEL),
-                        rs.getString(LiteralConstants.ORGANIZATION))
+                    new User(rs.getString(LiteralConstants.USERNAME),
+                            rs.getString(LiteralConstants.PASSWORD),
+                            rs.getString(LiteralConstants.ACCESS_LEVEL),
+                            rs.getString(LiteralConstants.ORGANIZATION))
             );
         }
         return users;
@@ -128,8 +128,8 @@ public class UserDao extends JdbcDaoSupport implements IUserDao {
 
     }
 
-    
-    /** 
+
+    /**
      * @param username
      * @return User
      * @throws SQLException
@@ -140,7 +140,7 @@ public class UserDao extends JdbcDaoSupport implements IUserDao {
         User user = null;
         try (PreparedStatement preparedStatement = DaoUtility.createPrepareStatement(connection, selectQuery, false,
                 username);
-                ResultSet resultSet = preparedStatement.executeQuery();) {
+             ResultSet resultSet = preparedStatement.executeQuery();) {
             while (resultSet.next()) {
                 user = new User(resultSet.getString(LiteralConstants.USERNAME),
                         resultSet.getString(LiteralConstants.ACCESS_LEVEL),
@@ -150,8 +150,8 @@ public class UserDao extends JdbcDaoSupport implements IUserDao {
         }
     }
 
-    
-    /** 
+
+    /**
      * @param user
      * @return User
      * @throws SQLException
@@ -170,8 +170,8 @@ public class UserDao extends JdbcDaoSupport implements IUserDao {
         }
     }
 
-    
-    /** 
+
+    /**
      * @param user
      * @return User
      * @throws SQLException
@@ -190,8 +190,8 @@ public class UserDao extends JdbcDaoSupport implements IUserDao {
         }
     }
 
-    
-    /** 
+
+    /**
      * @param user
      * @return User
      * @throws SQLException
@@ -210,8 +210,8 @@ public class UserDao extends JdbcDaoSupport implements IUserDao {
         }
     }
 
-    
-    /** 
+
+    /**
      * @return List<User>
      * @throws SQLException
      */
@@ -219,7 +219,7 @@ public class UserDao extends JdbcDaoSupport implements IUserDao {
     public List<User> listAllOrganizations() throws SQLException {
         String selectQuery = QueryConstants.ORGANIZATION_ADMIN_LIST_SELECT_QUERY;
         try (PreparedStatement preparedStatement = DaoUtility.createPrepareStatement(connection, selectQuery, true);
-                ResultSet resultSet = preparedStatement.executeQuery();) {
+             ResultSet resultSet = preparedStatement.executeQuery();) {
             List<User> users = new ArrayList<>();
             while (resultSet.next()) {
                 users.add(

@@ -30,8 +30,7 @@ public class UserRegistrationController {
         UserServiceStatus status = userService.userRegistration(user);
         if (status == UserServiceStatus.SUCCESS) {
             return ResponseEntity.status(HttpStatus.CREATED).body(SUCCESS_MESSAGE);
-        } 
-        else if (status == UserServiceStatus.USER_ALREADY_EXISTS) {
+        } else if (status == UserServiceStatus.USER_ALREADY_EXISTS) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body(USER_ALREADY_EXISTS_MESSAGE);
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(SYSTEM_ERROR_MESSAGE);

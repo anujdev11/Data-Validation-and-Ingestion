@@ -32,7 +32,6 @@ public class SystemUserController {
     static final String SYSTEM_ERROR_MESSAGE = LiteralConstants.SYSTEM_ERROR_MESSAGE;
 
     /**
-     *
      * @param systemUser
      * @return
      */
@@ -56,7 +55,6 @@ public class SystemUserController {
     }
 
     /**
-     *
      * @param systemUser
      * @return
      */
@@ -79,8 +77,8 @@ public class SystemUserController {
         }
     }
 
-    
-    /** 
+
+    /**
      * @param false
      * @param "username"
      * @return ResponseEntity<Object>
@@ -88,7 +86,7 @@ public class SystemUserController {
     @PutMapping(path = "/system-user/{username}")
     @ResponseBody
     public ResponseEntity<Object> updateSystemUser(@PathVariable(required = false, name = "username") String username,
-            @RequestBody SystemUser systemUser) {
+                                                   @RequestBody SystemUser systemUser) {
         SystemUser response;
         systemUser.setUsername(username);
         try {
@@ -106,8 +104,8 @@ public class SystemUserController {
         }
     }
 
-    
-    /** 
+
+    /**
      * @param false
      * @param username
      * @return ResponseEntity<Object>

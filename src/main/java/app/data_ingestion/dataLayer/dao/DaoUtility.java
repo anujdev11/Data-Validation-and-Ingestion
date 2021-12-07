@@ -17,7 +17,7 @@ public class DaoUtility {
      * @throws SQLException
      */
     public static PreparedStatement createPrepareStatement(Connection connection, String sql,
-            Boolean returnGeneratedKeys, Object... params)
+                                                           Boolean returnGeneratedKeys, Object... params)
             throws SQLException {
         PreparedStatement preparedStatement = null;
         if (Boolean.TRUE.equals(returnGeneratedKeys)) {
