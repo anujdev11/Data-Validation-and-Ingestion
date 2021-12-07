@@ -151,4 +151,24 @@ public class OrganizationManagementController {
                             .createResponseBody(LiteralConstants.INTERNAL_SERVER_ERROR_STRING));
         }
     }
+    
+    /** 
+     * @return ResponseEntity<Object>
+     */
+    @GetMapping(path = "/organization/user/{organizationname}")
+    @ResponseBody
+    public ResponseEntity<Object> getOrganizationListAllUsers( @PathVariable(required = false, name = "organizationname") String organizationname) {
+        try {
+            List<User> response = organizationAdminService.listAllOrganizationUser(organizationname);
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(GenericControllerOperations.getInstance().createResponseBody(response));
+        } catch (ResourceNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(GenericControllerOperations.getInstance().createResponseBody(e.getMessage()));
+        } catch (SQLException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(GenericControllerOperations.getInstance()
+                            .createResponseBody(LiteralConstants.INTERNAL_SERVER_ERROR_STRING));
+        }
+    }
 }
