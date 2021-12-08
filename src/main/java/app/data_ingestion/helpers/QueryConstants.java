@@ -14,14 +14,14 @@ public class QueryConstants {
     public static final String DROP_QUERY = "DROP TABLE `%s` ";
     public static final String INSERT_QUERY = "INSERT INTO %s (%s) VALUES (%s)";
     public static final String UPDATE_QUERY_TEXT = "update ";
-    
+
     public static final String FILE_DEFINITION_INSERT_QUERY = "INSERT INTO file_definition ("
             + "file_definition_name,"
             + "file_definition_details) VALUES (?, ?)";
     public static final String FILE_DEFINITION_SELECT_QUERY = "SELECT * from file_definition WHERE file_definition_id = ? limit 1";
     public static final String FILE_DEFINITION_DELETE_QUERY = "DELETE from file_definition WHERE file_definition_id = ?";
     public static final String FILE_DEFINITION_UPDATE_QUERY = "update file_definition set file_definition_name = ? ,file_definition_details = ? where file_definition_id = ? ";
-    
+
     public static final String USER_INSERT_QUERY = "INSERT INTO user (username, "
             + "password, access_level, "
             + "organization) VALUES (?, ?, ?, ?)";
@@ -40,9 +40,8 @@ public class QueryConstants {
     public static final String ORGANIZATION_ADMIN_DELETE_QUERY = "UPDATE user SET deleted_at = CURRENT_TIMESTAMP() WHERE username = ? AND ISNULL(deleted_at)";
     public static final String ORGANIZATION_ADMIN_UPDATE_QUERY = "UPDATE user SET password= ?, access_level= ?, organization= ?, updated_at = current_timestamp() WHERE username = ? AND ISNULL(deleted_at)";
     public static final String ORGANIZATION_ADMIN_SELECT_QUERY = "SELECT username, access_level, organization FROM user WHERE username = ? AND ISNULL(deleted_at)";
-    public static final String ORGANIZATION_ADMIN_LIST_SELECT_QUERY = "SELECT username, access_level, organization FROM user WHERE ISNULL(deleted_at)";
-    
-    public static final String ORGANIZATION_USER_LIST_SELECT_QUERY = "SELECT username, access_level, organization FROM user WHERE access_level != 'admin' AND organization = ? AND  ISNULL(deleted_at)";
-    
-}
+    public static final String ORGANIZATION_ADMIN_LIST_SELECT_QUERY = "SELECT username, access_level, organization FROM user WHERE access_level = 'admin' AND ISNULL(deleted_at)";
 
+    public static final String ORGANIZATION_USER_LIST_SELECT_QUERY = "SELECT username, access_level, organization FROM user WHERE access_level != 'admin' AND organization = ? AND  ISNULL(deleted_at)";
+
+}

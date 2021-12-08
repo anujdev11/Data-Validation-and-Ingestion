@@ -77,7 +77,6 @@ public class SystemUserController {
         }
     }
 
-
     /**
      * @param false
      * @param "username"
@@ -86,7 +85,7 @@ public class SystemUserController {
     @PutMapping(path = "/system-user/{username}")
     @ResponseBody
     public ResponseEntity<Object> updateSystemUser(@PathVariable(required = false, name = "username") String username,
-                                                   @RequestBody SystemUser systemUser) {
+            @RequestBody SystemUser systemUser) {
         SystemUser response;
         systemUser.setUsername(username);
         try {
@@ -103,7 +102,6 @@ public class SystemUserController {
                             .createResponseBody(LiteralConstants.INTERNAL_SERVER_ERROR_STRING));
         }
     }
-
 
     /**
      * @param false
