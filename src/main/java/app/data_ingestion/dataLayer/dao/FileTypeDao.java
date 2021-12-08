@@ -90,11 +90,9 @@ public class FileTypeDao extends JdbcDaoSupport implements IFileTypeDao {
         if (rs.next() == false) {
             throw new SQLException(LiteralConstants.NO_FILE_DEFINITION_FOR_ID + id);
         } else {
-            // fileType = new FileType();
             fileType.setFileTypeId(rs.getInt(LiteralConstants.FILE_DEFINITION_ID));
             fileType.setFileTypeName(rs.getString(LiteralConstants.FILE_DEFINITION_NAME));
             String columnDetails = rs.getString(LiteralConstants.FILE_DEFINITION_DETAILS);
-            // ObjectMapper objectMapper = new ObjectMapper();
             ColumnDetails[] colDetailsArray = objectMapper.readValue(columnDetails, ColumnDetails[].class);
             fileType.setColumnDetails(Arrays.asList(colDetailsArray));
         }

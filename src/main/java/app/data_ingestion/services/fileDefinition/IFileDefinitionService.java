@@ -15,6 +15,13 @@ public interface IFileDefinitionService {
      */
     public UserServiceStatus fileDefinition(FileType fileDef);
 
+
+    /**
+     * @param file_definition_id
+     * @return
+     */
+    public FileType getFileDefinitionById(int file_definition_id) throws JsonProcessingException;
+
     /**
      * @param fileDefinitionId
      * @return

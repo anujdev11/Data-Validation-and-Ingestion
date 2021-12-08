@@ -38,6 +38,21 @@ public class FileDefinitionController {
     /**
      * @param file_definition_id
      * @return
+     */
+    @PostMapping(path = "/getFileDefinitionById")
+    public ResponseEntity<Object> getFileDefinitionById(@RequestParam("file_definition_id") int file_definition_id) throws JsonProcessingException {
+        FileType fileType = fileDefService.getFileDefinitionById(file_definition_id);
+        if (fileType != null){
+            return ResponseEntity.status(HttpStatus.CREATED).body(fileType);
+        }
+        else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(SYSTEM_ERROR_MESSAGE);
+        }
+    }
+
+    /**
+     * @param file_definition_id
+     * @return
      * @throws SQLException
      * @throws JsonProcessingException
      */

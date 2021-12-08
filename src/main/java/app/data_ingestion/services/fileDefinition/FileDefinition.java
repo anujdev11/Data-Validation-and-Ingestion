@@ -35,6 +35,18 @@ public class FileDefinition implements IFileDefinitionService {
         return UserServiceStatus.FAILURE;
     }
 
+    @Override
+    public FileType getFileDefinitionById(int file_definition_id) throws JsonProcessingException {
+        FileType fileType = new FileType();
+        try {
+           fileType = fileTypeDao.getFileTypeById(file_definition_id);
+           return fileType;
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return fileType;
+    }
+
     /**
      * @param fileDefinitionId
      * @return
