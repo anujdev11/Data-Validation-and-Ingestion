@@ -20,7 +20,6 @@ public class OrganizationAdminService implements IOrganizationAdminService {
     UserDao userDao;
     User user;
 
-
     /**
      * @param user
      * @return User
@@ -37,7 +36,6 @@ public class OrganizationAdminService implements IOrganizationAdminService {
         }
     }
 
-
     /**
      * @param username
      * @return User
@@ -53,7 +51,6 @@ public class OrganizationAdminService implements IOrganizationAdminService {
         return userDao.deleteOrganization(user);
     }
 
-
     /**
      * @param user
      * @return User
@@ -66,9 +63,11 @@ public class OrganizationAdminService implements IOrganizationAdminService {
         if (existingUser == null) {
             throw new ResourceNotFoundException(LiteralConstants.USER_NOT_FOUND_STRING);
         }
+        if (user.getPassword() == null) {
+            user.setPassword(existingUser.getPassword());
+        }
         return userDao.updatedOrganization(user);
     }
-
 
     /**
      * @param username
@@ -84,7 +83,6 @@ public class OrganizationAdminService implements IOrganizationAdminService {
         }
         return user;
     }
-
 
     /**
      * @return List<User>

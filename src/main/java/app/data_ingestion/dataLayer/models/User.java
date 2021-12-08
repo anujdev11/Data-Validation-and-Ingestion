@@ -40,6 +40,10 @@ public class User {
         this.username = username;
     }
 
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public String getPassword() {
         return password;
     }
@@ -67,4 +71,3 @@ public class User {
     }
 
 }
-
