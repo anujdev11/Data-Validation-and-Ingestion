@@ -28,7 +28,7 @@ public class QueryConstants {
     public static final String USER_DELETE_QUERY = "DELETE FROM user WHERE username = ?";
     public static final String USER_SELECT_QUERY = "SELECT * FROM user WHERE username= ? AND ISNULL(deleted_at) limit 1";
     public static final String USER_UPDATE_QUERY = "UPDATE user SET password= ?, access_level= ?, organization= ? where username = ?";
-    public static final String USER_SELECT_ALL_QUERY = "SELECT * FROM user?";
+    public static final String USER_SELECT_ALL_QUERY = "SELECT * FROM user";
 
     public static final String SYSTEM_USER_AUTHENTICATE_QUERY = "SELECT id, first_name, last_name, username FROM system_user WHERE username = ? AND password = ? AND ISNULL(deleted_at) LIMIT 1";
     public static final String SYSTEM_USER_INSERT_QUERY = "INSERT INTO system_user (first_name, last_name, username, password) VALUES (?, ?, ?, ?)";

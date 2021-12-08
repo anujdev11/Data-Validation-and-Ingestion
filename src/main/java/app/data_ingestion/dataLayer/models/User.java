@@ -13,7 +13,7 @@ public class User {
     /**
      * @param username
      * @param password
-     * @param access_level
+     * @param accessLevel
      * @param organization
      */
     public User(String username, String password, String accessLevel, String organization) {

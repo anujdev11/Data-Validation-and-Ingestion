@@ -97,7 +97,7 @@ public class UserDao extends JdbcDaoSupport implements IUserDao {
      */
     @Override
     public List<User> getUsers() throws SQLException {
-        String selectQuery = QueryConstants.USER_SELECT_QUERY;
+        String selectQuery = QueryConstants.USER_SELECT_ALL_QUERY;
         PreparedStatement preparedStatment = connection.prepareStatement(selectQuery);
         ResultSet rs = preparedStatment.executeQuery();
         List<User> users = new ArrayList<User>();
