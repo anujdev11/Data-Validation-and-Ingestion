@@ -65,7 +65,7 @@ deploy_staging:
 deploy_production:
   stage: deploy_production
   tags:
-    - ugrad
+    - dalfcs_docker_autoscale
   image: ruby:latest
   script:
     - apt-get update -qy
