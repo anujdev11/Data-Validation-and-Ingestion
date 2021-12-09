@@ -7,8 +7,8 @@ public class FileTypeFactory {
     private FileTypeFactory() {
     }
 
-
     /**
+     * return instance of this class
      * @return FileTypeFactory
      */
     public static FileTypeFactory getInstance() {
@@ -16,6 +16,7 @@ public class FileTypeFactory {
     }
 
     /**
+     * create a new instance of FileType and return it
      * @return FileType
      */
     public FileType createFileType() {

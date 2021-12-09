@@ -54,6 +54,7 @@ public class FileTypeDao extends JdbcDaoSupport implements IFileTypeDao {
     }
 
     /**
+     * add file definition record in database
      * @param fileTypeDef
      * @return
      * @throws SQLException
@@ -72,6 +73,7 @@ public class FileTypeDao extends JdbcDaoSupport implements IFileTypeDao {
     }
 
     /**
+     * get file definition record based on id
      * @param id
      * @return
      * @throws SQLException
@@ -98,6 +100,7 @@ public class FileTypeDao extends JdbcDaoSupport implements IFileTypeDao {
     }
 
     /**
+     * delete file definition and all records related to it
      * @param fileDefinitionId
      * @return
      * @throws SQLException
@@ -117,6 +120,7 @@ public class FileTypeDao extends JdbcDaoSupport implements IFileTypeDao {
 
 
     /**
+     * update a file definition
      * @param fileTypeDef
      * @return int
      * @throws SQLException
@@ -134,6 +138,7 @@ public class FileTypeDao extends JdbcDaoSupport implements IFileTypeDao {
     
     
     /** 
+     * updation of table for inline editing
      * @param data
      * @return int
      * @throws SQLException

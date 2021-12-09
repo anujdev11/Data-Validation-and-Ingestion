@@ -43,6 +43,7 @@ public class UserDao extends JdbcDaoSupport implements IUserDao {
     }
 
     /**
+     * add a user
      * @param user
      * @return
      * @throws SQLException
@@ -60,6 +61,7 @@ public class UserDao extends JdbcDaoSupport implements IUserDao {
     }
 
     /**
+     * delete a user
      * @param username
      * @throws SQLException
      */
@@ -72,6 +74,7 @@ public class UserDao extends JdbcDaoSupport implements IUserDao {
     }
 
     /**
+     * get user
      * @param username
      * @return
      * @throws SQLException
@@ -93,6 +96,7 @@ public class UserDao extends JdbcDaoSupport implements IUserDao {
     }
 
     /**
+     * get all users
      * @return
      * @throws SQLException
      */
@@ -114,6 +118,7 @@ public class UserDao extends JdbcDaoSupport implements IUserDao {
     }
 
     /**
+     * update user
      * @param user
      * @throws SQLException
      */
@@ -129,6 +134,7 @@ public class UserDao extends JdbcDaoSupport implements IUserDao {
     }
 
     /**
+     * get organization admin
      * @param username
      * @return User
      * @throws SQLException
@@ -150,6 +156,7 @@ public class UserDao extends JdbcDaoSupport implements IUserDao {
     }
 
     /**
+     * add organization admin
      * @param user
      * @return User
      * @throws SQLException

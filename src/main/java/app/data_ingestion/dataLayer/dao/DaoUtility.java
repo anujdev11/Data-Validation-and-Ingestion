@@ -11,6 +11,7 @@ import app.data_ingestion.helpers.LiteralConstants;
 public class DaoUtility {
 
     /**
+     * create a preparedstatement for sql queries
      * @param sql
      * @param params
      * @return

@@ -42,6 +42,7 @@ public class SystemUserDao extends JdbcDaoSupport implements ISystemUserDao {
 
 
     /**
+     * add system user in database
      * @param systemUser
      * @return SystemUser
      * @throws SQLException
@@ -73,6 +74,7 @@ public class SystemUserDao extends JdbcDaoSupport implements ISystemUserDao {
 
 
     /**
+     * delete system user
      * @param systemUser
      * @return SystemUser
      * @throws SQLException
@@ -94,6 +96,7 @@ public class SystemUserDao extends JdbcDaoSupport implements ISystemUserDao {
 
 
     /**
+     * authenticate a system user
      * @param username
      * @param password
      * @return SystemUser
@@ -118,6 +121,7 @@ public class SystemUserDao extends JdbcDaoSupport implements ISystemUserDao {
 
 
     /**
+     * get a system user using username
      * @param username
      * @return SystemUser
      * @throws SQLException
@@ -141,6 +145,7 @@ public class SystemUserDao extends JdbcDaoSupport implements ISystemUserDao {
 
 
     /**
+     * update information of a system user
      * @param systemUser
      * @return SystemUser
      * @throws SQLException
