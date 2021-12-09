@@ -28,7 +28,7 @@ import app.data_ingestion.services.validationAndIngestion.IIngestionService;
 import app.data_ingestion.services.validationAndIngestion.IngestionService;
 
 
-@CrossOrigin(origins = "http://localhost:5555")
+@CrossOrigin
 @RestController
 public class IngestionController {
 

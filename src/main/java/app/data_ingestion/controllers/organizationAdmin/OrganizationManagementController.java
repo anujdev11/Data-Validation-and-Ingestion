@@ -23,7 +23,7 @@ import app.data_ingestion.helpers.GenericControllerOperations;
 import app.data_ingestion.helpers.LiteralConstants;
 import app.data_ingestion.services.organizationAdminService.IOrganizationAdminService;
 
-@CrossOrigin(origins = "http://localhost:5555")
+@CrossOrigin
 @RestController
 public class OrganizationManagementController {
 

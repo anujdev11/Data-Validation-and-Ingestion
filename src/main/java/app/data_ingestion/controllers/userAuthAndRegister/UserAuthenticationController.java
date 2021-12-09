@@ -18,7 +18,7 @@ import app.data_ingestion.helpers.LiteralConstants;
 import app.data_ingestion.services.userAuthAndRegister.IUserService;
 import app.data_ingestion.services.userAuthAndRegister.UserServiceStatus;
 
-@CrossOrigin(origins = "http://localhost:5555")
+@CrossOrigin
 @RestController
 
 public class UserAuthenticationController {

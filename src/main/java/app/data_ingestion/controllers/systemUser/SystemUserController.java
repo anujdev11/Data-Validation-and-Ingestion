@@ -21,7 +21,7 @@ import app.data_ingestion.helpers.GenericControllerOperations;
 import app.data_ingestion.helpers.LiteralConstants;
 import app.data_ingestion.services.systemUserService.ISystemUserService;
 
-@CrossOrigin(origins = "http://localhost:5555")
+@CrossOrigin
 @RestController
 public class SystemUserController {
 

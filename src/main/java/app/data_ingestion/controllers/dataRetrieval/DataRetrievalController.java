@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import app.data_ingestion.helpers.GenericControllerOperations;
 import app.data_ingestion.services.dataRetrieval.IDataRetrievalService;
 
-@CrossOrigin(origins = "http://localhost:5555")
+@CrossOrigin
 @RestController
 public class DataRetrievalController {
 
