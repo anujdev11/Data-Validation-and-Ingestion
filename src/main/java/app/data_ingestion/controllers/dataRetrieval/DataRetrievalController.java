@@ -22,6 +22,7 @@ public class DataRetrievalController {
 
     /**
      * controller for fetch data from table
+     *
      * @param tableName
      * @return
      */

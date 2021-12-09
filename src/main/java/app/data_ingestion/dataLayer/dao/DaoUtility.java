@@ -12,6 +12,7 @@ public class DaoUtility {
 
     /**
      * create a preparedstatement for sql queries
+     *
      * @param sql
      * @param params
      * @return

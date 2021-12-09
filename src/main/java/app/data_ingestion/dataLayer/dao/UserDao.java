@@ -44,6 +44,7 @@ public class UserDao extends JdbcDaoSupport implements IUserDao {
 
     /**
      * add a user
+     *
      * @param user
      * @return
      * @throws SQLException
@@ -62,6 +63,7 @@ public class UserDao extends JdbcDaoSupport implements IUserDao {
 
     /**
      * delete a user
+     *
      * @param username
      * @throws SQLException
      */
@@ -75,6 +77,7 @@ public class UserDao extends JdbcDaoSupport implements IUserDao {
 
     /**
      * get user
+     *
      * @param username
      * @return
      * @throws SQLException
@@ -97,6 +100,7 @@ public class UserDao extends JdbcDaoSupport implements IUserDao {
 
     /**
      * get all users
+     *
      * @return
      * @throws SQLException
      */
@@ -119,6 +123,7 @@ public class UserDao extends JdbcDaoSupport implements IUserDao {
 
     /**
      * update user
+     *
      * @param user
      * @throws SQLException
      */
@@ -135,6 +140,7 @@ public class UserDao extends JdbcDaoSupport implements IUserDao {
 
     /**
      * get organization admin
+     *
      * @param username
      * @return User
      * @throws SQLException
@@ -145,7 +151,7 @@ public class UserDao extends JdbcDaoSupport implements IUserDao {
         User user = null;
         try (PreparedStatement preparedStatement = DaoUtility.createPrepareStatement(connection, selectQuery, false,
                 username);
-                ResultSet resultSet = preparedStatement.executeQuery();) {
+             ResultSet resultSet = preparedStatement.executeQuery();) {
             while (resultSet.next()) {
                 user = new User(resultSet.getString(LiteralConstants.USERNAME),
                         resultSet.getString(LiteralConstants.ACCESS_LEVEL),
@@ -157,6 +163,7 @@ public class UserDao extends JdbcDaoSupport implements IUserDao {
 
     /**
      * add organization admin
+     *
      * @param user
      * @return User
      * @throws SQLException
@@ -221,7 +228,7 @@ public class UserDao extends JdbcDaoSupport implements IUserDao {
     public List<User> listAllOrganizations() throws SQLException {
         String selectQuery = QueryConstants.ORGANIZATION_ADMIN_LIST_SELECT_QUERY;
         try (PreparedStatement preparedStatement = DaoUtility.createPrepareStatement(connection, selectQuery, true);
-                ResultSet resultSet = preparedStatement.executeQuery();) {
+             ResultSet resultSet = preparedStatement.executeQuery();) {
             List<User> users = new ArrayList<>();
             while (resultSet.next()) {
                 users.add(
@@ -243,7 +250,7 @@ public class UserDao extends JdbcDaoSupport implements IUserDao {
 
         try (PreparedStatement preparedStatement = DaoUtility.createPrepareStatement(connection, selectQuery, false,
                 organizationName);
-                ResultSet resultSet = preparedStatement.executeQuery();) {
+             ResultSet resultSet = preparedStatement.executeQuery();) {
 
             List<User> users = new ArrayList<>();
             while (resultSet.next()) {

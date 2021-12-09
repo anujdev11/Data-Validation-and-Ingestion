@@ -40,9 +40,9 @@ public class FileDefinition implements IFileDefinitionService {
     public FileType getFileDefinitionById(int file_definition_id) throws JsonProcessingException {
         FileType fileType = new FileType();
         try {
-           fileType = fileTypeDao.getFileTypeById(file_definition_id);
-           return fileType;
-        }catch (SQLException e){
+            fileType = fileTypeDao.getFileTypeById(file_definition_id);
+            return fileType;
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return fileType;
