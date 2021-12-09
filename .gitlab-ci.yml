@@ -65,7 +65,7 @@ deploy_staging:
 deploy_production:
   stage: deploy_production
   tags:
-    - dalfcs_gitlab_docker_ci
+    - $RUNNER
   image: ruby:latest
   script:
     - apt-get update -qy
