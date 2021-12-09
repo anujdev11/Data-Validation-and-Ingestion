@@ -24,6 +24,7 @@ public class FileDefinitionController {
 
     /**
      * add file_definition to the table
+     *
      * @param fileType
      * @return
      */
@@ -38,22 +39,23 @@ public class FileDefinitionController {
 
     /**
      * controller to get file_definition by id
+     *
      * @param file_definition_id
      * @return http response
      */
     @PostMapping(path = "/getFileDefinitionById")
     public ResponseEntity<Object> getFileDefinitionById(@RequestParam("file_definition_id") int file_definition_id) throws JsonProcessingException {
         FileType fileType = fileDefService.getFileDefinitionById(file_definition_id);
-        if (fileType != null){
+        if (fileType != null) {
             return ResponseEntity.status(HttpStatus.CREATED).body(fileType);
-        }
-        else {
+        } else {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(SYSTEM_ERROR_MESSAGE);
         }
     }
 
     /**
      * controller to delete file_definition record
+     *
      * @param file_definition_id
      * @return http Response
      * @throws SQLException
@@ -68,6 +70,7 @@ public class FileDefinitionController {
 
     /**
      * update filedefinition record
+     *
      * @param fileType
      * @return
      */

@@ -33,9 +33,11 @@ public class OrganizationManagementController {
     static final String INVALID_CREDENTIALS_MESSAGE = LiteralConstants.LOGIN_INVALID_CREDENTIALS_MESSAGE;
     static final String SYSTEM_ERROR_MESSAGE = LiteralConstants.SYSTEM_ERROR_MESSAGE;
 
+
     /**
      * controller to add organization user
-     * @param systemUser
+     *
+     * @param user
      * @return
      */
     @PostMapping(path = "/organization/admin/")
@@ -60,9 +62,10 @@ public class OrganizationManagementController {
 
     /**
      * controller to update system/organization user
-     * @param false
-     * @param "username"
-     * @return ResponseEntity<Object>
+     *
+     * @param username
+     * @param user
+     * @return
      */
     @PutMapping(path = "/organization/admin/{username}")
     @ResponseBody
@@ -88,8 +91,9 @@ public class OrganizationManagementController {
 
     /**
      * controller to delete organization user
-     * @param deleteOrganizationUser(
-     * @return ResponseEntity<Object>
+     *
+     * @param username
+     * @return
      */
     @DeleteMapping(path = "/organization/admin/{username}")
     @ResponseBody
@@ -113,8 +117,9 @@ public class OrganizationManagementController {
 
     /**
      * controller to get an organization admin user
-     * @param getOrganizationUser(
-     * @return ResponseEntity<Object>
+     *
+     * @param username
+     * @return
      */
     @GetMapping(path = "/organization/admin/{username}")
     @ResponseBody
@@ -138,6 +143,7 @@ public class OrganizationManagementController {
 
     /**
      * controller to get all organization admin users
+     *
      * @return ResponseEntity<Object>
      */
     @GetMapping(path = "/organization/admin/")
@@ -156,14 +162,15 @@ public class OrganizationManagementController {
                             .createResponseBody(LiteralConstants.INTERNAL_SERVER_ERROR_STRING));
         }
     }
-    
-    /** 
+
+    /**
      * controller to get all users of an organization
+     *
      * @return ResponseEntity<Object>
      */
     @GetMapping(path = "/organization/user/{organizationname}")
     @ResponseBody
-    public ResponseEntity<Object> getOrganizationListAllUsers( @PathVariable(required = false, name = "organizationname") String organizationname) {
+    public ResponseEntity<Object> getOrganizationListAllUsers(@PathVariable(required = false, name = "organizationname") String organizationname) {
         try {
             List<User> response = organizationAdminService.listAllOrganizationUser(organizationname);
             return ResponseEntity.status(HttpStatus.OK)

@@ -173,10 +173,10 @@ public class IngestionService implements IIngestionService {
     public static String[] getValidationRule(String ruleDataType) {
         return ValidationRules.getValidationRule(ruleDataType);
     }
-    
-    
-    public  UserServiceStatus editInlineData( Map<String,Object> data) throws Exception {
-    	try {
+
+
+    public UserServiceStatus editInlineData(Map<String, Object> data) throws Exception {
+        try {
             return fileTypeDao.editInlineData(data) > 0 ? UserServiceStatus.SUCCESS
                     : UserServiceStatus.FAILURE;
 

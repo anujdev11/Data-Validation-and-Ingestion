@@ -14,10 +14,10 @@ public class QueryModificationHelper {
         return name.replaceAll(name, LiteralConstants.UNDERSCORE);
     }
 
-    
-    /** 
-     * @param dtype
-     * @return String
+
+    /**
+     * @param dType
+     * @return
      */
     public static String getDataType(String dType) {
         if (dType.equalsIgnoreCase(LiteralConstants.STRING)) {

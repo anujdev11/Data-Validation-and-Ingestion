@@ -14,8 +14,10 @@ public interface ISystemUserDao {
     public SystemUser addSystemUser(SystemUser systemUser)
             throws SQLException;
 
+
     /**
-     * @param username
+     * @param systemUser
+     * @return
      * @throws SQLException
      */
     public SystemUser deleteSystemUser(SystemUser systemUser) throws SQLException;

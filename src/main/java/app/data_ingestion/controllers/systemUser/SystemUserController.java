@@ -33,6 +33,7 @@ public class SystemUserController {
 
     /**
      * controller to authenticate a system user
+     *
      * @param systemUser
      * @return
      */
@@ -57,6 +58,7 @@ public class SystemUserController {
 
     /**
      * controller to add a system user
+     *
      * @param systemUser
      * @return
      */
@@ -79,16 +81,18 @@ public class SystemUserController {
         }
     }
 
+
     /**
      * controller to update a system user
-     * @param false
-     * @param "username"
-     * @return ResponseEntity<Object>
+     *
+     * @param username
+     * @param systemUser
+     * @return
      */
     @PutMapping(path = "/system-user/{username}")
     @ResponseBody
     public ResponseEntity<Object> updateSystemUser(@PathVariable(required = false, name = "username") String username,
-            @RequestBody SystemUser systemUser) {
+                                                   @RequestBody SystemUser systemUser) {
         SystemUser response;
         systemUser.setUsername(username);
         try {
@@ -106,11 +110,12 @@ public class SystemUserController {
         }
     }
 
+
     /**
      * controller to delete a system user
-     * @param false
+     *
      * @param username
-     * @return ResponseEntity<Object>
+     * @return
      */
     @DeleteMapping(path = "/system-user/{username}")
     @ResponseBody

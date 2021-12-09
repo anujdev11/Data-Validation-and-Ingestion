@@ -41,6 +41,7 @@ public class QueryExecutor extends JdbcDaoSupport implements IQueryExecutor {
 
     /**
      * execute sql queries
+     *
      * @param query
      */
     @Override
@@ -51,6 +52,7 @@ public class QueryExecutor extends JdbcDaoSupport implements IQueryExecutor {
     /**
      * iterate over rows and headers
      * insert data into the specified table
+     *
      * @param headers
      * @param tableName
      * @param rows
@@ -103,6 +105,7 @@ public class QueryExecutor extends JdbcDaoSupport implements IQueryExecutor {
 
     /**
      * execute select query and return records
+     *
      * @param query
      * @return
      */

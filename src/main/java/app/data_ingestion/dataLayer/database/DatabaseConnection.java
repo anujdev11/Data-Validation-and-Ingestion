@@ -10,6 +10,7 @@ public class DatabaseConnection {
 
     /**
      * get mysql database connection
+     *
      * @param jdbcTemplate
      * @return Connection
      * @throws SQLException

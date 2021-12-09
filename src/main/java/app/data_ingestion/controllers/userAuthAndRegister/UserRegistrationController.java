@@ -23,6 +23,7 @@ public class UserRegistrationController {
 
     /**
      * controller to take registration request
+     *
      * @param user
      * @return
      */

@@ -55,6 +55,7 @@ public class FileTypeDao extends JdbcDaoSupport implements IFileTypeDao {
 
     /**
      * add file definition record in database
+     *
      * @param fileTypeDef
      * @return
      * @throws SQLException
@@ -74,6 +75,7 @@ public class FileTypeDao extends JdbcDaoSupport implements IFileTypeDao {
 
     /**
      * get file definition record based on id
+     *
      * @param id
      * @return
      * @throws SQLException
@@ -101,6 +103,7 @@ public class FileTypeDao extends JdbcDaoSupport implements IFileTypeDao {
 
     /**
      * delete file definition and all records related to it
+     *
      * @param fileDefinitionId
      * @return
      * @throws SQLException
@@ -121,6 +124,7 @@ public class FileTypeDao extends JdbcDaoSupport implements IFileTypeDao {
 
     /**
      * update a file definition
+     *
      * @param fileTypeDef
      * @return int
      * @throws SQLException
@@ -134,50 +138,48 @@ public class FileTypeDao extends JdbcDaoSupport implements IFileTypeDao {
         PreparedStatement preparedStatement = DaoUtility.createPrepareStatement(connection, updateQuery, false, fileTypeDef.getFileTypeName(), fileDefinitionColumnDetails, fileTypeDef.getFileTypeId());
         return preparedStatement.executeUpdate();
 
-	}
-    
-    
-    /** 
+    }
+
+
+    /**
      * updation of table for inline editing
+     *
      * @param data
      * @return int
      * @throws SQLException
      */
     @Override
-    public  int editInlineData(Map<String,Object> data) throws SQLException {    	   	
-	
-    	
-    	int id = (int) data.get("id");
-    	String tableName = (String) data.get("tableName");
-    	
-    	 Map<String,Object> mapFields=(Map<String, Object>) data.get("fields");
-    	 String updateInlineDataQuery = QueryConstants.UPDATE_QUERY_TEXT + tableName +LiteralConstants.SET_TEXT;
-    	
-    	
-    	
-    	for (Map.Entry<String, Object> entry : mapFields.entrySet()) {
-    		
-    		if(entry.getValue().getClass().getName().equals(LiteralConstants.STRING_CLASS_NAME)) {
-    			
-    			updateInlineDataQuery+=  entry.getKey()+" = '"+entry.getValue().toString()+"' ,";
-    		} else {
-    			
-    			updateInlineDataQuery+= entry.getKey()+" = "+entry.getValue().toString()+",";
-    		}
-    		
-    	}
-    	updateInlineDataQuery=updateInlineDataQuery.substring(0, updateInlineDataQuery.length() - 1); 
+    public int editInlineData(Map<String, Object> data) throws SQLException {
 
-    	updateInlineDataQuery+=" where id = "+id;
-    	 System.out.println(updateInlineDataQuery);
-  	
-    	   	
-        PreparedStatement preparedStatement = DaoUtility.createPrepareStatement(connection, updateInlineDataQuery,false);
-        return preparedStatement.executeUpdate(); 	
 
-	}
-    
+        int id = (int) data.get("id");
+        String tableName = (String) data.get("tableName");
 
+        Map<String, Object> mapFields = (Map<String, Object>) data.get("fields");
+        String updateInlineDataQuery = QueryConstants.UPDATE_QUERY_TEXT + tableName + LiteralConstants.SET_TEXT;
+
+
+        for (Map.Entry<String, Object> entry : mapFields.entrySet()) {
+
+            if (entry.getValue().getClass().getName().equals(LiteralConstants.STRING_CLASS_NAME)) {
+
+                updateInlineDataQuery += entry.getKey() + " = '" + entry.getValue().toString() + "' ,";
+            } else {
+
+                updateInlineDataQuery += entry.getKey() + " = " + entry.getValue().toString() + ",";
+            }
+
+        }
+        updateInlineDataQuery = updateInlineDataQuery.substring(0, updateInlineDataQuery.length() - 1);
+
+        updateInlineDataQuery += " where id = " + id;
+        System.out.println(updateInlineDataQuery);
+
+
+        PreparedStatement preparedStatement = DaoUtility.createPrepareStatement(connection, updateInlineDataQuery, false);
+        return preparedStatement.executeUpdate();
+
+    }
 
 
 }

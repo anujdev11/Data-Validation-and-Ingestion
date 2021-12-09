@@ -37,6 +37,7 @@ public class IngestionController {
 
     /**
      * controller to take data ingestion request
+     *
      * @param file_definition_id
      * @param multipartFile
      * @param delimiter
@@ -74,6 +75,7 @@ public class IngestionController {
 
     /**
      * controller to get validation rules
+     *
      * @param ruleType
      * @return http response
      */
@@ -82,16 +84,17 @@ public class IngestionController {
         String[] validationRule = IngestionService.getValidationRule(ruleType);
         return new ResponseEntity<>(validationRule, HttpStatus.OK);
     }
-    
-    
+
+
     /**
      * controller to take inline editing request
+     *
      * @param fileType
      * @return http response
-     * @throws Exception 
+     * @throws Exception
      */
     @PostMapping(path = "/editInlineData")
-    public ResponseEntity<Object> editInlineData( @RequestBody Map<String,Object> body) throws Exception {
+    public ResponseEntity<Object> editInlineData(@RequestBody Map<String, Object> body) throws Exception {
         UserServiceStatus status = ingestionService.editInlineData(body);
 
         if (status == UserServiceStatus.SUCCESS) {
@@ -99,8 +102,6 @@ public class IngestionController {
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(LiteralConstants.SYSTEM_ERROR_MESSAGE);
     }
-    
-   
 
 
 }

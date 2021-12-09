@@ -40,15 +40,16 @@ public interface IUserDao {
      */
     public void updateUser(User user) throws SQLException;
 
+
     /**
-     * @param user
+     * @param username
      * @return
      * @throws SQLException
      */
     public User getOrganizationAdmin(String username) throws SQLException;
 
+
     /**
-     * @param user
      * @return
      * @throws SQLException
      */
@@ -75,10 +76,10 @@ public interface IUserDao {
      */
     public User updatedOrganization(User user) throws SQLException;
 
-	/** 
-	 * @return List<User>
-	 * @throws SQLException
-	 */
-	List<User> listAllOrganizationsUser(String organizationName) throws SQLException;
+    /**
+     * @return List<User>
+     * @throws SQLException
+     */
+    List<User> listAllOrganizationsUser(String organizationName) throws SQLException;
 
 }

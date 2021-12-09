@@ -31,6 +31,7 @@ public class UserAuthenticationController {
 
     /**
      * controller to take the request for authenticating a user
+     *
      * @param user
      * @return
      */
