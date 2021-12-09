@@ -16,6 +16,8 @@ public class LoadDataState implements IState {
 
 
     /**
+     * load the data from multipart file from 
+     * http request to the program's data structure
      * @param ingestionService
      * @param id
      * @param file
@@ -44,6 +46,7 @@ public class LoadDataState implements IState {
 
 
     /**
+     * retrieve file data as string
      * @param inputFile
      * @return String
      * @throws IOException
@@ -56,6 +59,7 @@ public class LoadDataState implements IState {
 
 
     /**
+     * populate the headers and rows from the file
      * @param ingestionService
      * @param fileContent
      * @param delimiter

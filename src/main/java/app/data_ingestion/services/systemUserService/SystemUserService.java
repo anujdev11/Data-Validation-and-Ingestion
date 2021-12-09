@@ -21,6 +21,7 @@ public class SystemUserService implements ISystemUserService {
 
 
     /**
+     * get system user
      * @return SystemUser
      */
     @Override
@@ -30,6 +31,7 @@ public class SystemUserService implements ISystemUserService {
 
 
     /**
+     * authenticate system user
      * @param username
      * @param password
      * @return SystemUser
@@ -48,6 +50,7 @@ public class SystemUserService implements ISystemUserService {
 
 
     /**
+     * add system user
      * @param systemUser
      * @return SystemUser
      * @throws SQLException
@@ -65,6 +68,7 @@ public class SystemUserService implements ISystemUserService {
 
 
     /**
+     * delete system user
      * @param username
      * @return SystemUser
      * @throws SQLException
@@ -81,6 +85,7 @@ public class SystemUserService implements ISystemUserService {
 
 
     /**
+     * update system user
      * @param systemUser
      * @return SystemUser
      * @throws SQLException

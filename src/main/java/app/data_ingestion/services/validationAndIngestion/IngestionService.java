@@ -32,6 +32,7 @@ public class IngestionService implements IIngestionService {
 
 
     /**
+     * call state runner to iterate and execute each state of ingestion operation
      * @param id
      * @param file
      * @param delimiter
@@ -174,7 +175,11 @@ public class IngestionService implements IIngestionService {
         return ValidationRules.getValidationRule(ruleDataType);
     }
     
-    
+    /**
+     * service to edit data inline
+     * @param data
+     * @return UserServiceStatus
+     */
     public  UserServiceStatus editInlineData( Map<String,Object> data) throws Exception {
     	try {
             return fileTypeDao.editInlineData(data) > 0 ? UserServiceStatus.SUCCESS

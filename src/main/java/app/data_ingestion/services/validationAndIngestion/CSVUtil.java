@@ -15,6 +15,7 @@ public class CSVUtil {
 
 
     /**
+     * return instance of this class
      * @return CSVUtil
      */
     public static CSVUtil getInstance() {
@@ -22,6 +23,7 @@ public class CSVUtil {
     }
 
     /**
+     * create csv with headers and rows in params
      * @param path
      * @param headers
      * @param invalidRows
@@ -49,6 +51,7 @@ public class CSVUtil {
     }
 
     /**
+     * write the content to file
      * @param path
      * @param content
      * @throws IOException

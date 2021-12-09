@@ -9,6 +9,7 @@ public class StateRunnerFactory {
 
 
     /**
+     * return the instance of this class
      * @return StateRunnerFactory
      */
     public static StateRunnerFactory getInstance() {
@@ -16,6 +17,7 @@ public class StateRunnerFactory {
     }
 
     /**
+     * create a new object of StateRunner
      * @return StateRunner
      */
     public StateRunner createStateRunner() {

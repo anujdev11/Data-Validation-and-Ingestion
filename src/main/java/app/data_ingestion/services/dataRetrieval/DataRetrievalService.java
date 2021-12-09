@@ -13,6 +13,7 @@ public class DataRetrievalService implements IDataRetrievalService {
     IQueryExecutor queryExecutor;
 
     /**
+     * service to fetch data of a table
      * @param tableName
      * @return List of records as Object
      */

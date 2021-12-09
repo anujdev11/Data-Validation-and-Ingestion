@@ -12,6 +12,7 @@ public class ValidationRules {
 
     
     /** 
+     * return data type wise validation rules
      * @param ruleDataType
      * @return String[]
      */

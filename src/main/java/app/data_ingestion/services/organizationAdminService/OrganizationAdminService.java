@@ -21,6 +21,7 @@ public class OrganizationAdminService implements IOrganizationAdminService {
     User user;
 
     /**
+     * add organization user
      * @param user
      * @return User
      * @throws SQLException
@@ -37,6 +38,7 @@ public class OrganizationAdminService implements IOrganizationAdminService {
     }
 
     /**
+     * delete organization user
      * @param username
      * @return User
      * @throws SQLException
@@ -52,6 +54,7 @@ public class OrganizationAdminService implements IOrganizationAdminService {
     }
 
     /**
+     * update organization user
      * @param user
      * @return User
      * @throws SQLException
@@ -70,6 +73,7 @@ public class OrganizationAdminService implements IOrganizationAdminService {
     }
 
     /**
+     * get organization admin
      * @param username
      * @return User
      * @throws SQLException

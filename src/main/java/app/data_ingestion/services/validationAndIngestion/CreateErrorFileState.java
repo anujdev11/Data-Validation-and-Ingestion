@@ -11,6 +11,7 @@ public class CreateErrorFileState implements IState {
 
 
     /**
+     * create csv file with records that violated the rules
      * @param ingestionService
      * @param id
      * @param file

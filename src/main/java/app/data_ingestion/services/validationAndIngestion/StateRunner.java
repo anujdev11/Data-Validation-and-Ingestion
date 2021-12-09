@@ -14,6 +14,8 @@ public class StateRunner {
 
 
     /**
+     * iterate over each implemetation class of Istate
+     * execute the method for each state class
      * @param ingestionService
      * @param id
      * @param file

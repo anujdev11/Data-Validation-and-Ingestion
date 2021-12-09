@@ -26,6 +26,7 @@ public class UserService implements IUserService {
     }
 
     /**
+     * authenticate user for login
      * @param username
      * @param password
      * @return
@@ -52,6 +53,7 @@ public class UserService implements IUserService {
     }
 
     /**
+     * register new user
      * @param user
      * @return
      */
@@ -74,6 +76,7 @@ public class UserService implements IUserService {
     }
 
     /**
+     * check if user exists
      * @param username
      * @return
      * @throws SQLException

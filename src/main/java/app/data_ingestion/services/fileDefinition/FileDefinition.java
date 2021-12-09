@@ -17,6 +17,7 @@ public class FileDefinition implements IFileDefinitionService {
     IFileTypeDao fileTypeDao;
 
     /**
+     * add file_definition 
      * @param fileDef
      * @return
      */
@@ -48,6 +49,7 @@ public class FileDefinition implements IFileDefinitionService {
     }
 
     /**
+     * delete file_definition
      * @param fileDefinitionId
      * @return
      * @throws SQLException
@@ -65,6 +67,7 @@ public class FileDefinition implements IFileDefinitionService {
 
 
     /**
+     * update file_definition
      * @param fileType
      * @return UserServiceStatus
      */

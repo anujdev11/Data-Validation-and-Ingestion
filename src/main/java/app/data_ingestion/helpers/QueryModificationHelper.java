@@ -7,6 +7,7 @@ public class QueryModificationHelper {
     }
 
     /** 
+     * add underspace in place of space
      * @param name
      * @return String
      */
@@ -16,6 +17,7 @@ public class QueryModificationHelper {
 
     
     /** 
+     * return nvarchar in place of string
      * @param dtype
      * @return String
      */

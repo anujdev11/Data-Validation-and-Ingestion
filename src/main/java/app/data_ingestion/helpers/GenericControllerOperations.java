@@ -19,6 +19,7 @@ public class GenericControllerOperations {
 
     
     /** 
+     * format response body
      * @param data
      * @return HashMap<String, Object>
      */

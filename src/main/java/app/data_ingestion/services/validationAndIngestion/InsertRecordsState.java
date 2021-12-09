@@ -16,6 +16,8 @@ public class InsertRecordsState implements IState {
 
 
     /**
+     * create table if not exist before ingestion
+     * insert records with an auto increment id
      * @param ingestionService
      * @param id
      * @param file
@@ -45,6 +47,8 @@ public class InsertRecordsState implements IState {
 
 
     /**
+     * create table if not exists
+     * create an extra auto increment primary key id
      * @param ingestionService
      */
     public void createTable(IngestionService ingestionService) {
@@ -61,6 +65,7 @@ public class InsertRecordsState implements IState {
 
 
     /**
+     * delete records from the table in case of replace
      * @param ingestionService
      */
     public void deleteRecordsFromDatabase(IngestionService ingestionService) {
@@ -71,6 +76,7 @@ public class InsertRecordsState implements IState {
 
 
     /**
+     * insert rows to the database table
      * @param ingestionService
      * @throws SQLException
      */

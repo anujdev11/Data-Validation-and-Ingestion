@@ -11,6 +11,7 @@ import app.data_ingestion.helpers.LiteralConstants;
 public class ValidationRulesService implements IValidationRulesService {
 
     /**
+     * delegate to check validation as per data type
      * @param rules
      * @param header
      * @param cellValue
@@ -46,6 +47,7 @@ public class ValidationRulesService implements IValidationRulesService {
     }
 
     /**
+     * validations on column of numeric data type
      * @param operator
      * @param rhsValue
      * @param header
@@ -107,6 +109,7 @@ public class ValidationRulesService implements IValidationRulesService {
     }
 
     /**
+     * validations on column of date data type
      * @param operator
      * @param rhsValue
      * @param header
@@ -163,6 +166,7 @@ public class ValidationRulesService implements IValidationRulesService {
 
 
     /**
+     * validations on column of string data type
      * @param operator
      * @param rhsValue
      * @param header
