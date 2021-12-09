@@ -30,13 +30,14 @@ public class UserAuthenticationController {
     static final String SYSTEM_ERROR_MESSAGE = LiteralConstants.SYSTEM_ERROR_MESSAGE;
 
     /**
-     * @param users
+     * controller to take the request for authenticating a user
+     * @param user
      * @return
      */
     @PostMapping(path = "/users/authenticate")
     @ResponseBody
-    public ResponseEntity<Object> userAuthentication(@RequestBody User users) {
-        UserServiceStatus status = userService.userAuthentication(users.getUsername(), users.getPassword());
+    public ResponseEntity<Object> userAuthentication(@RequestBody User user) {
+        UserServiceStatus status = userService.userAuthentication(user.getUsername(), user.getPassword());
         Map<String, String> bodyMap = new HashMap<String, String>();
 
         if (status == UserServiceStatus.SUCCESS) {

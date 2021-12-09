@@ -1,13 +1,10 @@
 package app.data_ingestion.services.validationAndIngestion;
 
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import app.data_ingestion.dataLayer.models.User;
-import app.data_ingestion.exceptions.ResourceNotFoundException;
 import app.data_ingestion.services.userAuthAndRegister.UserServiceStatus;
 
 public interface IIngestionService {

@@ -4,9 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -147,10 +145,7 @@ public class FileTypeDao extends JdbcDaoSupport implements IFileTypeDao {
     	int id = (int) data.get("id");
     	String tableName = (String) data.get("tableName");
     	
-    	
     	 Map<String,Object> mapFields=(Map<String, Object>) data.get("fields");
-    	
-    	 String  query = "update "+tableName+" set "; 	
     	 String updateInlineDataQuery = QueryConstants.UPDATE_QUERY_TEXT + tableName +LiteralConstants.SET_TEXT;
     	
     	

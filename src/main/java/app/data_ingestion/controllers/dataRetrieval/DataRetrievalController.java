@@ -21,6 +21,7 @@ public class DataRetrievalController {
     IDataRetrievalService dataService;
 
     /**
+     * controller for fetch data from table
      * @param tableName
      * @return
      */

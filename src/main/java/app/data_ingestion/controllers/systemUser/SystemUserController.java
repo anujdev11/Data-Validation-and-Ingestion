@@ -32,6 +32,7 @@ public class SystemUserController {
     static final String SYSTEM_ERROR_MESSAGE = LiteralConstants.SYSTEM_ERROR_MESSAGE;
 
     /**
+     * controller to authenticate a system user
      * @param systemUser
      * @return
      */
@@ -55,6 +56,7 @@ public class SystemUserController {
     }
 
     /**
+     * controller to add a system user
      * @param systemUser
      * @return
      */
@@ -78,6 +80,7 @@ public class SystemUserController {
     }
 
     /**
+     * controller to update a system user
      * @param false
      * @param "username"
      * @return ResponseEntity<Object>
@@ -104,6 +107,7 @@ public class SystemUserController {
     }
 
     /**
+     * controller to delete a system user
      * @param false
      * @param username
      * @return ResponseEntity<Object>

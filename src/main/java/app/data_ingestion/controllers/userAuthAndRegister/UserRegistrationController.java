@@ -22,6 +22,7 @@ public class UserRegistrationController {
     IUserService userService;
 
     /**
+     * controller to take registration request
      * @param user
      * @return
      */

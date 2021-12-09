@@ -23,6 +23,7 @@ public class FileDefinitionController {
     static final String SYSTEM_ERROR_MESSAGE = LiteralConstants.SYSTEM_ERROR_MESSAGE;
 
     /**
+     * add file_definition to the table
      * @param fileType
      * @return
      */
@@ -36,8 +37,9 @@ public class FileDefinitionController {
     }
 
     /**
+     * controller to get file_definition by id
      * @param file_definition_id
-     * @return
+     * @return http response
      */
     @PostMapping(path = "/getFileDefinitionById")
     public ResponseEntity<Object> getFileDefinitionById(@RequestParam("file_definition_id") int file_definition_id) throws JsonProcessingException {
@@ -51,8 +53,9 @@ public class FileDefinitionController {
     }
 
     /**
+     * controller to delete file_definition record
      * @param file_definition_id
-     * @return
+     * @return http Response
      * @throws SQLException
      * @throws JsonProcessingException
      */
@@ -64,6 +67,7 @@ public class FileDefinitionController {
     }
 
     /**
+     * update filedefinition record
      * @param fileType
      * @return
      */

@@ -3,7 +3,6 @@ package app.data_ingestion.controllers.validationAndIngestion;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
-import java.sql.SQLException;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,15 +11,17 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import app.data_ingestion.config.ConfigReader;
-import app.data_ingestion.dataLayer.models.FileType;
-import app.data_ingestion.dataLayer.models.User;
-import app.data_ingestion.exceptions.ResourceNotFoundException;
 import app.data_ingestion.helpers.ConfigPropertiesKeyConstants;
-import app.data_ingestion.helpers.GenericControllerOperations;
 import app.data_ingestion.helpers.LiteralConstants;
 import app.data_ingestion.services.userAuthAndRegister.UserServiceStatus;
 import app.data_ingestion.services.validationAndIngestion.IIngestionService;
@@ -35,10 +36,11 @@ public class IngestionController {
     IIngestionService ingestionService;
 
     /**
+     * controller to take data ingestion request
      * @param file_definition_id
      * @param multipartFile
      * @param delimiter
-     * @return
+     * @return http response
      * @throws Exception
      */
     @PostMapping(path = "/ingestion", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
@@ -71,8 +73,9 @@ public class IngestionController {
     }
 
     /**
+     * controller to get validation rules
      * @param ruleType
-     * @return
+     * @return http response
      */
     @GetMapping(path = "/getValidationRules")
     public ResponseEntity<Object> getValidationRules(@RequestParam String ruleType) {
@@ -82,8 +85,9 @@ public class IngestionController {
     
     
     /**
+     * controller to take inline editing request
      * @param fileType
-     * @return
+     * @return http response
      * @throws Exception 
      */
     @PostMapping(path = "/editInlineData")
@@ -91,9 +95,9 @@ public class IngestionController {
         UserServiceStatus status = ingestionService.editInlineData(body);
 
         if (status == UserServiceStatus.SUCCESS) {
-            return ResponseEntity.status(HttpStatus.OK).body(LiteralConstants.SQL_UPDATE_DONE); //TODO: 
+            return ResponseEntity.status(HttpStatus.OK).body(LiteralConstants.SQL_UPDATE_DONE);
         }
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(LiteralConstants.SYSTEM_ERROR_MESSAGE); //TODO:
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(LiteralConstants.SYSTEM_ERROR_MESSAGE);
     }
     
    

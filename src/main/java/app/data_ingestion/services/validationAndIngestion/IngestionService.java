@@ -11,9 +11,6 @@ import org.springframework.web.multipart.MultipartFile;
 import app.data_ingestion.dataLayer.dao.IFileTypeDao;
 import app.data_ingestion.dataLayer.database.IQueryExecutor;
 import app.data_ingestion.dataLayer.models.FileType;
-import app.data_ingestion.dataLayer.models.User;
-import app.data_ingestion.exceptions.ResourceNotFoundException;
-import app.data_ingestion.helpers.LiteralConstants;
 import app.data_ingestion.helpers.ValidationRules;
 import app.data_ingestion.services.userAuthAndRegister.UserServiceStatus;
 

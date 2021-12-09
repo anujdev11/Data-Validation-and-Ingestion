@@ -34,6 +34,7 @@ public class OrganizationManagementController {
     static final String SYSTEM_ERROR_MESSAGE = LiteralConstants.SYSTEM_ERROR_MESSAGE;
 
     /**
+     * controller to add organization user
      * @param systemUser
      * @return
      */
@@ -58,6 +59,7 @@ public class OrganizationManagementController {
 
 
     /**
+     * controller to update system/organization user
      * @param false
      * @param "username"
      * @return ResponseEntity<Object>
@@ -85,6 +87,7 @@ public class OrganizationManagementController {
 
 
     /**
+     * controller to delete organization user
      * @param deleteOrganizationUser(
      * @return ResponseEntity<Object>
      */
@@ -109,6 +112,7 @@ public class OrganizationManagementController {
 
 
     /**
+     * controller to get an organization admin user
      * @param getOrganizationUser(
      * @return ResponseEntity<Object>
      */
@@ -133,6 +137,7 @@ public class OrganizationManagementController {
 
 
     /**
+     * controller to get all organization admin users
      * @return ResponseEntity<Object>
      */
     @GetMapping(path = "/organization/admin/")
@@ -153,6 +158,7 @@ public class OrganizationManagementController {
     }
     
     /** 
+     * controller to get all users of an organization
      * @return ResponseEntity<Object>
      */
     @GetMapping(path = "/organization/user/{organizationname}")
